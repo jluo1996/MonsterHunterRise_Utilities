@@ -10,7 +10,7 @@ env:
   Version: 1.${{ github.run_number }}.${{ github.run_attempt }}.${{ github.run_id }}
 
 jobs:
-  zip_files:
+  build_release:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,42 +25,30 @@ jobs:
         run: |
           echo $Version
 
-      # This step is not necessary because github actions automatically creates a zip of the artifacts
       - name: Create zip
         if: github.ref == 'refs/heads/main_release'
         run: |
-          cd Utilities
-          zip -r "${{ env.ArtifactName }}.zip" ./*
+          zip -r "${{ env.ArtifactName }}.zip" Utilities/**/*
 
-      - name: Delete old releases (keep 2 most recent)
+      - name: Delete all existing releases
         if: github.ref == 'refs/heads/main_release'
         run: |
           run: |
-          # Fetch all releases, sorted by creation date descending
-          releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${{ github.repository }}/releases | \
-            jq -r 'sort_by(.created_at) | reverse | .[] | "\(.id) \(.tag_name)"')
-
-          count=0
-
-          for release in $releases; do
-            count=$((count + 1))
-            # Split id and tag
-            RELEASE_ID=$(echo $release | awk '{print $1}')
-            TAG_NAME=$(echo $release | awk '{print $2}')
-
-            if [ $count -le 2 ]; then
-              echo "Keeping release ID $RELEASE_ID with tag $TAG_NAME"
-            else
-              echo "Deleting release ID $RELEASE_ID and tag $TAG_NAME"
-
-              # Delete the release
+            releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              https://api.github.com/repos/${{ github.repository }}/releases | jq -r '.[].id')
+            for id in $releases; do
+              echo "Deleting release ID $id"
               curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID
-
-              # Delete the tag from remote
-              git push origin --delete $TAG_NAME || echo "Tag $TAG_NAME already deleted"
-            fi
+                https://api.github.com/repos/${{ github.repository }}/releases/$id
+            done
+      
+      - name: Delete all tags
+        if: github.ref == 'refs/heads/main_release'
+        run: |
+          tags=$(git ls-remote --tags origin | awk '{print $2}' | sed 's|refs/tags/||')
+          for tag in $tags; do
+            echo "Deleting tag $tag"
+            git push origin --delete $tag
           done
 
       - name: Create Release
