@@ -25,6 +25,13 @@ jobs:
         run: |
           echo $Version
 
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ env.ArtifactName }}"
+          path: |
+            Utilities/**/*
+
       - name: Create zip
         if: github.ref == 'refs/heads/main_release'
         run: |
@@ -58,9 +65,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload zip artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: "${{ env.ArtifactName }}"
-          path: |
-            Utilities/**/*
