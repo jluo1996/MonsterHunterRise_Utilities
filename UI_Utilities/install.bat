@@ -1,29 +1,27 @@
 @echo off
-REM Hard-coded expected parent folder name
-set expectedParent=MonsterHunterRise
 
-REM Get the full path of the parent folder
-for %%F in ("%~dp0..") do set parentFolderName=%%~nF
+REM Destination folder passed as parameter
+REM %1 = destination path
+set "destFolder=%~1"
 
-REM Check if parent folder name matches
-if /I "%parentFolderName%"=="%expectedParent%" (
-    echo Parent folder is "%expectedParent%". Running scripts...
+REM Get the directory where the script is located
+set "scriptDir=%~dp0"
 
-    REM Hard-coded batch file names
-    set firstFile=copyFile.bat
-    set secondFile=copyFolder.bat
-
-    REM Call the first batch file
-    call "%firstFile%"
-
-    REM Call the second batch file
-    call "%secondFile%"
-
-    echo Mod has been installed.
-) else (
-    echo Please run this under the game install directory. It should be a folder named "%expectedParent%".
-    echo Installation failed.
-    pause
+REM Validate destination parameter
+if "%destFolder%"=="" (
+    echo ERROR: Destination path not provided.
+    echo Usage: %scriptDir%install.bat 
+    exit /b
 )
 
+REM Hard-coded batch file names
+set firstFile=copyFile.bat
+set secondFile=copyFolder.bat
 
+REM Call the first batch file
+call "%scriptDir%%firstFile%" "%destFolder%"
+
+REM Call the second batch file
+call "%scriptDir%%secondFile%" "%destFolder%"
+
+echo UI Utilities has been installed.
