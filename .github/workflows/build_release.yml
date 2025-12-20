@@ -29,7 +29,8 @@ jobs:
       - name: Create zip
         if: github.ref == 'refs/heads/main_release'
         run: |
-          zip -r "${{ env.ArtifactName }}.zip" Utilities/**/*
+          cd Utilities
+          zip -r "${{ env.ArtifactName }}.zip" ./*
 
       - name: Delete old releases (keep 2 most recent)
         if: github.ref == 'refs/heads/main_release'
@@ -79,4 +80,3 @@ jobs:
           name: "${{ env.ArtifactName }}.zip"
           path: |
             Utilities/**/*
-            README.md
