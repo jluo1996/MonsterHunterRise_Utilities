@@ -1,0 +1,28 @@
+name: Zip Utilities and README
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  zip_files:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Zip Utilities folder and README.md
+      - name: Create zip
+        run: |
+          mkdir -p zipped_data
+          zip -r zipped_data/MHR_Utilities.zip Utilities README.md
+
+      # Step 3: Upload the zip as an artifact
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MHR_Utilities
+          path: zipped_data/MHR_Utilities.zip
