@@ -31,25 +31,21 @@ jobs:
           cd Utilities
           zip -r "${{ env.ArtifactName }}.zip" ./*
 
-      - name: Delete all existing releases
-        if: github.ref == 'refs/heads/main_release'
+      - name: Delete all releases and tags
         run: |
-          run: |
-            releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/${{ github.repository }}/releases | jq -r '.[].id')
-            for id in $releases; do
-              echo "Deleting release $id"
-              curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                https://api.github.com/repos/${{ github.repository }}/releases/$id
-            done
-      
-      - name: Delete all tags
-        if: github.ref == 'refs/heads/main_release'
-        run: |
-          tags=$(git ls-remote --tags origin | awk '{print $2}' | sed 's|refs/tags/||')
-          for tag in $tags; do
-            echo "Deleting tag $tag"
-            git push origin --delete $tag
+          # Delete releases
+          releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases | jq -r '.[].id')
+          for id in $releases; do
+            tag=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              https://api.github.com/repos/${{ github.repository }}/releases/$id | jq -r '.tag_name')
+            echo "Deleting release ID $id with tag $tag"
+            curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              https://api.github.com/repos/${{ github.repository }}/releases/$id
+            # Delete the tag if it exists
+            if [ ! -z "$tag" ]; then
+              git push origin --delete "$tag" || echo "Tag $tag already deleted"
+            fi
           done
 
       - name: Create Release
@@ -65,6 +61,6 @@ jobs:
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "${{ env.ArtifactName }}.zip"
+          name: "${{ env.ArtifactName }}"
           path: |
             Utilities/**/*
