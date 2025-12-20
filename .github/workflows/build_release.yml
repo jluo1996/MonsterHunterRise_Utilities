@@ -21,8 +21,8 @@ jobs:
         env:
           Version: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
         run: |
-          echo "{\"version\": \"$Version\"}" > /assets/version.json
-          
+          echo "{\"version\": \"$Version\"}"
+
       - name: Create zip
         run: |
           zip -r zipped_data/MHR_Utilities.zip Utilities README.md
