@@ -22,7 +22,7 @@ jobs:
 
       # Step 3: Upload the zip as an artifact
       - name: Upload zip artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MHR_Utilities
           path: zipped_data/MHR_Utilities.zip
