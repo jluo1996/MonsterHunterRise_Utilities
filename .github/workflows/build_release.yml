@@ -3,6 +3,7 @@ name: MHR_Util
 on:
   push:
     branches:
+      - main
       - main_release
 
 env:
@@ -31,6 +32,7 @@ jobs:
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
+        if: github.ref == 'refs/heads/main_release'  # <-- triggered by push to main_release branch
         with:
           tag_name: v${{ env.Version }}
           name: ${{ env.ArtifactName }} Release
