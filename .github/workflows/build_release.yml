@@ -22,10 +22,10 @@ jobs:
 
       - name: Create zip
         run: |
-          zip -r "MHR_Utilities.zip" Utilities README.md
+          zip -r "MHR_Util_${{ env.Version }}.zip" Utilities README.md
 
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "MHR_Utilities.zip"
-          path: "MHR_Utilities.zip"
+          name: "MHR_Util_${{ env.Version }}.zip"
+          path: "MHR_Util_${{ env.Version }}.zip"
