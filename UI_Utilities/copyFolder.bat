@@ -12,7 +12,7 @@ set "scriptDir=%~dp0"
 REM Validate destination parameter
 if "%destFolder%"=="" (
     echo ERROR: Destination path not provided.
-    echo Usage: %scriptDir%CopyFolder.bat 
+    echo Usage: %scriptDir%copyFolder.bat 
     exit /b
 )
 
