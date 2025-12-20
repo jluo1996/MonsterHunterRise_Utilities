@@ -3,7 +3,7 @@ name: MHR_Util
 on:
   push:
     branches:
-      - main
+      - main_release
 
 env:
   Version: 1.${{ github.run_number }}.${{ github.run_attempt }}.${{ github.run_id }}
@@ -33,7 +33,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.Version }}
-          name: Release ${{ env.Version }}
+          name: ${{ env.ArtifactName }} Release
           files: ${{ env.ArtifactName }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
