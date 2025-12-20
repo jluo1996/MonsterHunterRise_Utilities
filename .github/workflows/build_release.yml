@@ -10,19 +10,6 @@ env:
   Version: 1.${{ github.run_number }}.${{ github.run_attempt }}.${{ github.run_id }}
 
 jobs:
-  cleanup_releases:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete all releases via API
-        run: |
-          releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${{ github.repository }}/releases | jq -r '.[].id')
-          for id in $releases; do
-            echo "Deleting release $id"
-            curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/${{ github.repository }}/releases/$id
-          done
-          
   zip_files:
     runs-on: ubuntu-latest
 
@@ -40,12 +27,35 @@ jobs:
 
       # This step is not necessary because github actions automatically creates a zip of the artifacts
       - name: Create zip
+        if: github.ref == 'refs/heads/main_release'
         run: |
           zip -r "${{ env.ArtifactName }}.zip" Utilities README.md
 
+      - name: Delete old releases (keep 2 most recent)
+        if: github.ref == 'refs/heads/main_release'
+        run: |
+          # Get release IDs sorted by creation date (most recent first)
+          releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/releases | \
+            jq -r 'sort_by(.created_at) | reverse | .[].id')
+
+          # Keep a counter
+          count=0
+
+          for id in $releases; do
+            count=$((count + 1))
+            if [ $count -le 2 ]; then
+              echo "Keeping release ID $id"
+            else
+              echo "Deleting release ID $id"
+              curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                https://api.github.com/repos/${{ github.repository }}/releases/$id
+            fi
+          done
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
-        if: github.ref == 'refs/heads/main_release'  # <-- triggered by push to main_release branch
+        if: github.ref == 'refs/heads/main_release'
         with:
           tag_name: v${{ env.Version }}
           name: ${{ env.ArtifactName }} Release
@@ -55,6 +65,7 @@ jobs:
 
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
+        if: github.ref != 'refs/heads/main_release'
         with:
           name: "${{ env.ArtifactName }}.zip"
           path: |
