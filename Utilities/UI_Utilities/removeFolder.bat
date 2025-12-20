@@ -19,10 +19,12 @@ if "%destFolder%"=="" (
 REM Build full path to the folder in the parent directory
 set targetFolder=%destFolder%%foldername%
 
+@REM if not exist "%targetFolder%" (
+@REM     echo ERROR: %targetFolder% does not exist.
+@REM     exit
+@REM )
+
 REM Delete the folder and all its contents
-if exist "%targetFolder%" (
-    rmdir /S /Q "%targetFolder%"
-    echo %targetFolder% deleted successfully.
-) else (
-    echo %targetFolder% does not exist.
-)
+echo Deleting %targetFolder%...
+rmdir /S /Q "%targetFolder%"
+echo %targetFolder% deleted successfully.

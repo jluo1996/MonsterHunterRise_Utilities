@@ -47,7 +47,7 @@ if exist "%gameInstallPath%" (
     echo [%date% %time%] %%A >> "%scriptLogPath%"
     )
     echo UI Utilities has been installed.
-    for /L %%i in (5,-1,1) do (
+    for /L %%i in (3,-1,1) do (
         echo It will exit automatically in %%i seconds...
     timeout /t 1 /nobreak >nul
     )

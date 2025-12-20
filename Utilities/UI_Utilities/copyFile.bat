@@ -20,13 +20,9 @@ if "%destFolder%"=="" (
 REM Build full path to source file
 set "sourceFile=%scriptDir%%filename%"
 
+echo Copying "%filename%" to "%destFolder%"...
+
 REM Copy the file to the destination folder
 copy /Y "%sourceFile%" "%destFolder%"
 
-if errorlevel 1 (
-    echo Failed to copy "%filename%"
-) else (
-    echo File "%filename%" copied successfully to:
-    echo %destFolder%
-)
-
+echo File "%filename%" has been copied to "%destFolder%".

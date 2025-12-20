@@ -17,12 +17,14 @@ if "%destFolder%"=="" (
 )
 
 REM Build full path to the file in the parent folder
-set targetFile=%destFolder%%filename%
+set "targetFile=%destFolder%\%filename%"
+
+@REM if not exist "%targetFile%" (
+@REM     echo ERROR: File %targetFile% does not exist.
+@REM     exit
+@REM )
 
 REM Delete the file
-if exist "%targetFile%" (
-    del "%targetFile%"
-    echo %targetFile% deleted successfully.
-) else (
-    echo %targetFile% does not exist.
-)
+echo Deleting %targetFile%...
+del "%targetFile%"
+echo %targetFile% deleted successfully.

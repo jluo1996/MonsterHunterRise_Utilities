@@ -1,4 +1,5 @@
 @echo off
+
 REM Hard-coded folder name
 set foldername=reframework
 
@@ -18,6 +19,8 @@ if "%destFolder%"=="" (
 
 REM Build full path to source folder
 set sourceFolder=%scriptDir%%foldername%
+
+echo Copying folder "%foldername%" to "%destFolder%%foldername%"...
 
 REM Copy the folder to the parent directory
 xcopy "%sourceFolder%" "%destFolder%%foldername%" /E /I /H /Y
