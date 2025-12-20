@@ -20,8 +20,5 @@ set secondFile=copyFolder.bat
 
 REM Call the first batch file
 call "%scriptDir%%firstFile%" "%destFolder%"
-
 REM Call the second batch file
 call "%scriptDir%%secondFile%" "%destFolder%"
-
-echo UI Utilities has been installed.
