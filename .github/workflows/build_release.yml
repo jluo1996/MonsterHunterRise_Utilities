@@ -32,6 +32,9 @@ jobs:
           path: |
             Utilities/**/*
 
+
+# ============== Below are steps for only release branch (main_release) ================
+
       - name: Create zip
         if: github.ref == 'refs/heads/main_release'
         run: |
@@ -39,6 +42,7 @@ jobs:
           zip -r "${{ env.ArtifactName }}.zip" ./*
 
       - name: Delete all releases and tags
+        if: github.ref == 'refs/heads/main_release'
         run: |
           # Delete releases
           releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
