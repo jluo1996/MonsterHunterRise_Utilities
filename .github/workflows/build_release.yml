@@ -23,17 +23,18 @@ jobs:
           echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
           echo "Version is $MAJOR.$MINOR.$PATCH"
 
-      # Step 1: Checkout the repo
       - name: Checkout repository
-        uses: actions/checkout@v3
+        run: |
+          MAJOR=1
+          MINOR=0  
+          PATCH=$(git rev-list --count HEAD)
+          VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      # Step 2: Zip Utilities folder and README.md
       - name: Create zip
         run: |
-          mkdir -p zipped_data
           zip -r zipped_data/MHR_Utilities.zip Utilities README.md
 
-# Step 3: Upload the zip as an artifact
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
         with:
