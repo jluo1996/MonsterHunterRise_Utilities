@@ -17,8 +17,8 @@ jobs:
       - name: Get version
         id: version
         run: |
-          MAJOR=$(MAJOR_VERSION)
-          MINOR=$(MINOR_VERSION)
+          MAJOR=1
+          MINOR=0
           PATCH=$(git rev-list --count HEAD)
           echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
           echo "Version is $MAJOR.$MINOR.$PATCH"
