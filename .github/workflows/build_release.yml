@@ -28,7 +28,8 @@ jobs:
       - name: Create zip
         if: github.ref == 'refs/heads/main_release'
         run: |
-          zip -r "${{ env.ArtifactName }}.zip" Utilities/**/*
+          cd Utilities
+          zip -r "${{ env.ArtifactName }}.zip" ./*
 
       - name: Delete all existing releases
         if: github.ref == 'refs/heads/main_release'
@@ -37,7 +38,7 @@ jobs:
             releases=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${{ github.repository }}/releases | jq -r '.[].id')
             for id in $releases; do
-              echo "Deleting release ID $id"
+              echo "Deleting release $id"
               curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                 https://api.github.com/repos/${{ github.repository }}/releases/$id
             done
@@ -57,13 +58,12 @@ jobs:
         with:
           tag_name: v${{ env.Version }}
           name: ${{ env.ArtifactName }} Release
-          files: ${{ env.ArtifactName }}.zip
+          files: Utilities/${{ env.ArtifactName }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
-        if: github.ref != 'refs/heads/main_release'
         with:
           name: "${{ env.ArtifactName }}.zip"
           path: |
