@@ -1,4 +1,4 @@
-name: Zip Utilities and README
+name: MHR_Util
 
 on:
   push:
@@ -26,10 +26,17 @@ jobs:
 
       # This step is not necessary because github actions automatically creates a zip of the artifacts
       - name: Create zip
-        if: false
         run: |
-          zip -r "${{ env.Version }}.zip" Utilities README.md
+          zip -r "${{ env.ArtifactName }}.zip" Utilities README.md
 
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.Version }}
+          name: Release ${{ env.Version }}
+          files: ${{ env.ArtifactName }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
