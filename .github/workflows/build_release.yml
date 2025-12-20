@@ -14,23 +14,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get version
-        id: version
-        run: |
-          MAJOR=1
-          MINOR=0
-          PATCH=$(git rev-list --count HEAD)
-          echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
-          echo "Version is $MAJOR.$MINOR.$PATCH"
-
       - name: Checkout repository
-        run: |
-          MAJOR=1
-          MINOR=0  
-          PATCH=$(git rev-list --count HEAD)
-          VERSION="$MAJOR.$MINOR.$PATCH"
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        uses: actions/checkout@v3
 
+      - name: Generate version number
+        env:
+          Version: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
+        run: |
+          echo "{\"version\": \"$Version\"}" > /assets/version.json
+          
       - name: Create zip
         run: |
           zip -r zipped_data/MHR_Utilities.zip Utilities README.md
