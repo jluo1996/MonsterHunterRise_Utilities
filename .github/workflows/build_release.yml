@@ -6,8 +6,7 @@ on:
       - main
 
 env:
-  MAJOR_VERSION: 1
-  MINOR_VERSION: 0
+  Version: 1.${{ github.run_number }}.${{ github.run_attempt }}.${{ github.run_id }}
 
 jobs:
   zip_files:
@@ -18,19 +17,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Generate version number
-        env:
-          Version: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
         run: |
-          echo "{\"version\": \"$Version\"}"
+          echo $Version
 
       - name: Create zip
-        env:
-            Version: 1.${{ github.run_number }}.${{ github.run_attempt }}.${{ github.run_id }}
         run: |
-          zip -r "MHR_Utilities.zip $Version" Utilities README.md
+          zip -r "MHR_Utilities.zip" Utilities README.md
 
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "MHR_Utilities.zip $Version"
-          path: "MHR_Utilities.zip $Version"
+          name: "MHR_Utilities.zip"
+          path: "MHR_Utilities.zip"
