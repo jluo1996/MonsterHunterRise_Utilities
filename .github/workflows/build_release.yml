@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set artifact name
+        run: |
+          echo "ArtifactName=MHR_Util ${{ env.Version }}" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -20,12 +24,17 @@ jobs:
         run: |
           echo $Version
 
+      # This step is not necessary because github actions automatically creates a zip of the artifacts
       - name: Create zip
+        if: false
         run: |
-          zip -r "MHR_Util_${{ env.Version }}.zip" Utilities README.md
+          zip -r "${{ env.Version }}.zip" Utilities README.md
+
 
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "MHR_Util_${{ env.Version }}.zip"
-          path: "MHR_Util_${{ env.Version }}.zip"
+          name: "${{ env.ArtifactName }}.zip"
+          path: |
+            Utilities/
+            README.md
