@@ -5,11 +5,24 @@ on:
     branches:
       - main
 
+env:
+  MAJOR_VERSION: 1
+  MINOR_VERSION: 0
+
 jobs:
   zip_files:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get version
+        id: version
+        run: |
+          MAJOR=$(MAJOR_VERSION)
+          MINOR=$(MINOR_VERSION)
+          PATCH=$(git rev-list --count HEAD)
+          echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
+          echo "Version is $MAJOR.$MINOR.$PATCH"
+
       # Step 1: Checkout the repo
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -20,7 +33,7 @@ jobs:
           mkdir -p zipped_data
           zip -r zipped_data/MHR_Utilities.zip Utilities README.md
 
-      # Step 3: Upload the zip as an artifact
+# Step 3: Upload the zip as an artifact
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
         with:
