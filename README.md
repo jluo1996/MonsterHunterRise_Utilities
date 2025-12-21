@@ -75,7 +75,7 @@ This project is provided as-is for educational and entertainment purposes.
 
 ## Version
 
-Current version: 1.0.1
+Current version: 1.x.x.x
 
 ## Credits
 
