@@ -10,9 +10,13 @@ class TeleportMod(ModModel):
         super().__init__(resource_folder, game_install_path)
         self.name = "Teleport"
         self.description = "A mod that allows teleporting to different monsters."
-        self.mod_file_path = Path(self.resource_folder) / "Teleport_to_target.lua"
+        self.mod_file_path = Path(self.resource_folder) / "Teleport" / "Teleport_to_target.lua"
 
     def install(self):
+        if self.is_installed():
+            print("Teleport mod is already installed.")
+            return False
+        
         if not self.mod_file_path.exists():
             print(f"Teleport mod file {self.mod_file_path} not found.")
             return False

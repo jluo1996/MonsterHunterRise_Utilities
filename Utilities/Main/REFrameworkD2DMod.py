@@ -7,9 +7,13 @@ class REFrameworkD2DMod(ModModel):
         super().__init__(resource_folder, game_install_path)
         self.name = "REFramework Direct2D"
         self.description = "REFramework Direct2D is an extension for REFramework that enables Direct2D rendering."
-        self.REFrameworkD2D_folder_path = Path(self.resource_folder) / "reframework"
+        self.REFrameworkD2D_folder_path = Path(self.resource_folder) / "REFramework Direct2D" / "reframework"
 
     def install(self):
+        if self.is_installed():
+            print("REFramework Direct2D is already installed.")
+            return False
+        
         if not self.REFrameworkD2D_folder_path.exists() or not self.REFrameworkD2D_folder_path.is_dir():
             print(f"REFramework Direct2D folder {self.REFrameworkD2D_folder_path} not found.")
             return False
@@ -32,12 +36,32 @@ class REFrameworkD2DMod(ModModel):
         return self.is_installed()
     
     def uninstall(self):
+        if not self.is_installed():
+            print("REFramework Direct2D is not installed.")
+            return False
+
         if not self.REFrameworkD2D_folder_path.exists() or not self.REFrameworkD2D_folder_path.is_dir():
             print(f"REFramework Direct2D folder {self.REFrameworkD2D_folder_path} not found.")
             return False
 
         target_path = self.install_path / self.REFrameworkD2D_folder_path.name
-        shutil.rmtree(target_path)
+        files_to_remove = {
+                "autorun": ["reframework-d2d.lua"],
+                "plugins": ["reframework-d2d.dll"]
+            }
+
+        for subfolder, filenames in files_to_remove.items():
+            folder_path = target_path / subfolder
+            for filename in filenames:
+                file_path = folder_path / filename
+                if file_path.exists() and file_path.is_file():
+                    try:
+                        file_path.unlink()
+                        print(f"Removed {file_path}")
+                    except Exception as e:
+                        print(f"Failed to remove {file_path}: {e}")
+                else:
+                    print(f"{file_path} does not exist")
 
         return not self.is_installed()
     

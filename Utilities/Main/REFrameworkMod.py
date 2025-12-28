@@ -11,9 +11,13 @@ class REFrameworkMod(ModModel):
         )
         self.name = "REFramework"
         self.description = "REFramework is a modding framework for RE Engine games."
-        self.REFramework_file_path = Path(self.resource_folder) / "dinput8.dll"
+        self.REFramework_file_path = Path(self.resource_folder) / "REFramework" / "dinput8.dll"
 
     def install(self):
+        if self.is_installed():
+            print("REFramework is already installed.")
+            return False
+        
         if not self.REFramework_file_path.exists():
             print(f"REFramework file {self.REFramework_file_path} not found.")
             return False
