@@ -11,4 +11,7 @@ class TeleportMod(ModModel):
         self.name = "Teleport"
         self.description = "A mod that allows teleporting to different monsters."
         self.mod_file_path = Path(self.resource_folder) / "Teleport"
-        self.install_path = Path(game_install_path) / "reframework" / "autorun"
+        self.update_install_path(game_install_path)
+
+    def update_install_path(self, new_game_install_path):
+        self.install_path = Path(new_game_install_path) / "reframework" / "autorun"

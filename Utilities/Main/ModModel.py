@@ -27,9 +27,11 @@ class ModModel:
             if item.is_dir():
                 # Create subfolder if it doesn't exist
                 target_item.mkdir(parents=True, exist_ok=True)
+                print(f"Created folder: {target_item}")
             else:
                 # Copy file (overwrites if exists)
                 shutil.copy2(item, target_item)
+                print(f"Copied file: {target_item}")
     
     def uninstall(self):
         source_folder = self.mod_file_path
@@ -66,9 +68,9 @@ class ModModel:
         target_folder = self.install_path
 
         if not source_folder.exists() or not source_folder.is_dir():
-            raise ValueError(f"Source folder does not exist: {source_folder}")
+            return False
         if not target_folder.exists() or not target_folder.is_dir():
-            raise ValueError(f"Target folder does not exist: {target_folder}")
+            return False
 
         # Iterate through all files in source_folder recursively
         for src_file in source_folder.rglob("*"):
@@ -86,5 +88,8 @@ class ModModel:
     
     def set_selected(self, selected: bool):
         self.is_selected = selected
+
+    def update_install_path(self, new_game_install_path):
+        self.install_path = Path(new_game_install_path)
 
     

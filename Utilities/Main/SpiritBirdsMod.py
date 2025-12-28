@@ -7,4 +7,7 @@ class SpiritBirdsMod(ModModel):
         self.name = "Spirit Birds"
         self.description = "Adds spirit birds to the game for a more immersive experience."
         self.mod_file_path = Path(self.resource_folder) / "Spirit Birds v1.8"
-        self.install_path = Path(game_install_path) / "reframework" / "autorun"
+        self.update_install_path(game_install_path)
+
+    def update_install_path(self, new_game_install_path):
+        self.install_path = Path(new_game_install_path) / "reframework" / "autorun"
