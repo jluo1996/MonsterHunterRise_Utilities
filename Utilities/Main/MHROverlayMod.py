@@ -1,3 +1,4 @@
+from pathlib import Path
 from ModModel import ModModel
 
 class MHROverlayMod(ModModel):
@@ -5,15 +6,4 @@ class MHROverlayMod(ModModel):
         super().__init__(resource_folder, game_install_path)
         self.name = "MHR Overlay"
         self.description = "MHR Overlay is a mod that adds an overlay to Monster Hunter Rise."
-
-    def install(self):
-        # Placeholder for actual installation logic
-        return True
-
-    def uninstall(self):
-        # Placeholder for actual uninstallation logic
-        return True
-
-    def is_installed(self):
-        # Placeholder for actual installed check logic
-        return False
+        self.mod_file_path = Path(self.resource_folder) / "MHR Overlay v2.7.3"

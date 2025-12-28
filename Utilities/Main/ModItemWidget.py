@@ -14,24 +14,13 @@ class ModItemWidget(QWidget):
         layout = QHBoxLayout(self)
         layout.setContentsMargins(5, 2, 5, 2)
 
-        # Toggle button
-        # self.toggle_button = QPushButton("Off")
-        # self.toggle_button.setCheckable(True)
-        # self.toggle_button.setFixedWidth(60)
-        # self.toggle_button.toggled.connect(self.mod.install)
-        # layout.addWidget(self.toggle_button)
-
         # Checkbox
-        self.check_box = QCheckBox()
+        self.check_box = QCheckBox(self.mod.name)
         self.check_box.setCheckable(True)
         self.check_box.setChecked(self.mod.is_selected)
         self.check_box.stateChanged.connect(self.mod.set_selected)
-        layout.addWidget(self.check_box)
+        layout.addWidget(self.check_box, stretch=1)
 
-        # Name label
-        self.name_label = QLabel(mod.name)
-        self.name_label.setAlignment(Qt.AlignmentFlag.AlignVCenter)
-        layout.addWidget(self.name_label, stretch=1)
 
         # Info icon with tooltip
         self.info_icon = QLabel()
