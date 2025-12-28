@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import shutil
 from ModModel import ModModel
 
@@ -10,27 +11,31 @@ class REFrameworkMod(ModModel):
         )
         self.name = "REFramework"
         self.description = "REFramework is a modding framework for RE Engine games."
+        self.REFramework_file_path = Path(self.resource_folder) / "dinput8.dll"
 
     def install(self):
-        REFramework_file_path = os.path.join(self.resource_folder, "dinput8.dll")
-        if not os.path.exists(REFramework_file_path):
-            print(f"REFramework file {REFramework_file_path} not found.")
+        if not self.REFramework_file_path.exists():
+            print(f"REFramework file {self.REFramework_file_path} not found.")
             return False
-        
-        if not os.path.exists(self.game_install_path):
+
+        if not self.install_path.exists():
             print(f"Game install path {self.game_install_path} does not exist.")
             return False
 
-        shutil.copy(REFramework_file_path, self.game_install_path)
-        
-        return not os.path.exists(os.path.join(self.game_install_path, "dinput8.dll"))
+        shutil.copy(self.REFramework_file_path, self.game_install_path)
+
+        return self.is_installed()
     
     def uninstall(self):
-        target_file = os.path.join(self.game_install_path, "dinput8.dll")
-        if os.path.exists(self.game_install_path) and os.path.exists(target_file):
+        target_file = Path(self.game_install_path) / "dinput8.dll"
+        if self.install_path.exists() and self.is_installed():
             os.remove(target_file)
         else:
             print("REFramework is not installed.")
             return False
         
-        return not os.path.exists(target_file)
+        return not self.is_installed()
+    
+    def is_installed(self):
+        target_file = Path(self.game_install_path) / "dinput8.dll"
+        return target_file.exists()

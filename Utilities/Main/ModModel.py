@@ -1,9 +1,12 @@
+from pathlib import Path
+
 class ModModel:
     def __init__(self, resource_folder: str, game_install_path: str):
         self.name = ""
         self.description = ""
         self.resource_folder = resource_folder
         self.game_install_path = game_install_path
+        self.install_path = Path(game_install_path)
         self.is_selected = False
 
     def install(self):
