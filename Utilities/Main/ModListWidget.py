@@ -19,8 +19,14 @@ class ModListWidget(QWidget):
         layout = QVBoxLayout(container)
         layout.setSpacing(4)
 
+        self.mods_item_widgets = []
         for mod in mods:
             item = ModItemWidget(mod)
             layout.addWidget(item)
+            self.mods_item_widgets.append(item)
 
         layout.addStretch()
+
+    def refresh_statuses(self):
+        for item_widget in self.mods_item_widgets:
+            item_widget.update_status_label()

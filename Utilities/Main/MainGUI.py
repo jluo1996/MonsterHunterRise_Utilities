@@ -11,15 +11,15 @@ class MainGUI(QWidget):
         main_layout = QVBoxLayout()
         
         mods = self.main_vm.get_mods()
-        mod_list_widget = self.get_mod_list_widget(mods)
-        main_layout.addWidget(mod_list_widget)
+        self.mod_list_widget = self.get_mod_list_widget(mods)
+        main_layout.addWidget(self.mod_list_widget)
 
         button_layout = QHBoxLayout()
         install_button = QPushButton("Install Selected Mods")
-        install_button.clicked.connect(self.main_vm.install_selected_mods)
+        install_button.clicked.connect(self.install_selected_mods)
         button_layout.addWidget(install_button)
         uninstall_button = QPushButton("Uninstall Selected Mods")
-        uninstall_button.clicked.connect(self.main_vm.uninstall_selected_mods)
+        uninstall_button.clicked.connect(self.uninstall_selected_mods)
         button_layout.addWidget(uninstall_button)
         main_layout.addLayout(button_layout)
         
@@ -30,6 +30,17 @@ class MainGUI(QWidget):
     def get_mod_list_widget(self, mods):
         mod_list_widget = ModListWidget(mods)
         return mod_list_widget
+    
+    def install_selected_mods(self):
+        self.main_vm.install_selected_mods()
+        self.refresh_mod_statuses()
+
+    def uninstall_selected_mods(self):
+        self.main_vm.uninstall_selected_mods()
+        self.refresh_mod_statuses()
+
+    def refresh_mod_statuses(self):
+        self.mod_list_widget.refresh_statuses()
 
 
 

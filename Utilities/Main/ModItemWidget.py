@@ -21,6 +21,10 @@ class ModItemWidget(QWidget):
         self.check_box.stateChanged.connect(self.mod.set_selected)
         layout.addWidget(self.check_box, stretch=1)
 
+        # Status label
+        self.status_label = QLabel()
+        self.update_status_label()
+        layout.addWidget(self.status_label)
 
         # Info icon with tooltip
         self.info_icon = QLabel()
@@ -32,16 +36,11 @@ class ModItemWidget(QWidget):
         self.info_icon.setCursor(Qt.CursorShape.WhatsThisCursor)
         layout.addWidget(self.info_icon)
 
-        # self.toggle_button.setStyleSheet("""
-        # QPushButton {
-        #     padding: 4px;
-        # }
-        # QPushButton:checked {
-        #     background-color: #4CAF50;
-        #     color: white;
-        # }
-        # """)
-
-
-    # def on_toggled(self, checked: bool):
-    #     self.toggle_button.setText("On" if checked else "Off")
+    def update_status_label(self):
+        """Update the status label text based on mod installation."""
+        if self.mod.is_installed():
+            self.status_label.setText("Installed")
+            self.status_label.setStyleSheet("color: green; font-weight: bold;")
+        else:
+            self.status_label.setText("Not installed")
+            self.status_label.setStyleSheet("color: red; font-weight: bold;")
