@@ -1,10 +1,10 @@
 from pathlib import Path
-from REFrameworkMod import REFrameworkMod
-from REFrameworkD2DMod import REFrameworkD2DMod
-from TeleportMod import TeleportMod
-from SpiritBirdsMod import SpiritBirdsMod
-from MHROverlayMod import MHROverlayMod
-from DropRatesEnhancedMod import DropRatesEnhancedMod
+from Main.Mods.REFrameworkMod import REFrameworkMod
+from Main.Mods.REFrameworkD2DMod import REFrameworkD2DMod
+from Main.Mods.TeleportMod import TeleportMod
+from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
+from Main.Mods.DropRatesEnhancedMod import DropRatesEnhancedMod
+from Main.Mods.MHROverlayMod import MHROverlayMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 

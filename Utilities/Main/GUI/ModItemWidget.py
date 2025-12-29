@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import (
-    QCheckBox, QWidget, QHBoxLayout, QPushButton, QLabel
+    QCheckBox, QWidget, QHBoxLayout, QLabel
 )
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
 
-from ModModel import ModModel
+from Main.Mods.ModModel import ModModel
 
 class ModItemWidget(QWidget):
     def __init__(self, mod : ModModel, parent=None):

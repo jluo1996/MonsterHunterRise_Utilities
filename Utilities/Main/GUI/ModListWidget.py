@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea
-from ModItemWidget import ModItemWidget
-from ModModel import ModModel
+from Main.GUI.ModItemWidget import ModItemWidget
+from Main.Mods.ModModel import ModModel
 
 
 class ModListWidget(QWidget):

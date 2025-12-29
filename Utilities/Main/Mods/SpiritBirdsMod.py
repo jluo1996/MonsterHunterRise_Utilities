@@ -1,5 +1,5 @@
 from pathlib import Path
-from ModModel import ModModel
+from Main.Mods.ModModel import ModModel
 
 class SpiritBirdsMod(ModModel):
     def __init__(self, resource_folder: str, game_install_path: str):

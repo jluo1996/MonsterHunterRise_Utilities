@@ -15,7 +15,8 @@ class ModModel:
         target_folder = self.install_path
 
         if not source_folder.exists() or not source_folder.is_dir():
-            raise ValueError(f"Source folder does not exist: {source_folder}")
+            print(f"Source folder does not exist: {source_folder}")
+            return False
         if not target_folder.exists():
             target_folder.mkdir(parents=True)
 
@@ -68,8 +69,10 @@ class ModModel:
         target_folder = self.install_path
 
         if not source_folder.exists() or not source_folder.is_dir():
+            print(f"Source folder {source_folder} does not exist.")
             return False
         if not target_folder.exists() or not target_folder.is_dir():
+            print(f"Target folder {target_folder} does not exist.")
             return False
 
         # Iterate through all files in source_folder recursively
@@ -81,6 +84,7 @@ class ModModel:
                 tgt_file = target_folder / rel_path
                 if not tgt_file.is_file():
                     # File missing in target
+                    print(f"File missing in target: {tgt_file}")
                     return False
 
         # All files exist in target
@@ -90,6 +94,7 @@ class ModModel:
         self.is_selected = selected
 
     def update_install_path(self, new_game_install_path):
+        print(f"Updating install path from {self.install_path} to: {new_game_install_path}")
         self.install_path = Path(new_game_install_path)
 
     
