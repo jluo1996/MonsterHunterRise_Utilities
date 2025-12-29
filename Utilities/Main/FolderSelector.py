@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import QFileDialog, QHBoxLayout, QLineEdit, QPushButton, QW
 class FolderSelector(QWidget):
     folder_changed_signal = pyqtSignal(Path)
 
-    def __init__(self, default_path=None, parent=None):
+    def __init__(self, default_path="", parent=None):
         super().__init__(parent)
 
         self.layout = QHBoxLayout(self)
