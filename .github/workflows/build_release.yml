@@ -1,0 +1,82 @@
+name: MHR Utilities
+
+on:
+  push:
+    branches:
+      - main
+      - main_release
+
+env:
+  Version: 2.${{ github.run_number }}.${{ github.run_attempt }}.${{ github.run_id }}
+  ArtifactBaseName: MHR Util
+  BuildScript: build\scripts\buildExe.bat
+  ArtifactFolder: dist\
+
+jobs:
+  build_release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Set artifact name
+        run: |
+          echo ("ArtifactName=${{ env.ArtifactBaseName }} ${{ env.Version }}") >> $env:GITHUB_ENV
+
+      - name: Set artifact path
+        run: |
+          echo ("ArtifactFullPath=${{ env.ArtifactFolder }}/${{ env.ArtifactName }}.exe") >> $env:GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with: 
+          fetch-depth: 1         
+          
+      - name: Create EXE 
+        run: |
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ArtifactName }}
+          path: |
+            ${{ env.ArtifactFullPath }}
+
+      # ============== Below are steps for only release branch (main_release) ================
+
+      - name: Delete all releases and tags
+        if: github.ref == 'refs/heads/main_release'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          Write-Host "Deleting all releases..."
+        
+          $releases = gh release list --limit 1000 --json tagName | ConvertFrom-Json
+          foreach ($release in $releases) {
+            Write-Host "Deleting release $($release.tagName)"
+            gh release delete $release.tagName -y
+          }
+        
+          Write-Host "Deleting all tags..."
+        
+          git fetch --tags
+          $tags = git tag
+          foreach ($tag in $tags) {
+            Write-Host "Deleting tag $tag"
+            git tag -d $tag
+            git push origin :refs/tags/$tag
+          }
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main_release'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.Version }}
+          name: ${{ env.ArtifactName }} Release
+          files: |
+            ${{ env.ArtifactFullPath }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+
+
+

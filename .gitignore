@@ -1,3 +1,10 @@
 LogFiles/
 __pycache__/
 .vscode/
+
+build/*
+!build/scripts/
+!build/scripts/**
+
+dist/
+*.spec
