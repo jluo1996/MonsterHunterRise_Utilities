@@ -1,5 +1,4 @@
-import sys
-from PyQt6.QtWidgets import QApplication, QHBoxLayout, QPushButton, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget
 from Main.MainViewModel import MainViewModel
 from Main.GUI.ModListWidget import ModListWidget
 from Main.GUI.FolderSelector import FolderSelector
@@ -28,7 +27,7 @@ class MainGUI(QWidget):
         button_layout.addWidget(uninstall_button)
         main_layout.addLayout(button_layout)
         
-        self.setWindowTitle("MHR Utilities - Main GUI")
+        self.setWindowTitle("MHR Utilities")
         self.setLayout(main_layout)
 
     def get_mod_list_widget(self, mods):
@@ -49,16 +48,3 @@ class MainGUI(QWidget):
     def on_folder_changed(self, folder_path):
         self.main_vm.update_game_install_path(folder_path)
         self.refresh_mod_statuses()
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-
-    mod_vm = MainViewModel()
-    mod_vm.init_mods()
-
-    main_gui = MainGUI(mod_vm)
-    main_gui.show()
-
-    sys.exit(app.exec())

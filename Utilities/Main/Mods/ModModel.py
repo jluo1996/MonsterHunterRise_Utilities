@@ -28,20 +28,22 @@ class ModModel:
             if item.is_dir():
                 # Create subfolder if it doesn't exist
                 target_item.mkdir(parents=True, exist_ok=True)
-                print(f"Created folder: {target_item}")
+                print(f"{__name__}.install: Created folder: {target_item}")
             else:
                 # Copy file (overwrites if exists)
                 shutil.copy2(item, target_item)
-                print(f"Copied file: {target_item}")
+                print(f"{__name__}.install: Copied file: {target_item}")
     
     def uninstall(self):
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
         if not source_folder.exists() or not source_folder.is_dir():
-            raise ValueError(f"Source folder does not exist: {source_folder}")
+            print(f"Source folder does not exist: {source_folder}")
+            return False
         if not target_folder.exists() or not target_folder.is_dir():
-            raise ValueError(f"Target folder does not exist: {target_folder}")
+            print(f"Target folder does not exist: {target_folder}")
+            return False
 
         # Remove files in target that exist in source
         for src_file in source_folder.rglob("*"):
@@ -51,28 +53,28 @@ class ModModel:
                 if tgt_file.exists() and tgt_file.is_file():
                     try:
                         tgt_file.unlink()
-                        print(f"Removed file: {tgt_file}")
+                        print(f"{__name__}.uninstall: Removed file: {tgt_file}")
                     except Exception as e:
-                        print(f"Failed to remove {tgt_file}: {e}")
+                        print(f"{__name__}.uninstall: Failed to remove {tgt_file}: {e}")
 
         # Optionally, remove empty directories in target
         for tgt_dir in sorted(target_folder.rglob("*"), key=lambda p: -p.parts.__len__()):
             if tgt_dir.is_dir() and not any(tgt_dir.iterdir()):
                 try:
                     tgt_dir.rmdir()
-                    print(f"Removed empty folder: {tgt_dir}")
+                    print(f"{__name__}.uninstall: Removed empty folder: {tgt_dir}")
                 except Exception as e:
-                    print(f"Failed to remove {tgt_dir}: {e}")
+                    print(f"{__name__}.uninstall: Failed to remove {tgt_dir}: {e}")
 
     def is_installed(self) -> bool:
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
         if not source_folder.exists() or not source_folder.is_dir():
-            print(f"Source folder {source_folder} does not exist.")
+            print(f"{__name__}.is_installed: Source folder {source_folder} does not exist.")
             return False
         if not target_folder.exists() or not target_folder.is_dir():
-            print(f"Target folder {target_folder} does not exist.")
+            print(f"{__name__}.is_installed: Target folder {target_folder} does not exist.")
             return False
 
         # Iterate through all files in source_folder recursively
@@ -84,7 +86,7 @@ class ModModel:
                 tgt_file = target_folder / rel_path
                 if not tgt_file.is_file():
                     # File missing in target
-                    print(f"File missing in target: {tgt_file}")
+                    print(f"{__name__}.is_installed: File missing in target: {tgt_file}")
                     return False
 
         # All files exist in target
@@ -94,7 +96,7 @@ class ModModel:
         self.is_selected = selected
 
     def update_install_path(self, new_game_install_path):
-        print(f"Updating install path from {self.install_path} to: {new_game_install_path}")
+        print(f"{__name__}.update_install_path: Updating install path from {self.install_path} to: {new_game_install_path}")
         self.install_path = Path(new_game_install_path)
 
     

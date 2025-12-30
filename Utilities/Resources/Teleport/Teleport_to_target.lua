@@ -76,16 +76,16 @@ re.on_frame(
 			preNodeID = curNodeID
 		end
 
-		if GetTime() - startTime > 0.2 and curNodeID == 690136471 and not effectFlag then
+		if GetTime() - startTime > 0.2 and curNodeID == 732121360 and not effectFlag then
 			masterPlayerQuest:call("setItemEffect", 100, 800)
 			effectFlag = true
 		end
-		if GetTime() - startTime > 1.2 and curNodeID == 690136471 and not tpFlag then
+		if GetTime() - startTime > 1.2 and curNodeID == 732121360 and not tpFlag then
 			TpToTarget()
 			tpFlag = true
 			arriveFlag = true
 		end
-		if curNodeID ~= 690136471 then
+		if curNodeID ~= 732121360 then
 			tpFlag = false
 			effectFlag = false
 			if arriveFlag then
