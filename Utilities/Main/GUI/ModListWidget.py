@@ -10,9 +10,6 @@ class ModListWidget(QWidget):
 
         main_layout = QVBoxLayout(self)
 
-        # Add "Select All" checkbox
-        
-
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         main_layout.addWidget(scroll)
