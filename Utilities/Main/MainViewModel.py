@@ -5,6 +5,8 @@ from Main.Mods.TeleportMod import TeleportMod
 from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
 from Main.Mods.DropRatesEnhancedMod import DropRatesEnhancedMod
 from Main.Mods.MHROverlayMod import MHROverlayMod
+from Main.Mods.AutoArgosyMod import AutoArgosyMod
+from Main.Mods.AutoCohootNestMod import AutoCohootNestMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
@@ -22,7 +24,9 @@ class MainViewModel():
         self.mods.append(REFrameworkMod(self.resources_path, self.game_install_path))
         self.mods.append(REFrameworkD2DMod(self.resources_path, self.game_install_path))
         self.mods.append(TeleportMod(self.resources_path, self.game_install_path))
-        self.mods.append(SpiritBirdsMod(self.resources_path, self.game_install_path))    
+        self.mods.append(SpiritBirdsMod(self.resources_path, self.game_install_path))
+        self.mods.append(AutoArgosyMod(self.resources_path, self.game_install_path)) 
+        self.mods.append(AutoCohootNestMod(self.resources_path, self.game_install_path))
         self.mods.append(MHROverlayMod(self.resources_path, self.game_install_path))
         self.mods.append(DropRatesEnhancedMod(self.resources_path, self.game_install_path))
 
