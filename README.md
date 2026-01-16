@@ -4,6 +4,13 @@ A comprehensive GUI application for managing mods for Monster Hunter Rise, provi
 
 ## Features
 
+The application provides a user-friendly graphical interface with features such as:
+
+- Select all functionality for easy mod selection
+- Custom loading splash screen
+- Application icon for better identification
+- Auto-detection of game installation path
+
 This application manages several popular Monster Hunter Rise mods:
 
 - **MHR Overlay**: A detailed in-game UI overlay that provides:
@@ -20,6 +27,8 @@ This application manages several popular Monster Hunter Rise mods:
 - **Teleport Mod**: Teleportation functionality
 - **Spirit Birds Mod**: Spirit Bird enhancements
 - **Drop Rates Enhanced Mod**: Enhanced drop rates with different balance options
+- **Auto Argosy Mod**: Automates the Argosy trading system
+- **Auto Cohoot Nest Mod**: Automates gathering from Cohoot nests
 
 ## Installation
 
