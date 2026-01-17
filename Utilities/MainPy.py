@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # Create and show a splash screen with custom background
     splash_pixmap = QPixmap(str(PICTURE_PATH / "splash_background.jpg"))  # Load custom image
     splash = QSplashScreen(splash_pixmap)
-    splash.setFont(QFont("Arial", 80)) 
+    splash.setFont(QFont("Arial", 16)) 
     splash.showMessage("Loading MHR Utilities...", alignment=Qt.AlignmentFlag.AlignCenter, color=Qt.GlobalColor.white)
     splash.show()
     app.processEvents()
