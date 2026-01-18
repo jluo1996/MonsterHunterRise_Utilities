@@ -2,18 +2,20 @@ import sys
 import re
 from pathlib import Path
 
-if len(sys.argv) != 6:
+if len(sys.argv) != 7:
     print("Usage: python update_version.py <app_name> <version_major> <version_minor> <version_build> <version_revision> <version_file>")
     sys.exit(1)
 
 app_name = sys.argv[1]
 major = sys.argv[2]
 minor = sys.argv[3]
-revision = sys.argv[4]
-version_file = Path(sys.argv[5])
+build = "0" # sys.argv[4] # NOTE: the git build version number is larger than Windows rule 65535
+revision = sys.argv[5]
+version_file = Path(sys.argv[6])
 
-version = f"{major}.{minor}.0.{revision}"
-tuple_version = f"({major}, {minor}, 0, {revision})"
+version = f"{major}.{minor}.{build}.{revision}"
+tuple_version = f"({major}, {minor}, {build}, {revision})"
+print(f"Setting version to {version} in {version_file.resolve()}")
 
 text = version_file.read_text(encoding="utf-8")
 
