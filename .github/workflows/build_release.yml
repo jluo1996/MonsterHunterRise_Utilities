@@ -9,7 +9,8 @@ on:
 env:
   VersionMarjor: 2
   VersionMinor: ${{ github.run_number }}
-  VersionBuild: ${{ github.run_id }}
+  # VersionBuild: ${{ github.run_id }}
+  VersionBuild: 0
   VersionRevision: ${{ github.run_attempt }}
   ArtifactBaseName: MHR Util
   BuildScript: build\scripts\buildExe.bat
@@ -23,6 +24,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Set Full Version
+        run: |
+          echo ("FullVersion=${{ env.VersionMarjor }}.${{ env.VersionMinor }}.${{ env.VersionBuild }}.${{ env.VersionRevision }}") >> $env:GITHUB_ENV
+
       - name: Set artifact name
         run: |
           echo ("ArtifactName=${{ env.ArtifactBaseName }}") >> $env:GITHUB_ENV
@@ -42,7 +47,7 @@ jobs:
 
       - name: Create EXE 
         run: |
-          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.PythonPath }}" 
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.PythonPath }}" "${{ env.VersionFile }}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -81,7 +86,7 @@ jobs:
         if: github.ref == 'refs/heads/main_release'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ env.VersionMinor }}.${{ env.VersionBuild }}.0.${{ env.VersionRevision }}
+          tag_name: v${{ env.FullVersion }}
           name: ${{ env.ArtifactName }} Release
           files: |
             ${{ env.ArtifactFullPath }}

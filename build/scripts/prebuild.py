@@ -11,7 +11,7 @@ if len(sys.argv) != 7:
 app_name = sys.argv[1]
 major = sys.argv[2]
 minor = sys.argv[3]
-build = "0" # sys.argv[4] # NOTE: the git build version number is larger than Windows rule 65535
+build = sys.argv[4]
 revision = sys.argv[5]
 version_file = Path(sys.argv[6])
 
