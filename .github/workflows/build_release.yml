@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - main_release
 
 env:
   VersionMarjor: 2
@@ -59,7 +58,7 @@ jobs:
       # ============== Below are steps for only release branch (main_release) ================
 
       - name: Delete all releases and tags
-        if: github.ref == 'refs/heads/main_release'
+        if: github.ref == 'refs/heads/main'
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -83,7 +82,7 @@ jobs:
           }
 
       - name: Create Release
-        if: github.ref == 'refs/heads/main_release'
+        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.FullVersion }}
