@@ -5,6 +5,7 @@ __pycache__/
 build/*
 !build/scripts/
 !build/scripts/**
+!build/version_info.txt
 
 dist/
 *.spec

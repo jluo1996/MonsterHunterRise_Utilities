@@ -7,7 +7,11 @@ on:
       - main_release
 
 env:
-  Version: 2.${{ github.run_number }}.${{ github.run_attempt }}.${{ github.run_id }}
+  VersionMarjor: 2
+  VersionMinor: ${{ github.run_number }}
+  VersionBuild: ${{ github.run_id }}
+  VersionRevision: ${{ github.run_attempt }}
+  Version: 2.${{ github.run_number }}.${{ github.run_id }}.${{ github.run_attempt }}
   ArtifactBaseName: MHR Util
   BuildScript: build\scripts\buildExe.bat
   ArtifactFolder: dist\
@@ -19,7 +23,7 @@ jobs:
     steps:
       - name: Set artifact name
         run: |
-          echo ("ArtifactName=${{ env.ArtifactBaseName }} ${{ env.Version }}") >> $env:GITHUB_ENV
+          echo ("ArtifactName=${{ env.ArtifactBaseName }}") >> $env:GITHUB_ENV
 
       - name: Set artifact path
         run: |
@@ -32,7 +36,7 @@ jobs:
           
       - name: Create EXE 
         run: |
-          .\${{ env.BuildScript }} "${{ env.ArtifactName }}"
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
