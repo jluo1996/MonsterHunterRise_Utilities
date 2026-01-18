@@ -38,11 +38,11 @@ jobs:
           
       - name: Run prebuild
         run: |
-          python314/python.exe "${{ env.PrebuildScript }}" "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}" build\version_info.txt 
+          python314/python.exe "${{ env.PrebuildScript }}" "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}" ${{ env.VersionFile }}
 
       - name: Create EXE 
         run: |
-          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}"
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.PythonPath }}" 
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
