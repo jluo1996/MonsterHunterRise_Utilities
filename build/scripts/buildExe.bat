@@ -9,14 +9,14 @@ set "versionBuild=%~4"
 set "versionRevision=%~5"
 set "versionFile=%~dp0..\version_info.txt"
 
-echo Writing version info ...
-python314\python.exe "build\scripts\prebuild.py" "%appName%" "%versionMajor%" "%versionMinor%" "%versionRevision%" %versionFile%
+@REM echo Writing version info ...
+@REM python314\python.exe "build\scripts\prebuild.py" "%appName%" "%versionMajor%" "%versionMinor%" "%versionBuild%" "%versionRevision%" %versionFile%
 
-REM ---- Stop if prebuild failed ----
-if errorlevel 1 (
-    echo ERROR: prebuild.py failed. Aborting build.
-    exit /b 1
-)
+@REM REM ---- Stop if prebuild failed ----
+@REM if errorlevel 1 (
+@REM     echo ERROR: prebuild.py failed. Aborting build.
+@REM     exit /b 1
+@REM )
 
 echo Generating "%appName%.exe" in "%~f0" ...
  

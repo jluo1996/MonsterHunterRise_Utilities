@@ -13,6 +13,9 @@ env:
   VersionRevision: ${{ github.run_attempt }}
   ArtifactBaseName: MHR Util
   BuildScript: build\scripts\buildExe.bat
+  PrebuildScript: build\scripts\prebuild.py
+  VersionFile: build\version_info.txt
+  PythonPath: python314\python.exe
   ArtifactFolder: dist\
 
 jobs:
@@ -33,6 +36,10 @@ jobs:
         with: 
           fetch-depth: 1         
           
+      - name: Run prebuild
+        run: |
+          "${{ env.PythonPath }}" "${{ env.PrebuildScript }}" "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}" ${{ env.VersionFile }}
+
       - name: Create EXE 
         run: |
           .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}"
