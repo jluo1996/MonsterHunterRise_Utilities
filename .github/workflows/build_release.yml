@@ -11,7 +11,6 @@ env:
   VersionMinor: ${{ github.run_number }}
   VersionBuild: ${{ github.run_id }}
   VersionRevision: ${{ github.run_attempt }}
-  Version: 2.${{ github.run_number }}.${{ github.run_id }}.${{ github.run_attempt }}
   ArtifactBaseName: MHR Util
   BuildScript: build\scripts\buildExe.bat
   ArtifactFolder: dist\
@@ -36,7 +35,7 @@ jobs:
           
       - name: Create EXE 
         run: |
-          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}"
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionRevision }}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
