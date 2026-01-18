@@ -3,7 +3,9 @@ import re
 from pathlib import Path
 
 if len(sys.argv) != 7:
-    print("Usage: python update_version.py <app_name> <version_major> <version_minor> <version_build> <version_revision> <version_file>")
+    print("There were only {len(sys.argv)-1} arguments provided.")
+    for i, arg in enumerate(sys.argv):
+        print(f"  Arg {i}: {arg}")
     sys.exit(1)
 
 app_name = sys.argv[1]
