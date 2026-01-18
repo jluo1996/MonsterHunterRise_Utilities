@@ -81,7 +81,7 @@ jobs:
         if: github.ref == 'refs/heads/main_release'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ env.VersionMinor }}.${{ env.VersionBuild }}.${{ env.VersionRevision }}
+          tag_name: v${{ env.VersionMinor }}.${{ env.VersionBuild }}.0.${{ env.VersionRevision }}
           name: ${{ env.ArtifactName }} Release
           files: |
             ${{ env.ArtifactFullPath }}

@@ -1,8 +1,8 @@
 # UTF-8
 VSVersionInfo(
     ffi=FixedFileInfo(
-        filevers=(2, 41, 0, 1),
-        prodvers=(2, 41, 0, 1),
+        filevers=(0, 0, 0, 1),
+        prodvers=(0, 0, 0, 1),
         mask=0x3f,
         flags=0x2,
         OS=0x4,
@@ -18,11 +18,11 @@ VSVersionInfo(
                     [
                         StringStruct('CompanyName', ''),
                         StringStruct('FileDescription', ''),
-                        StringStruct('FileVersion', '2.41.0.1'),
-                        StringStruct('InternalName', 'MHR Util'),
-                        StringStruct('OriginalFilename', 'MHR Util.exe'),
-                        StringStruct('ProductName', 'MHR Util'),
-                        StringStruct('ProductVersion', '2.41.0.1')
+                        StringStruct('FileVersion', ''),
+                        StringStruct('InternalName', ''),
+                        StringStruct('OriginalFilename', ''),
+                        StringStruct('ProductName', ''),
+                        StringStruct('ProductVersion', '')
                     ]
                 )
             ]
