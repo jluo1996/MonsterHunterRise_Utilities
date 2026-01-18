@@ -35,7 +35,7 @@ jobs:
           
       - name: Create EXE 
         run: |
-          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionRevision }}"
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
