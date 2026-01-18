@@ -38,7 +38,7 @@ jobs:
           
       - name: Run prebuild
         run: |
-          python314/python.exe build\scripts\prebuild.py "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}" build\version_info.txt 
+          python314/python.exe ${{ env.PrebuildScript }}" "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}" build\version_info.txt 
 
       - name: Create EXE 
         run: |
