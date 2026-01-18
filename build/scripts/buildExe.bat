@@ -10,7 +10,7 @@ set "versionRevision=%~5"
 set "versionFile=%~dp0..\version_info.txt"
 
 echo Writing version info ...
-python314\python.exe "build\scripts\prebuild.py" "%appName%" "%versionMajor%" "%versionMinor%" "%versionBuild%" "%versionRevision%" %versionFile%
+python314\python.exe "build\scripts\prebuild.py" "%appName%" "%versionMajor%" "%versionMinor%" "%versionRevision%" %versionFile%
 
 echo Generating "%appName%.exe" in "%~f0" ...
  
