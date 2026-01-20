@@ -57,7 +57,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.ArtifactName }}
+          name: ${{ env.ArtifactName }} (one file)
           path: |
             ${{ env.OneFileArtifactFullPath }}
 
@@ -68,10 +68,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.ArtifactName }}
+          name: ${{ env.ArtifactName }} (one dir)
           path: |
             ${{ env.OneDirArtifactFullPath }}
-            
+
       # ============== Below are steps for only release branch (main_release) ================
 
       - name: Delete all releases and tags
