@@ -8,7 +8,7 @@ set "versionFile=%~3"
 
 echo Generating "%appName%.exe" in "%~f0" ...
 
-%pythonPath% -m PyInstaller --onefile --noconsole --version-file "%versionFile%" --add-data "Utilities\Resources;\Resources" --name="%appName%" "Utilities\MainPy.py"
+%pythonPath% -m PyInstaller --onefile --clean --noconfirm --noconsole --version-file "%versionFile%" --add-data "Utilities\Resources;Resources" --name="%appName%" "Utilities\MainPy.py"
 
 REM ---- Stop if PyInstaller failed ----
 if errorlevel 1 (

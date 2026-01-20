@@ -15,7 +15,7 @@ env:
   BuildScript: build\scripts\buildExe.bat
   PrebuildScript: build\scripts\prebuild.py
   VersionFile: build\version_info.txt
-  PythonPath: python314\python.exe
+  PythonPath: python312\python.exe
   ArtifactFolder: dist\
 
 jobs:
