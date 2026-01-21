@@ -67,7 +67,7 @@ jobs:
         run: |
           # Build regex dynamically based on VersionBuild
           $patch = [regex]::Escape($env:VersionBuild)
-          $versionPattern = "^\d+\.\d+\.$patch\.\d+$"
+          $versionPattern = "v^\d+\.\d+\.$patch\.\d+$"
     
              Write-Host "Deleting releases with patch version $env:VersionBuild..."
     
