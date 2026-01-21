@@ -58,29 +58,42 @@ jobs:
 
       # ============== Below are steps for only release branch (main) ================
 
-      - name: Delete all releases and tags
+      - name: Delete all (one dir) releases and tags
         if: github.ref == 'refs/heads/main'
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VersionBuild: ${{ env.VersionBuild }}
         run: |
-          Write-Host "Deleting all releases..."
-        
-          $releases = gh release list --limit 1000 --json tagName | ConvertFrom-Json
+          # Build regex dynamically based on VersionBuild
+          $patch = [regex]::Escape($env:VersionBuild)
+          $versionPattern = "^\d+\.\d+\.$patch\.\d+$"
+    
+             Write-Host "Deleting releases with patch version $env:VersionBuild..."
+    
+             $releases = gh release list --limit 1000 --json tagName | ConvertFrom-Json
           foreach ($release in $releases) {
-            Write-Host "Deleting release $($release.tagName)"
-            gh release delete $release.tagName -y
+            if ($release.tagName -match $versionPattern) {
+              Write-Host "Deleting release $($release.tagName)"
+              gh release delete $release.tagName -y
+            }
           }
-        
-          Write-Host "Deleting all tags..."
-        
-          git fetch --tags
+    
+             Write-Host "Deleting tags with patch version $env:VersionBuild..."
+    
+             git fetch --tags
           $tags = git tag
           foreach ($tag in $tags) {
-            Write-Host "Deleting tag $tag"
-            git tag -d $tag
-            git push origin :refs/tags/$tag
+            if ($tag -match $versionPattern) {
+              Write-Host "Deleting tag $tag"
+              git tag -d $tag
+              git push origin :refs/tags/$tag
+            }
           }
+    
+      - name: Zip artifact
+        run: |
+            Compress-Archive -Path "${{ env.ArtifactFullPath }}\*" -DestinationPath "${{ env.ArtifactFullPath }}.zip"
 
       - name: Create Release
         if: github.ref == 'refs/heads/main'
@@ -89,7 +102,7 @@ jobs:
           tag_name: v${{ env.FullVersion }}
           name: ${{ env.ArtifactName }}
           files: |
-            ${{ env.ArtifactFullPath }}
+            ${{ env.ArtifactFullPath }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
 
