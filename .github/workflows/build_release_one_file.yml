@@ -1,4 +1,4 @@
-name: MHR Utilities
+name: MHR Utilities (one file)
 
 on:
   push:
@@ -13,8 +13,7 @@ env:
   VersionBuild: 0
   VersionRevision: ${{ github.run_attempt }}
   ArtifactBaseName: MHR Util
-  BuildOneFileScript: build\scripts\buildExeOneFile.bat
-  BuildOneDirScript: build\scripts\buildExeOneDir.bat
+  BuildScript: build\scripts\buildExeOneFile.bat
   PrebuildScript: build\scripts\prebuild.py
   VersionFile: build\version_info.txt
   PythonPath: python312\python.exe
@@ -35,11 +34,7 @@ jobs:
 
       - name: Set artifact path (one file)
         run: |
-          echo ("OneFileArtifactFullPath=${{ env.ArtifactFolder }}/${{ env.ArtifactName }}.exe") >> $env:GITHUB_ENV
-
-      - name: Set artifact path (one dir)
-        run: |
-          echo ("OneDirArtifactFullPath=${{ env.ArtifactFolder }}/${{ env.ArtifactName }}") >> $env:GITHUB_ENV
+          echo ("ArtifactFullPath=${{ env.ArtifactFolder }}/${{ env.ArtifactName }}.exe") >> $env:GITHUB_ENV
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -52,27 +47,16 @@ jobs:
 
       - name: Create EXE (one file)
         run: |
-          .\${{ env.BuildOneFileScript }} "${{ env.ArtifactName }}" "${{ env.PythonPath }}" "${{ env.VersionFile }}"
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.PythonPath }}" "${{ env.VersionFile }}"
 
-      - name: Upload artifact
+      - name: Upload artifact (one file)
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.ArtifactName }} (one file)
+          name: ${{ env.ArtifactName }} 
           path: |
-            ${{ env.OneFileArtifactFullPath }}
+            ${{ env.ArtifactFullPath }}
 
-      - name: Create EXE (one dir)
-        run: |
-          .\${{ env.BuildOneDirScript }} "${{ env.ArtifactName }}" "${{ env.PythonPath }}" "${{ env.VersionFile }}"
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.ArtifactName }} (one dir)
-          path: |
-            ${{ env.OneDirArtifactFullPath }}
-
-      # ============== Below are steps for only release branch (main_release) ================
+      # ============== Below are steps for only release branch (main) ================
 
       - name: Delete all releases and tags
         if: github.ref == 'refs/heads/main'
@@ -103,9 +87,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.FullVersion }}
-          name: ${{ env.ArtifactName }} Release
+          name: ${{ env.ArtifactName }} (Compressed)
           files: |
-            ${{ env.OneFileArtifactFullPath }}
+            ${{ env.ArtifactFullPath }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
 
