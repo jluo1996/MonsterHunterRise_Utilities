@@ -43,6 +43,7 @@ jobs:
        
       - name: Read Python version
         id: python_version
+        shell: bash
         run: echo "PythonVersion=$(<.python-version)" >> $GITHUB_ENV
 
       - name: Set up Python
