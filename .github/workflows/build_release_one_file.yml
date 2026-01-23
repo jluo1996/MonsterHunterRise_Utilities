@@ -12,12 +12,12 @@ env:
   # VersionBuild: ${{ github.run_id }}
   VersionBuild: 0
   VersionRevision: ${{ github.run_attempt }}
-  ArtifactBaseName: MHR Util
+  ArtifactBaseName: MHR_Util
   BuildScript: build\scripts\buildExeOneFile.bat
   PrebuildScript: build\scripts\prebuild.py
   VersionFile: build\version_info.txt
-  PythonPath: python312\python.exe
   ArtifactFolder: dist\
+  PythonRequirements: build\python_requirements.txt
 
 jobs:
   build_release:
@@ -39,15 +39,32 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with: 
-          fetch-depth: 1         
+          fetch-depth: 1    
+
+      - name: Read Python version
+        id: python_version
+        shell: bash
+        run: echo "PythonVersion=$(<.python-version)" >> $GITHUB_ENV
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PythonVersion }}
+          cache: 'pip'
+          cache-dependency-path: ${{ env.PythonRequirements }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ${{ env.PythonRequirements }}
           
       - name: Run prebuild
         run: |
-          ${{ env.PythonPath }} "${{ env.PrebuildScript }}" "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}" ${{ env.VersionFile }}
+          python "${{ env.PrebuildScript }}" "${{ env.ArtifactName }}" "${{ env.VersionMarjor }}" "${{ env.VersionMinor }}" "${{ env.VersionBuild }}" "${{ env.VersionRevision }}" ${{ env.VersionFile }}
 
       - name: Create EXE (one file)
         run: |
-          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.PythonPath }}" "${{ env.VersionFile }}"
+          .\${{ env.BuildScript }} "${{ env.ArtifactName }}" "${{ env.VersionFile }}"
 
       - name: Upload artifact (one file)
         uses: actions/upload-artifact@v4
