@@ -10,6 +10,8 @@ The application provides a user-friendly graphical interface with features such 
 - Custom loading splash screen
 - Application icon for better identification
 - Auto-detection of game installation path
+- Game running detection to prevent installation conflicts
+- Two executable options: single file or directory-based
 
 This application manages several popular Monster Hunter Rise mods:
 
@@ -33,11 +35,14 @@ This application manages several popular Monster Hunter Rise mods:
 ## Installation
 
 1. Download the latest release from the [Releases](https://github.com/jluo1996/MonsterHunterRise_Utilities/releases) page
-2. Extract the executable file (MHR_Utilities.exe or similar)
+2. Choose the appropriate executable for your needs:
+   - **One-file executable** (.exe): A single executable file that runs directly (recommended for most users)
+   - **One-directory executable** (.exe): An executable that extracts to a directory (useful if you need access to individual files)
 3. Run the executable as administrator
-4. When prompted, select the full path to your Monster Hunter Rise game installation directory (e.g., `C:\Program Files (x86)\Steam\steamapps\common\MonsterHunterRise\`)
-5. Select the mods you want to install from the list
-6. Click "Install Selected Mods"
+4. The application will check if Monster Hunter Rise is currently running and prompt you to close it if necessary
+5. When prompted, select the full path to your Monster Hunter Rise game installation directory (the app will attempt to auto-detect it)
+6. Select the mods you want to install from the list
+7. Click "Install Selected Mods"
 
 ## Requirements
 
@@ -106,7 +111,7 @@ This project is provided as-is for educational and entertainment purposes.
 
 ## Version
 
-Current version: 2.xxx.xxx.xxx (MHR Overlay v2.7.3)
+Current version: 2.x.x.x (MHR Overlay v2.7.3)
 
 ## Credits
 
