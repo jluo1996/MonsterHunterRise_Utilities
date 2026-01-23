@@ -17,7 +17,7 @@ env:
   PrebuildScript: build\scripts\prebuild.py
   VersionFile: build\version_info.txt
   ArtifactFolder: dist\
-  PythonVersion: 3.12
+  PythonVersion: 3.12.10
   PythonRequirements: build\python_requirements.txt
 
 jobs:
