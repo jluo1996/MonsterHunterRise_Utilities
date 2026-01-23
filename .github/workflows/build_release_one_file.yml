@@ -18,7 +18,7 @@ env:
   VersionFile: build\version_info.txt
   ArtifactFolder: dist\
   PythonVersion: 3.12
-  PythonRequirements: build/python_requirements.txt
+  PythonRequirements: build\python_requirements.txt
 
 jobs:
   build_release:
