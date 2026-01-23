@@ -1,14 +1,26 @@
 from pathlib import Path
 import sys
-from PyQt6.QtWidgets import QApplication, QSplashScreen
+from PyQt6.QtWidgets import QApplication, QSplashScreen, QMessageBox
 from PyQt6.QtGui import QIcon, QPixmap, QFont
 from PyQt6.QtCore import Qt
+import psutil
 from Main.GUI.MainGUI import MainGUI
 from Main.MainViewModel import MainViewModel
 
+ICON_PATH = Path(__file__).resolve().parent / "Resources" / "AppIcon"
+PICTURE_PATH = Path(__file__).resolve().parent / "Resources" / "Pictures"
+
+GAME_EXE = "MonsterHunterRise.exe"   
+def is_game_running():
+    for proc in psutil.process_iter(['name']):
+        try:
+            if proc.info['name'] and proc.info['name'].lower() == GAME_EXE.lower():
+                return True
+        except psutil.NoSuchProcess:
+            pass
+    return False
+
 if __name__ == "__main__":
-    ICON_PATH = Path(__file__).resolve().parent / "Resources" / "AppIcon"
-    PICTURE_PATH = Path(__file__).resolve().parent / "Resources" / "Pictures"
     app = QApplication(sys.argv)
 
     # Set application icon
@@ -22,6 +34,10 @@ if __name__ == "__main__":
     splash.showMessage("Loading MHR Utilities...", alignment=Qt.AlignmentFlag.AlignCenter, color=Qt.GlobalColor.white)
     splash.show()
     app.processEvents()
+
+    if is_game_running():
+        QMessageBox.critical(None, "Game Running", "Please close Monster Hunter Rise before using this utility.")
+        sys.exit(0)
 
     mod_vm = MainViewModel()
     mod_vm.init_mods()
