@@ -12,7 +12,7 @@ env:
   # VersionBuild: ${{ github.run_id }}
   VersionBuild: 0
   VersionRevision: ${{ github.run_attempt }}
-  ArtifactBaseName: MHR Util
+  ArtifactBaseName: MHR_Util
   BuildScript: build\scripts\buildExeOneFile.bat
   PrebuildScript: build\scripts\prebuild.py
   VersionFile: build\version_info.txt
