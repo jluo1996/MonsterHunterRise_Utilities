@@ -1,7 +1,14 @@
 LogFiles/
-__pycache__/
 .vscode/
+
 
 dist/
 *.spec
+
+# Virtual environments
+.venv/
+env/
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
