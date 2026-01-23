@@ -2,11 +2,6 @@ LogFiles/
 __pycache__/
 .vscode/
 
-build/*
-!build/scripts/
-!build/scripts/**
-!build/version_info.txt
-
 dist/
 *.spec
 *.pyc
