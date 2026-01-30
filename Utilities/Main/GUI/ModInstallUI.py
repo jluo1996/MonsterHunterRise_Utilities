@@ -3,7 +3,7 @@ from Main.MainViewModel import MainViewModel
 from Main.GUI.ModListWidget import ModListWidget
 from Main.GUI.FolderSelector import FolderSelector
 
-class MainGUI(QWidget):
+class ModInstallUI(QWidget):
     def __init__(self, main_vm: MainViewModel):
         super().__init__()
         

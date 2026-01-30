@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication, QSplashScreen, QMessageBox
 from PyQt6.QtGui import QIcon, QPixmap, QFont
 from PyQt6.QtCore import Qt
 import psutil
-from Main.GUI.MainGUI import MainGUI
+from Main.GUI.ModInstallUI import ModInstallUI
 from Main.MainViewModel import MainViewModel
 
 ICON_PATH = Path(__file__).resolve().parent / "Resources" / "AppIcon"
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     splash.finish(None)  # Close the splash screen
 
-    main_gui = MainGUI(mod_vm)
+    main_gui = ModInstallUI(mod_vm)
     main_gui.show()
     main_gui.raise_()
     main_gui.activateWindow()
