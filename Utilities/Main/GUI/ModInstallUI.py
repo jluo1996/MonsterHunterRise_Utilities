@@ -27,7 +27,6 @@ class ModInstallUI(QWidget):
         button_layout.addWidget(uninstall_button)
         main_layout.addLayout(button_layout)
         
-        self.setWindowTitle("MHR Utilities")
         self.setLayout(main_layout)
 
     def get_mod_list_widget(self, mods):

@@ -4,11 +4,9 @@ from PyQt6.QtWidgets import QApplication, QSplashScreen, QMessageBox
 from PyQt6.QtGui import QIcon, QPixmap, QFont
 from PyQt6.QtCore import Qt
 import psutil
-from Main.GUI.ModInstallUI import ModInstallUI
 from Main.MainViewModel import MainViewModel
-
-ICON_PATH = Path(__file__).resolve().parent / "Resources" / "AppIcon"
-PICTURE_PATH = Path(__file__).resolve().parent / "Resources" / "Pictures"
+from Main.GUI.MainWindow import MainWindow
+from Main.Helpers.FileHelper import FileHelper
 
 GAME_EXE = "MonsterHunterRise.exe"   
 def is_game_running():
@@ -23,12 +21,16 @@ def is_game_running():
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    # Set application icon
-    app_icon = QIcon(str(ICON_PATH / "App.ico"))
-    app.setWindowIcon(app_icon)
+    file_helper = FileHelper()
+    picture_path = file_helper.get_pictures_folder_path()
+    icon_path = file_helper.get_icons_folder_path()
 
+    # Set application icon
+    app_icon = QIcon(str(icon_path / "App.ico"))
+    app.setWindowIcon(app_icon)
+    
     # Create and show a splash screen with custom background
-    splash_pixmap = QPixmap(str(PICTURE_PATH / "splash_background.jpg"))  # Load custom image
+    splash_pixmap = QPixmap(str(picture_path / "splash_background.jpg"))  # Load custom image
     splash = QSplashScreen(splash_pixmap)
     splash.setFont(QFont("Arial", 16)) 
     splash.showMessage("Loading MHR Utilities...", alignment=Qt.AlignmentFlag.AlignCenter, color=Qt.GlobalColor.white)
@@ -44,9 +46,11 @@ if __name__ == "__main__":
 
     splash.finish(None)  # Close the splash screen
 
-    main_gui = ModInstallUI(mod_vm)
-    main_gui.show()
-    main_gui.raise_()
-    main_gui.activateWindow()
+
+    win = MainWindow(mod_vm)
+    win.show()
+    win.raise_()
+    win.activateWindow()
+
 
     sys.exit(app.exec())

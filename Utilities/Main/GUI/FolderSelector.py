@@ -13,6 +13,7 @@ class FolderSelector(QWidget):
         self.layout.setContentsMargins(5, 5, 5, 5)
 
         self.path_edit = QLineEdit(default_path)
+        self.path_edit.setReadOnly(True)
         self.path_edit.setPlaceholderText("Select a folder...")
         self.layout.addWidget(self.path_edit, stretch=1)
         self.path_edit.textChanged.connect(self._on_text_changed)
