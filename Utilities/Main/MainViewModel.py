@@ -7,14 +7,18 @@ from Main.Mods.DropRatesEnhancedMod import DropRatesEnhancedMod
 from Main.Mods.MHROverlayMod import MHROverlayMod
 from Main.Mods.AutoArgosyMod import AutoArgosyMod
 from Main.Mods.AutoCohootNestMod import AutoCohootNestMod
+from Main.Helpers.GameInfoHelper import GameInfoHelper
+from Main.Helpers.FileHelper import FileHelper
+
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
 class MainViewModel():
     def __init__(self):
         self.mods = []  # This will hold a list of ModModel instances
-        self.resources_path = Path(__file__).resolve().parent.parent / "Resources"
-        detected_paths = self.auto_detect_game_install_path()  
+        file_helper = FileHelper()
+        self.resources_path = file_helper.get_resources_folder_path()
+        detected_paths = self.auto_detect_game_install_path(auto_detect=False)  
         self.game_install_path = str(detected_paths[0]) if detected_paths else str(GAME_INSTALL_PATH)
 
     def get_mods(self):
@@ -45,23 +49,7 @@ class MainViewModel():
         for mod in self.mods:
             mod.update_install_path(new_path)
 
-    def auto_detect_game_install_path(self):
-        exe_name = "MonsterHunterRise.exe"
-
-        return self._find_exe_in_named_folder(exe_name, "MonsterHunterRise")
-
-    def _find_exe_in_named_folder(self, exe_name: str, folder_name: str):
-        COMMON_DIRS = [
-            Path("C:/Program Files"),
-            Path("C:/Program Files (x86)"),
-            Path.home(),
-        ]
-
-        results = []
-        for base in COMMON_DIRS:
-            if not base.exists():
-                continue
-            for p in base.rglob(exe_name):
-                if p.parent.name == folder_name:
-                    results.append(p.parent)
-        return results
+    def auto_detect_game_install_path(self, auto_detect: bool = False) -> list[Path]:
+        game_info_helper = GameInfoHelper()
+        detected_path = game_info_helper.get_MRH_install_path(auto_detect)
+        return [detected_path] if detected_path else []
