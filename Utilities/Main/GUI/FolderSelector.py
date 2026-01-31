@@ -36,3 +36,6 @@ class FolderSelector(QWidget):
     def _on_text_changed(self, text: str):
         if text:
             self.folder_changed_signal.emit(Path(text))
+
+    def update_path(self, new_path: str):
+        self.path_edit.setText(new_path)

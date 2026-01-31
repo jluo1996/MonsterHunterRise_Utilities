@@ -47,3 +47,6 @@ class ModInstallUI(QWidget):
     def on_folder_changed(self, folder_path):
         self.main_vm.update_game_install_path(folder_path)
         self.refresh_mod_statuses()
+
+    def update_game_install_path(self, new_path):
+        self.file_selector.update_path(new_path)

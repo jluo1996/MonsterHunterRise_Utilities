@@ -18,8 +18,7 @@ class MainViewModel():
         self.mods = []  # This will hold a list of ModModel instances
         file_helper = FileHelper()
         self.resources_path = file_helper.get_resources_folder_path()
-        detected_paths = self.auto_detect_game_install_path(auto_detect=False)  
-        self.game_install_path = str(detected_paths[0]) if detected_paths else str(GAME_INSTALL_PATH)
+        _ = self.auto_detect_game_install_path(auto_detect=False, update_game_install_path=True)  
 
     def get_mods(self):
         return self.mods
@@ -49,7 +48,9 @@ class MainViewModel():
         for mod in self.mods:
             mod.update_install_path(new_path)
 
-    def auto_detect_game_install_path(self, auto_detect: bool = False) -> list[Path]:
+    def auto_detect_game_install_path(self, auto_detect: bool = False, update_game_install_path: bool = False) -> list[Path]:
         game_info_helper = GameInfoHelper()
         detected_path = game_info_helper.get_MRH_install_path(auto_detect)
+        if update_game_install_path and detected_path:
+            self.update_game_install_path(str(detected_path))
         return [detected_path] if detected_path else []
