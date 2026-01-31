@@ -9,6 +9,7 @@ class MainWindow(QMainWindow):
     def __init__(self, main_vm, parent=None):
         super().__init__(parent)
         self.setWindowTitle("MHR Utilities")
+        self.setMinimumWidth(330)
 
         self.main_vm = main_vm
         self.main_gui = ModInstallUI(self.main_vm)
