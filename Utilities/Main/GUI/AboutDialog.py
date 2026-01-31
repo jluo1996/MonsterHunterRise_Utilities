@@ -2,7 +2,7 @@ from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import Qt
 import sys
 
-GITHUB_URL = "https://github.com/your-org/your-repo"
+GITHUB_URL = "https://github.com/jluo1996/MonsterHunterRise_Utilities"
 
 class AboutDialog(QtWidgets.QDialog):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
