@@ -3,6 +3,7 @@ from PyQt6.QtGui import QAction, QIcon
 from Main.GUI.ModInstallUI import ModInstallUI
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
+from Main.GUI.AboutDialog import AboutDialog
 
 class MainWindow(QMainWindow):
     def __init__(self, main_vm, parent=None):
@@ -47,7 +48,7 @@ class MainWindow(QMainWindow):
         act_auto_detect.triggered.connect(self._auto_detect_game_folder)
         tools_menu.addAction(act_auto_detect)
 
-        # --- Help menu (optional) ---
+        # --- Help menu ---
         help_menu = menubar.addMenu("&Help")
 
         act_about = QAction("&About", self)
@@ -59,8 +60,8 @@ class MainWindow(QMainWindow):
     # ---- Handlers for toolbar actions ----
 
     def _show_about(self):
-        # TODO: Implement about dialog
-        pass
+        about_dialog = AboutDialog()
+        about_dialog.exec() 
 
     def _backup_user_data(self):
         game_info_helper = GameInfoHelper()

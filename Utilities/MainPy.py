@@ -1,22 +1,11 @@
-from pathlib import Path
 import sys
 from PyQt6.QtWidgets import QApplication, QSplashScreen, QMessageBox
 from PyQt6.QtGui import QIcon, QPixmap, QFont
 from PyQt6.QtCore import Qt
-import psutil
 from Main.MainViewModel import MainViewModel
 from Main.GUI.MainWindow import MainWindow
 from Main.Helpers.FileHelper import FileHelper
-
-GAME_EXE = "MonsterHunterRise.exe"   
-def is_game_running():
-    for proc in psutil.process_iter(['name']):
-        try:
-            if proc.info['name'] and proc.info['name'].lower() == GAME_EXE.lower():
-                return True
-        except psutil.NoSuchProcess:
-            pass
-    return False
+from Main.Helpers.GameInfoHelper import GameInfoHelper
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -37,7 +26,8 @@ if __name__ == "__main__":
     splash.show()
     app.processEvents()
 
-    if is_game_running():
+    game_info_helper = GameInfoHelper()
+    if game_info_helper.is_game_running():
         QMessageBox.critical(None, "Game Running", "Please close Monster Hunter Rise before using this utility.")
         sys.exit(0)
 

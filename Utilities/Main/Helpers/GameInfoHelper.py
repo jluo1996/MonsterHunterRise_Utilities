@@ -7,6 +7,8 @@ from string import ascii_uppercase
 from typing import List
 import winreg
 
+import psutil
+
 MHR_STEAM_APP_ID = 1446780
 MHR_EXE_NAME = "MonsterHunterRise.exe"
 
@@ -82,7 +84,6 @@ class GameInfoHelper:
         found_exes = self._find_exe_in_named_folder(MHR_EXE_NAME, "MonsterHunterRise")
         return found_exes[0] if found_exes else None
     
-
     def _list_available_drives(self) -> List[Path]:
         """
         Returns a list of root Paths for all available drives on Windows.
@@ -201,5 +202,12 @@ class GameInfoHelper:
         # Nothing found
         return []
     
-    
+    def is_game_running(self):
+        for proc in psutil.process_iter(['name']):
+            try:
+                if proc.info['name'] and proc.info['name'].lower() == MHR_EXE_NAME.lower():
+                    return True
+            except psutil.NoSuchProcess:
+                pass
+        return False
     

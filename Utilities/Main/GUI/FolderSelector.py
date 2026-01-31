@@ -19,10 +19,10 @@ class FolderSelector(QWidget):
         self.path_edit.textChanged.connect(self._on_text_changed)
 
         self.browse_button = QPushButton("Browse")
-        self.browse_button.clicked.connect(self.select_folder)
+        self.browse_button.clicked.connect(self._select_folder)
         self.layout.addWidget(self.browse_button)
 
-    def select_folder(self):
+    def _select_folder(self):
         folder = QFileDialog.getExistingDirectory(
             self, "Select Folder", str(Path(self.path_edit.text()).expanduser())
         )
