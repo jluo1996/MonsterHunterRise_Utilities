@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "부적 편집기",
+        "m_header_player_editor": "플레이어 에디터",
+        "m_header_itembox_editor": "항목 상자 편집기",
+        "m_header_loadout_editor": "로드아웃 편집기"
+    },
+    "Charm Editor": {
+        "m_label_charms": "부적",
+        "m_label_none": "없음",
+        "m_button_add_empty_charm": "빈 부적 추가",
+        "m_title_error": "오류",
+        "m_text_error_add_charm": "매력을 추가하지 못했습니다. 사용 가능한 인벤토리 공간이 없습니다.",
+        "m_button_sell_charm": "부적 판매",
+        "m_button_make_legal": "합법화",
+        "m_checkbox_disable_sanity_check": "온전성 검사 비활성화",
+        "m_button_export_charms": "수출 부적",
+        "m_button_import_charms": "부적 가져오기",
+        "m_button_ok": "OK",
+        "m_label_rarity": "희박",
+        "m_label_skill": "기술",
+        "m_label_level": "수준",
+        "m_label_slot": "슬롯",
+        "m_text_waiting_for_game": "매력이 없거나 저장에 로드되지 않았습니다."
+    },
+    "Player Editor": {
+        "m_label_zenny": "제니",
+        "m_label_points": "포인트들",
+        "m_text_warning": "경고",
+        "m_text_warning_hr": "헌터 랭크를 수동으로 설정하는 것은 권장하지 않습니다. 헌터 랭크 포인트를 조정하지 않고 헌터 랭크를 설정하면 해당 랭크에 도달하는 데 필요한 XP를 합법적으로 획득할 때까지 특정 헌터 랭크에 고정됩니다. 대신 헌터 랭크 포인트만 편집한 다음 퀘스트를 완료하면 헌터 랭크가 그에 따라 조정됩니다.",
+        "m_label_hunter_rank": "헌터 랭크",
+        "m_label_hr_points": "인사 포인트",
+        "m_label_master_rank": "마스터 랭크",
+        "m_label_mr_points": "미스터 포인트"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "모든 항목 추가",
+        "m_button_clear_itembox": "아이템 상자 지우기",
+        "m_button_delete_illegal": "불법 항목 삭제",
+        "m_button_clear_selected": "선택 취소",
+        "m_button_export_items": "수출 품목",
+        "m_button_import_items": "항목 가져오기",
+        "m_text_warning_overwrite": "이렇게 하면 상자의 모든 항목을 덮어씁니다! 확실합니까?",
+        "m_button_yes": "예",
+        "m_button_no": "아니요",
+        "m_label_itemlist_filter": "항목 목록 필터",
+        "m_label_items": "아이템",
+        "m_label_index": "색인",
+        "m_label_id": "ID",
+        "m_label_item": "안건",
+        "m_label_amount": "수량"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "삭제"
+    }
+}

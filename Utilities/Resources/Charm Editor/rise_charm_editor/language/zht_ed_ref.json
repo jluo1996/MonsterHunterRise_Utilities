@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "護石編輯",
+        "m_header_player_editor": "人物編輯",
+        "m_header_itembox_editor": "道具箱編輯",
+        "m_header_loadout_editor": "裝備個人組合編輯"
+    },
+    "Charm Editor": {
+        "m_label_charms": "護石",
+        "m_label_none": "無",
+        "m_button_add_empty_charm": "添加空白護石",
+        "m_title_error": "錯誤",
+        "m_text_error_add_charm": "添加護石失敗，裝備箱已滿",
+        "m_button_sell_charm": "出售護石",
+        "m_button_make_legal": "使合法",
+        "m_checkbox_disable_sanity_check": "禁用健全性檢查",
+        "m_button_export_charms": "出口護身符",
+        "m_button_import_charms": "進口護身符",
+        "m_button_ok": "好",
+        "m_label_rarity": "稀有度",
+        "m_label_skill": "技能",
+        "m_label_level": "等級",
+        "m_label_slot": "鑲嵌槽",
+        "m_text_waiting_for_game": "你沒有護石，或者沒有進入存檔"
+    },
+    "Player Editor": {
+        "m_label_zenny": "現金",
+        "m_label_points": "炎火點數",
+        "m_text_warning": "警告",
+        "m_text_warning_hr": "不建議手動設置獵人等級。如果你設置了獵人等級而沒有調整獵人等級點數，你將被卡在那個特定的獵人等級，直到你合法地獲得達到該等級所需的經驗點數。相反，只編輯獵人等級經驗點數，然後完成任何任務，你的獵人等級就會相應調整。",
+        "m_label_hunter_rank": "獵人等級",
+        "m_label_hr_points": "HR 點數",
+        "m_label_master_rank": "大師等級",
+        "m_label_mr_points": "MR 點數"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "添加全部道具",
+        "m_button_clear_itembox": "清空道具箱",
+        "m_button_delete_illegal": "刪除非法物品",
+        "m_button_clear_selected": "清除所選道具",
+        "m_button_export_items": "出口項目",
+        "m_button_import_items": "導入項目",
+        "m_text_warning_overwrite": "這樣做會覆蓋你盒子裡的所有物品！你確定嗎？",
+        "m_button_yes": "是的",
+        "m_button_no": "不",
+        "m_label_itemlist_filter": "道具列表篩選",
+        "m_label_items": "道具",
+        "m_label_index": "索引",
+        "m_label_id": "名稱",
+        "m_label_item": "道具",
+        "m_label_amount": "數量"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "刪除"
+    }
+}

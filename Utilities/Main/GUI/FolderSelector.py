@@ -13,15 +13,16 @@ class FolderSelector(QWidget):
         self.layout.setContentsMargins(5, 5, 5, 5)
 
         self.path_edit = QLineEdit(default_path)
+        self.path_edit.setReadOnly(True)
         self.path_edit.setPlaceholderText("Select a folder...")
         self.layout.addWidget(self.path_edit, stretch=1)
         self.path_edit.textChanged.connect(self._on_text_changed)
 
         self.browse_button = QPushButton("Browse")
-        self.browse_button.clicked.connect(self.select_folder)
+        self.browse_button.clicked.connect(self._select_folder)
         self.layout.addWidget(self.browse_button)
 
-    def select_folder(self):
+    def _select_folder(self):
         folder = QFileDialog.getExistingDirectory(
             self, "Select Folder", str(Path(self.path_edit.text()).expanduser())
         )
@@ -35,3 +36,6 @@ class FolderSelector(QWidget):
     def _on_text_changed(self, text: str):
         if text:
             self.folder_changed_signal.emit(Path(text))
+
+    def update_path(self, new_path: str):
+        self.path_edit.setText(new_path)

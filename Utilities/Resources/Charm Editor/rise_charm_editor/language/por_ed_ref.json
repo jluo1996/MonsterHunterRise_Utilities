@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "Editor de talismãs",
+        "m_header_player_editor": "Editor do jogador",
+        "m_header_itembox_editor": "Editor de caixa de item",
+        "m_header_loadout_editor": "Editor de carregamento"
+    },
+    "Charm Editor": {
+        "m_label_charms": "Talismãs",
+        "m_label_none": "Nenhum",
+        "m_button_add_empty_charm": "Adicionar talismã vazio",
+        "m_title_error": "Erro",
+        "m_text_error_add_charm": "Falha ao adicionar talismã. Nenhum espaço de inventário gratuito encontrado.",
+        "m_button_sell_charm": "Vender talismã",
+        "m_button_make_legal": "Tornar legal",
+        "m_checkbox_disable_sanity_check": "Desabilitar verificação de integridade",
+        "m_button_export_charms": "Exportar talismãs",
+        "m_button_import_charms": "Importar talismãs",
+        "m_button_ok": "OK",
+        "m_label_rarity": "Raridade",
+        "m_label_skill": "Habilidade",
+        "m_label_level": "Nível",
+        "m_label_slot": "Slot",
+        "m_text_waiting_for_game": "Ou você não tem talismãs ou você não está carregado em um save."
+    },
+    "Player Editor": {
+        "m_label_zenny": "Zenny",
+        "m_label_points": "Pontos",
+        "m_text_warning": "Aviso",
+        "m_text_warning_hr": "Não é recomendado configurar a Classificação de caçador manualmente. Se você definir sua Classificação de Caçador sem ajustar seus Pontos de Classificação de Caçador, ficará preso a essa Classificação de Caçador específica até adquirir legitimamente o XP necessário para chegar a essa classificação. Em vez disso, edite apenas os Pontos de Classificação de Caçador, depois complete qualquer missão e sua Classificação de Caçador se ajustará de acordo.",
+        "m_label_hunter_rank": "Classificação de caçador",
+        "m_label_hr_points": "RC Pontos",
+        "m_label_master_rank": "Classificação Mestre",
+        "m_label_mr_points": "MC Pontos"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "Adicionar todos os itens",
+        "m_button_clear_itembox": "Limpar caixa de itens",
+        "m_button_delete_illegal": "Excluir itens ilegais",
+        "m_button_clear_selected": "Limpar itens selecionados",
+        "m_button_export_items": "Exportar itens",
+        "m_button_import_items": "Importar itens",
+        "m_text_warning_overwrite": "Fazer isso substituirá todos os itens da sua caixa! Tem certeza?",
+        "m_button_yes": "Sim",
+        "m_button_no": "Não",
+        "m_label_itemlist_filter": "Filtro de lista de itens",
+        "m_label_items": "Itens",
+        "m_label_index": "Índice",
+        "m_label_id": "ID",
+        "m_label_item": "Item",
+        "m_label_amount": "Quantidade"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "Excluir"
+    }
+}

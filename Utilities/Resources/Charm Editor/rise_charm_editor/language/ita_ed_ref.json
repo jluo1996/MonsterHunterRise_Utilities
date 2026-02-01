@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "Editor di talismani",
+        "m_header_player_editor": "Editor dei giocatori",
+        "m_header_itembox_editor": "Editor cassa oggetti",
+        "m_header_loadout_editor": "Editor dell' equipaggiamento"
+    },
+    "Charm Editor": {
+        "m_label_charms": "Talismani",
+        "m_label_none": "Nessuno",
+        "m_button_add_empty_charm": "Aggiungi talismano vuoto",
+        "m_title_error": "Errore",
+        "m_text_error_add_charm": "Impossibile aggiungere il talismano. Nessuno spazio libero trovato nell'inventario.",
+        "m_button_sell_charm": "Vendere il Talismano",
+        "m_button_make_legal": "Rendi legale",
+        "m_checkbox_disable_sanity_check": "Disabilita il controllo di integrità",
+        "m_button_export_charms": "Esporta talismani",
+        "m_button_import_charms": "Importa talismani",
+        "m_button_ok": "OK",
+        "m_label_rarity": "Rarità",
+        "m_label_skill": "Abilità",
+        "m_label_level": "Livello",
+        "m_label_slot": "Slot",
+        "m_text_waiting_for_game": "Non hai talismani o non sei caricato in un salvataggio."
+    },
+    "Player Editor": {
+        "m_label_zenny": "Zenny",
+        "m_label_points": "Punti",
+        "m_text_warning": "Attenzione",
+        "m_text_warning_hr": "L'impostazione manuale del grado cacciatore non è consigliata. Se imposti il tuo grado cacciatore senza modificare i tuoi punti grado cacciatore, rimarrai bloccato a quel grado cacciatore finchè non avrai acquisito legittimamente l'esperienza richiesta per arrivare a quel grado cacciatore. Al contrario, modificare i punti GC, dopodichè completare qualsiasi quest e il tuo Grado Cacciatore verrà modificato di conseguenza.",
+        "m_label_hunter_rank": "Grado Cacciatore",
+        "m_label_hr_points": "Punti GC",
+        "m_label_master_rank": "Grado di maestro",
+        "m_label_mr_points": "Punti MR"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "Aggiungi tutti gli oggetti",
+        "m_button_clear_itembox": "Pulisci cassa oggetti",
+        "m_button_delete_illegal": "Elimina oggetti illegali",
+        "m_button_clear_selected": "Pulisci selezionati",
+        "m_button_export_items": "Esporta articoli",
+        "m_button_import_items": "Importa articoli",
+        "m_text_warning_overwrite": "In questo modo verranno sovrascritti tutti gli articoli nella tua scatola! Sei sicuro?",
+        "m_button_yes": "Sì",
+        "m_button_no": "No",
+        "m_label_itemlist_filter": "Filtro lista oggetti",
+        "m_label_items": "Oggetti",
+        "m_label_index": "Index",
+        "m_label_id": "ID",
+        "m_label_item": "Oggetto",
+        "m_label_amount": "Quantità"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "Elimina"
+    }
+}

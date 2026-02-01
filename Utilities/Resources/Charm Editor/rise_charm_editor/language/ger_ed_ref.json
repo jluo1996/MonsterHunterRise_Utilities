@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "Talisman Bearbeiten",
+        "m_header_player_editor": "Player Bearbeiten",
+        "m_header_itembox_editor": "Objekttruhe Bearbeiten",
+        "m_header_loadout_editor": "Ausrüstungssets Bearbeiten"
+    },
+    "Charm Editor": {
+        "m_label_charms": "Talisman",
+        "m_label_none": "Keins",
+        "m_button_add_empty_charm": "Leeren Talisman Hinzufügen",
+        "m_title_error": "Error",
+        "m_text_error_add_charm": "Talisman Hinzufügen fehlgeschlagen. Kein freier Platz verfügbar.",
+        "m_button_sell_charm": "Talisman verkaufen",
+        "m_button_make_legal": "Legal machen",
+        "m_checkbox_disable_sanity_check": "Plausibilitätsprüfung deaktivieren",
+        "m_button_export_charms": "Talismane Exportieren",
+        "m_button_import_charms": "Talismane Importieren",
+        "m_button_ok": "OK",
+        "m_label_rarity": "Seltenheit",
+        "m_label_skill": "Fähigkeit",
+        "m_label_level": "Stufe",
+        "m_label_slot": "Slots",
+        "m_text_waiting_for_game": "Du besitzt kein Talisman oder befindest dich nicht  im Spiel."
+    },
+    "Player Editor": {
+        "m_label_zenny": "Zenni",
+        "m_label_points": "Punkte",
+        "m_text_warning": "Warnung",
+        "m_text_warning_hr": "Falls du dein Jägerrang änderst ohne JR-Punkte hinzuzufügen, bleibst du so lange auf deinem jetzigen Rang bis du legitim die benötigten JR Punkte erfarmt hast. Stattdessen bearbeite nur die Jägerrang Punkte und schließe eine Quest ab, damit dein Jägerrank entsprechend aufsteigt.",
+        "m_label_hunter_rank": "Jägerrang",
+        "m_label_hr_points": "JR Punkte",
+        "m_label_master_rank": "Meisterrang",
+        "m_label_mr_points": "MR Punkte"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "Alle Objekte Hinzufügen",
+        "m_button_clear_itembox": "Objekttruhe leeren",
+        "m_button_delete_illegal": "Illegale Objekte löschen",
+        "m_button_clear_selected": "Auswahl löschen",
+        "m_button_export_items": "Items Exportieren",
+        "m_button_import_items": "Items Importieren",
+        "m_text_warning_overwrite": "Dies wird alle deine Items in der box überschreiben! Bist du sicher?",
+        "m_button_yes": "Ja",
+        "m_button_no": "Nein",
+        "m_label_itemlist_filter": "Itemliste Filter",
+        "m_label_items": "Items",
+        "m_label_index": "Index",
+        "m_label_id": "ID",
+        "m_label_item": "Item",
+        "m_label_amount": "Menge"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "Löschen"
+    }
+}
