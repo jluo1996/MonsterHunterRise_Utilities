@@ -4,14 +4,16 @@ from Main.GUI.ModInstallUI import ModInstallUI
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
 from Main.GUI.AboutDialog import AboutDialog
+from Main.Log.Logger import Logger
 
 class MainWindow(QMainWindow):
     def __init__(self, main_vm, parent=None):
         super().__init__(parent)
         self.setWindowTitle("MHR Utilities")
         self.setMinimumWidth(330)
-
+ 
         self.main_vm = main_vm
+        self.logger = Logger()
         self.main_gui = ModInstallUI(self.main_vm)
         self.setCentralWidget(self.main_gui)
 
@@ -68,9 +70,9 @@ class MainWindow(QMainWindow):
         game_info_helper = GameInfoHelper()
         success = game_info_helper.backup_MHR_user_data()
         if success:
-            print("Backup completed successfully.")
+            self.logger.log("Backup completed successfully.")
         else:
-            print("Backup failed.")
+            self.logger.log("Backup failed.", level="ERROR")
 
     def _auto_detect_game_folder(self):
         self.main_vm.auto_detect_game_install_path(auto_detect=True, update_game_install_path=True)

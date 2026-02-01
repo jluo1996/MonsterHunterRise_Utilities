@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "Редактор талисманов",
+        "m_header_player_editor": "Редактор игроков",
+        "m_header_itembox_editor": "Редактор ящиков предметов",
+        "m_header_loadout_editor": "Редактор снаряжения"
+    },
+    "Charm Editor": {
+        "m_label_charms": "Талисманы",
+        "m_label_none": "Никто",
+        "m_button_add_empty_charm": "Добавить пустой талисман",
+        "m_title_error": "Ошибка",
+        "m_text_error_add_charm": "Не удалось добавить талисман. Не найдено свободного места в инвентаре.",
+        "m_button_sell_charm": "Продам талисман",
+        "m_button_make_legal": "Сделать законным",
+        "m_checkbox_disable_sanity_check": "Отключить проверку работоспособности",
+        "m_button_export_charms": "Экспорт талисманов",
+        "m_button_import_charms": "Импорт Талисманов",
+        "m_button_ok": "OK",
+        "m_label_rarity": "редкость",
+        "m_label_skill": "Навык",
+        "m_label_level": "Уровень",
+        "m_label_slot": "Ячейка",
+        "m_text_waiting_for_game": "У вас либо нет талисманов, либо вы не загружаетесь в сохранение."
+    },
+    "Player Editor": {
+        "m_label_zenny": "Зенни",
+        "m_label_points": "Точки",
+        "m_text_warning": "Предупреждение",
+        "m_text_warning_hr": "Не рекомендуется устанавливать ранг охотника вручную. Если вы установите свой Ранг Охотника, не изменив свои Очки Ранга Охотника, вы застрянете на этом конкретном Ранге Охотника, пока не законно получите Опыт, необходимый для достижения этого ранга. Вместо этого отредактируйте только очки ранга охотника, затем выполните любой квест, и ваш ранг охотника изменится соответствующим образом.",
+        "m_label_hunter_rank": "Ранг охотника",
+        "m_label_hr_points": "РО Точки",
+        "m_label_master_rank": "Мастер Ранг",
+        "m_label_mr_points": "МР очки"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "Добавить все элементы",
+        "m_button_clear_itembox": "Очистить ящик с предметами",
+        "m_button_delete_illegal": "Удалить недопустимые элементы",
+        "m_button_clear_selected": "Очистить выбранные элементы",
+        "m_button_export_items": "Экспорт товаров",
+        "m_button_import_items": "Импорт предметов",
+        "m_text_warning_overwrite": "Это перезапишет все предметы в вашем ящике! Уверены ли вы?",
+        "m_button_yes": "Да",
+        "m_button_no": "Нет",
+        "m_label_itemlist_filter": "Фильтр списка элементов",
+        "m_label_items": "Предметы",
+        "m_label_index": "Показатель",
+        "m_label_id": "ID",
+        "m_label_item": "Вещь",
+        "m_label_amount": "Количество"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "Удалить"
+    }
+}

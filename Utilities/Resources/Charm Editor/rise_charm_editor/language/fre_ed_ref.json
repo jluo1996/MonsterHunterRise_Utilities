@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "Éditeur de talismans",
+        "m_header_player_editor": "Éditeur de lecteur",
+        "m_header_itembox_editor": "Éditeur d'Itembox",
+        "m_header_loadout_editor": "Éditeur de chargement"
+    },
+    "Charm Editor": {
+        "m_label_charms": "Talismans",
+        "m_label_none": "Rien",
+        "m_button_add_empty_charm": "Ajouter un talisman vide",
+        "m_title_error": "Erreur",
+        "m_text_error_add_charm": "Échec de l'ajout du talisman. Aucun espace d'inventaire libre n'a été trouvé.",
+        "m_button_sell_charm": "Vends Talisman",
+        "m_button_make_legal": "Rendre légal",
+        "m_checkbox_disable_sanity_check": "Désactiver la vérification d'intégrité",
+        "m_button_export_charms": "Exporter des talismans",
+        "m_button_import_charms": "Importer des talismans",
+        "m_button_ok": "OK",
+        "m_label_rarity": "Rareté",
+        "m_label_skill": "Skill",
+        "m_label_level": "Niveau",
+        "m_label_slot": "Emplacement",
+        "m_text_waiting_for_game": "Toi non plus tu n'as pas de talismans ou vous n'êtes pas chargé dans une sauvegarde."
+    },
+    "Player Editor": {
+        "m_label_zenny": "Zenny",
+        "m_label_points": "Points",
+        "m_text_warning": "Avertissement",
+        "m_text_warning_hr": "La définition manuelle du rang de chasseur n'est pas recommandée. Si vous définissez votre rang de chasseur sans ajuster vos points de rang de chasseur, vous serez bloqué à ce rang de chasseur spécifique jusqu'à ce que vous acquériez légitimement l'XP nécessaire pour accéder à ce rang. Au lieu de cela, modifiez uniquement les points de rang Hunter, puis terminez n'importe quelle quête et votre rang de chasseur s'ajustera en conséquence.",
+        "m_label_hunter_rank": "Rang de chasseur",
+        "m_label_hr_points": "HR Points",
+        "m_label_master_rank": "Rang Maître",
+        "m_label_mr_points": "MR Points"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "Ajouter tous les éléments",
+        "m_button_clear_itembox": "Effacer la boîte d'articles",
+        "m_button_delete_illegal": "Supprimer les éléments illégaux",
+        "m_button_clear_selected": "Effacer les éléments sélectionnés",
+        "m_button_export_items": "Exporter des articles",
+        "m_button_import_items": "Importer des articles",
+        "m_text_warning_overwrite": "Cela écrasera tous les éléments de votre boîte! Es-tu sûr?",
+        "m_button_yes": "Oui",
+        "m_button_no": "Non",
+        "m_label_itemlist_filter": "Filtre de liste d'articles",
+        "m_label_items": "Articles",
+        "m_label_index": "Indice",
+        "m_label_id": "ID",
+        "m_label_item": "Article",
+        "m_label_amount": "Quantité"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "Supprimer"
+    }
+}

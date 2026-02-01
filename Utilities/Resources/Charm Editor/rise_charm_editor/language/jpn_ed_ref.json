@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "チャームエディター",
+        "m_header_player_editor": "プレイヤーエディター",
+        "m_header_itembox_editor": "アイテムボックスエディター",
+        "m_header_loadout_editor": "マイセットエディター"
+    },
+    "Charm Editor": {
+        "m_label_charms": "護石",
+        "m_label_none": "なし",
+        "m_button_add_empty_charm": "空の護石を追加",
+        "m_title_error": "エラー",
+        "m_text_error_add_charm": "護石の追加に失敗しました。装備BOXの空きが見つかりません。",
+        "m_button_sell_charm": "護石を売却",
+        "m_button_make_legal": "合法化",
+        "m_checkbox_disable_sanity_check": "健全性チェックを無効にする",
+        "m_button_export_charms": "護石のエクスポート",
+        "m_button_import_charms": "護石をインポート",
+        "m_button_ok": "OK",
+        "m_label_rarity": "レアリティ",
+        "m_label_skill": "スキル",
+        "m_label_level": "レベル",
+        "m_label_slot": "スロット",
+        "m_text_waiting_for_game": "護石がないか、ゲームデータを選択していません。"
+    },
+    "Player Editor": {
+        "m_label_zenny": "ゼニー",
+        "m_label_points": "カムラポイント",
+        "m_text_warning": "警告",
+        "m_text_warning_hr": "ハンターランクを手動で設定することは推奨されていません。HRポイントを調整せずにハンターランクを設定した場合、そのランクに到達するために必要なHRポイントを取得するまでそのハンターランクで止まります。HRポイントのみを調整してからクエストを1つクリアすると、それに応じてハンターランクが調整されます。",
+        "m_label_hunter_rank": "ハンターランク",
+        "m_label_hr_points": "HRポイント",
+        "m_label_master_rank": "マスターランク",
+        "m_label_mr_points": "MRポイント"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "すべてのアイテムを追加",
+        "m_button_clear_itembox": "アイテムボックスをクリア",
+        "m_button_delete_illegal": "違法なアイテムを削除する",
+        "m_button_clear_selected": "チェックしたアイテムを削除",
+        "m_button_export_items": "アイテムのエクスポート",
+        "m_button_import_items": "アイテムのインポート",
+        "m_text_warning_overwrite": "アイテムボックス内のすべてのアイテムが上書きされます。続けますか？",
+        "m_button_yes": "はい",
+        "m_button_no": "いいえ",
+        "m_label_itemlist_filter": "アイテムフィルター",
+        "m_label_items": "アイテム",
+        "m_label_index": "索引",
+        "m_label_id": "ID",
+        "m_label_item": "アイテム名",
+        "m_label_amount": "数量"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "削除"
+    }
+}

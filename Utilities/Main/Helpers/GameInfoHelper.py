@@ -9,14 +9,18 @@ import winreg
 
 import psutil
 
+from Main.Log.Logger import Logger
+
 MHR_STEAM_APP_ID = 1446780
 MHR_EXE_NAME = "MonsterHunterRise.exe"
+
+logger = Logger()
 
 class GameInfoHelper:
     def backup_MHR_user_data(self) -> bool:
         steam_user_data_path = Path(self._get_steam_user_data_path())
         if steam_user_data_path is None or not steam_user_data_path.exists():
-            print("Steam user data path not found or inaccessible.")
+            logger.log("Steam user data path not found or inaccessible.", level="ERROR")
             return False
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -32,10 +36,10 @@ class GameInfoHelper:
 
             backup_folder_name = f"{MHR_STEAM_APP_ID}_backup_{timestamp}"
             destination = folder / backup_folder_name
-            print(f"Backing up: {source} -> {destination}")
+            logger.log(f"Backing up: {source} -> {destination}")
             shutil.copytree(source, destination, dirs_exist_ok=True)
             if not destination.exists():
-                print(f"Backup failed for folder: {source}")
+                logger.log(f"Backup failed for folder: {source}", level="ERROR")
                 success = False
 
         return success
@@ -44,7 +48,7 @@ class GameInfoHelper:
         # Placeholder implementation
         steam_path = self._get_steam_install_path()
         if steam_path is None or not steam_path.exists():
-            print("Steam installation not found.")
+            logger.log("Steam installation not found.", level="ERROR")
             return None
         return steam_path / "userdata"
     
@@ -72,12 +76,12 @@ class GameInfoHelper:
         if not auto_detect:
             steam_install_path = self._get_steam_install_path()
             if steam_install_path is None or not steam_install_path.exists():
-                print("Steam installation not found.")
+                logger.log("Steam installation not found.", level="ERROR")
                 return None
             
             expected_path = steam_install_path / "steamapps" / "common" / "MonsterHunterRise"
             if not expected_path.exists():
-                print(f"Expected MHR path does not exist: {expected_path}")
+                logger.log(f"Expected MHR path does not exist: {expected_path}", level="ERROR")
                 return None
             return expected_path
         

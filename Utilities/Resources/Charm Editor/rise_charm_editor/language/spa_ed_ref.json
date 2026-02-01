@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "Editor de Talisman",
+        "m_header_player_editor": "Editor de Jugador",
+        "m_header_itembox_editor": "Gestionar objetos de Caja",
+        "m_header_loadout_editor": "Editor de equipo"
+    },
+    "Charm Editor": {
+        "m_label_charms": "Talisman",
+        "m_label_none": "Ninguno",
+        "m_button_add_empty_charm": "Añadir Talismán Vacío",
+        "m_title_error": "Error",
+        "m_text_error_add_charm": "No se Pudo Agregar Talisman. No se Encontró Espacio de Inventario Libre.",
+        "m_button_sell_charm": "Vender Talisman",
+        "m_button_make_legal": "Hacer válido",
+        "m_checkbox_disable_sanity_check": "Deshabilitar la verificación de cordura",
+        "m_button_export_charms": "Exportar talismanes",
+        "m_button_import_charms": "Importar talismanes",
+        "m_button_ok": "OK",
+        "m_label_rarity": "Rareza",
+        "m_label_skill": "Habilidad",
+        "m_label_level": "Nivel",
+        "m_label_slot": "Espacio",
+        "m_text_waiting_for_game": "O no tienes ningún amuleto o no estás cargado en una partida guardada."
+    },
+    "Player Editor": {
+        "m_label_zenny": "Zenny",
+        "m_label_points": "Puntos",
+        "m_text_warning": "Advertencia",
+        "m_text_warning_hr": "No se recomienda configurar el rango de cazador manualmente. Si establece su rango de cazador sin ajustar sus puntos de rango de cazador, se quedará atrapado en ese rango de cazador específico hasta que adquiera legítimamente la XP requerida para llegar a ese rango. En su lugar, edite solo los puntos de rango de cazador, luego complete cualquier misión y su rango de cazador se ajustará en consecuencia.",
+        "m_label_hunter_rank": "Rango de Cazador",
+        "m_label_hr_points": "Puntos de Rango",
+        "m_label_master_rank": "Rango Maestro",
+        "m_label_mr_points": "Puntos MR"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "Agregar todos los Objectos",
+        "m_button_clear_itembox": "Vaciar Caja de Objetos",
+        "m_button_delete_illegal": "Eliminar Objetos ilegales",
+        "m_button_clear_selected": "Borrar Seleccionado",
+        "m_button_export_items": "Exportar Objetos",
+        "m_button_import_items": "Importar Objetos",
+        "m_text_warning_overwrite": "¡Hacer esto sobrescribirá todos los artículos en su caja! ¿Está seguro?",
+        "m_button_yes": "Sí",
+        "m_button_no": "No",
+        "m_label_itemlist_filter": "Filtro de Lista de Objetos",
+        "m_label_items": "Objetos",
+        "m_label_index": "Indice",
+        "m_label_id": "ID",
+        "m_label_item": "Objeto",
+        "m_label_amount": "Monto/Cantidad"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "Borrar"
+    }
+}

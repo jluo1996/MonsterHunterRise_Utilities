@@ -9,7 +9,7 @@ from Main.Mods.AutoArgosyMod import AutoArgosyMod
 from Main.Mods.AutoCohootNestMod import AutoCohootNestMod
 from Main.Helpers.GameInfoHelper import GameInfoHelper
 from Main.Helpers.FileHelper import FileHelper
-
+from Main.Mods.CharmEditorMod import CharmEditorMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
@@ -32,6 +32,9 @@ class MainViewModel():
         self.mods.append(AutoCohootNestMod(self.resources_path, self.game_install_path))
         self.mods.append(MHROverlayMod(self.resources_path, self.game_install_path))
         self.mods.append(DropRatesEnhancedMod(self.resources_path, self.game_install_path))
+        self.mods.append(CharmEditorMod(self.resources_path, self.game_install_path))
+
+        # self.mods.sort(key=lambda mod: mod.name)
 
     def install_selected_mods(self):
         for mod in self.mods:

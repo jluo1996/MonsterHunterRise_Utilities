@@ -1,3 +1,4 @@
+from datetime import datetime
 import sys
 from PyQt6.QtWidgets import QApplication, QSplashScreen, QMessageBox
 from PyQt6.QtGui import QIcon, QPixmap, QFont
@@ -6,11 +7,21 @@ from Main.MainViewModel import MainViewModel
 from Main.GUI.MainWindow import MainWindow
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
+from Main.Log.Logger import Logger
+
+def _init_logger(self, file_helper: FileHelper = FileHelper()):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_folder = file_helper.get_log_folder_path()
+    log_file_path = log_folder / f"MHR_Utilities_{timestamp}.log"
+    return Logger(log_file_path)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     file_helper = FileHelper()
+
+    logger = _init_logger(file_helper)
+    
     picture_path = file_helper.get_pictures_folder_path()
     icon_path = file_helper.get_icons_folder_path()
 

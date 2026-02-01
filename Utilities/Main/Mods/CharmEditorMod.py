@@ -1,0 +1,15 @@
+
+from pathlib import Path
+from Main.Mods.ModModel import ModModel
+
+
+class CharmEditorMod(ModModel):
+    def __init__(self, resource_folder: str, game_install_path: str):
+        super().__init__(resource_folder, game_install_path)
+        self.name = "Charm Editor"
+        self.description = "Charm Editor is a mod that allows you to edit your charms in Monster Hunter Rise."
+        self.mod_file_path = Path(self.resource_folder) / "Charm Editor"
+        self.update_install_path(game_install_path)
+
+    def update_install_path(self, new_game_install_path):
+        self.install_path = Path(new_game_install_path) / "reframework" / "plugins"

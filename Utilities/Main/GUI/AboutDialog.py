@@ -30,7 +30,7 @@ class AboutDialog(QtWidgets.QDialog):
         desc.setWordWrap(True)
 
         # No f-string; use format() to avoid brace issues
-        link = QtWidgets.QLabel('{0}{0}</a>'.format(GITHUB_URL))
+        link = QtWidgets.QLabel('<a href="{0}">{0}</a>'.format(GITHUB_URL))
         link.setTextFormat(Qt.TextFormat.RichText)
         link.setTextInteractionFlags(
             Qt.TextInteractionFlag.TextBrowserInteraction

@@ -1,0 +1,56 @@
+{
+    "Headers": {
+        "m_header_charm_editor": "محرر التعويذة",
+        "m_header_player_editor": "محرر المشغل",
+        "m_header_itembox_editor": "محرر مربع العنصر",
+        "m_header_loadout_editor": "محرر العتاد"
+    },
+    "Charm Editor": {
+        "m_label_charms": "التعويذات",
+        "m_label_none": "لا أحد",
+        "m_button_add_empty_charm": "أضف تعويذة فارغة",
+        "m_title_error": "خطأ",
+        "m_text_error_add_charm": "فشل في إضافة تعويذة. لا توجد مساحة جرد خالية.",
+        "m_button_sell_charm": "بيع تعويذة",
+        "m_button_make_legal": "اجعلها صالحة",
+        "m_checkbox_disable_sanity_check": "تعطيل فحص الصحة",
+        "m_button_export_charms": "تصدير التعويذات",
+        "m_button_import_charms": "استيراد التعويذات",
+        "m_button_ok": "نعم",
+        "m_label_rarity": "ندرة",
+        "m_label_skill": "مهارة",
+        "m_label_level": "مستوى",
+        "m_label_slot": "فتحة",
+        "m_text_waiting_for_game": "إما أنه ليس لديك أي تعويذات أو لا يتم تحميلك في حفظ"
+    },
+    "Player Editor": {
+        "m_label_zenny": "زيني",
+        "m_label_points": "نقاط",
+        "m_text_warning": "تحذير",
+        "m_text_warning_hr": "لا ينصح بتحديد رتبة الصياد يدويًا. إذا قمت بتعيين رتبة الصياد الخاصة بك دون تعديل نقاط تصنيف الصياد الـ لخاصة بك ، فستظل عالقًا في رتبة الصياد المحددة هذه حتى تحصل بشكل شرعي على XP المطلوبة للوصول إلى هذا التصنيف. بدلاً من ذلك ، قم بتحرير نقاط Hunter Rank Points فقط ، ثم أكمل أي مهمة وسيتم تعديل رتبة Hunter Rank الخاصة بك وفقًا لذلك.",
+        "m_label_hunter_rank": "رتبة الصياد",
+        "m_label_hr_points": "نقاط الموارد البشرية",
+        "m_label_master_rank": "رتبة المتميز",
+        "m_label_mr_points": "نقاط MR"
+    },
+    "Itembox Editor": {
+        "m_button_add_all": "أضف كافة العناصر",
+        "m_button_clear_itembox": "مسح مربع العنصر",
+        "m_button_delete_illegal": "حذف العناصر غير القانونية",
+        "m_button_clear_selected": "مسح العناصر المحددة",
+        "m_button_export_items": "أصناف التصدير",
+        "m_button_import_items": "عناصر الاستيراد",
+        "m_text_warning_overwrite": "سيؤدي القيام بذلك إلى استبدال جميع العناصر الموجودة في صندوقك! هل أنت واثق؟",
+        "m_button_yes": "نعم",
+        "m_button_no": "لا",
+        "m_label_itemlist_filter": "عامل تصفية قائمة العناصر",
+        "m_label_items": "أغراض",
+        "m_label_index": "فِهرِس",
+        "m_label_id": "ID",
+        "m_label_item": "بند",
+        "m_label_amount": "مقدار"
+    },
+    "Loadout Editor": {
+        "m_button_delete": "حذف"
+    }
+}
