@@ -39,13 +39,13 @@ class MainWindow(QMainWindow):
         # --- Edit / Tools ---
         tools_menu = menubar.addMenu("&Tools")
 
-        backup_icon = QIcon(str(file_helper.get_icons_folder_path() / "App.ico"))  # TODO: add icon file
+        backup_icon = QIcon(str(file_helper.get_icons_folder_path() / "Backup.png"))
         act_backup = QAction(backup_icon, "&Backup User Data", self)
         act_backup.setShortcut("Ctrl+B")
         act_backup.triggered.connect(self._backup_user_data)
         tools_menu.addAction(act_backup)
 
-        auto_detect_icon = QIcon(str(file_helper.get_icons_folder_path() / "App.ico"))  # TODO: add icon file
+        auto_detect_icon = QIcon(str(file_helper.get_icons_folder_path() / "Search.png")) 
         act_auto_detect = QAction(auto_detect_icon, "&Auto Detect Game Folder", self)
         act_auto_detect.setShortcut("Ctrl+D")
         act_auto_detect.triggered.connect(self._auto_detect_game_folder)
@@ -54,7 +54,8 @@ class MainWindow(QMainWindow):
         # --- Help menu ---
         help_menu = menubar.addMenu("&Help")
 
-        act_about = QAction("&About", self)
+        about_icon = QIcon(str(file_helper.get_icons_folder_path() / "About.png"))
+        act_about = QAction(about_icon, "&About", self)
         act_about.triggered.connect(self._show_about)
         act_about.setShortcut("F1")
         help_menu.addAction(act_about)
