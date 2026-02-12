@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import shutil
 
@@ -18,7 +19,7 @@ class ModModel:
         target_folder = self.install_path
 
         if not source_folder.exists() or not source_folder.is_dir():
-            logger.log(f"Source folder does not exist: {source_folder}", level="ERROR")
+            self._log(f"Source folder does not exist: {source_folder}", level="ERROR")
             return False
         if not target_folder.exists():
             target_folder.mkdir(parents=True)
@@ -31,21 +32,21 @@ class ModModel:
             if item.is_dir():
                 # Create subfolder if it doesn't exist
                 target_item.mkdir(parents=True, exist_ok=True)
-                logger.log(f"Created folder: {target_item}")
+                self._log(f"Created folder: {target_item}")
             else:
                 # Copy file (overwrites if exists)
                 shutil.copy2(item, target_item)
-                logger.log(f"Copied file: {target_item}")
+                self._log(f"Copied file: {target_item}")
     
     def uninstall(self):
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
         if not source_folder.exists() or not source_folder.is_dir():
-            logger.log(f"Source folder does not exist: {source_folder}", level="ERROR")
+            self._log(f"Source folder does not exist: {source_folder}", level="ERROR")
             return False
         if not target_folder.exists() or not target_folder.is_dir():
-            logger.log(f"Target folder does not exist: {target_folder}", level="ERROR")
+            self._log(f"Target folder does not exist: {target_folder}", level="ERROR")
             return False
 
         # Remove files in target that exist in source
@@ -56,49 +57,77 @@ class ModModel:
                 if tgt_file.exists() and tgt_file.is_file():
                     try:
                         tgt_file.unlink()
-                        logger.log(f"Removed file: {tgt_file}")
+                        self._log(f"Removed file: {tgt_file}")
                     except Exception as e:
-                        logger.log(f"Failed to remove {tgt_file}: {e}", level="ERROR")
+                        self._log(f"Failed to remove {tgt_file}: {e}", level="ERROR")
 
         # Optionally, remove empty directories in target
         for tgt_dir in sorted(target_folder.rglob("*"), key=lambda p: -p.parts.__len__()):
             if tgt_dir.is_dir() and not any(tgt_dir.iterdir()):
                 try:
                     tgt_dir.rmdir()
-                    logger.log(f"Removed empty folder: {tgt_dir}")
+                    self._log(f"Removed empty folder: {tgt_dir}")
                 except Exception as e:
-                    logger.log(f"Failed to remove {tgt_dir}: {e}", level="ERROR")
+                    self._log(f"Failed to remove {tgt_dir}: {e}", level="ERROR")
     def is_installed(self) -> bool:
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
-        if not source_folder.exists() or not source_folder.is_dir():
-            logger.log(f"{__name__}.is_installed: Source folder {source_folder} does not exist.", level="ERROR")
-            return False
-        if not target_folder.exists() or not target_folder.is_dir():
-            logger.log(f"{__name__}.is_installed: Target folder {target_folder} does not exist.", level="ERROR")
-            return False
-
-        # Iterate through all files in source_folder recursively
-        for src_file in source_folder.rglob("*"):
-            if src_file.is_file():
-                # Compute the relative path of the file to source_folder
-                rel_path = src_file.relative_to(source_folder)
-                # Corresponding file in target folder
-                tgt_file = target_folder / rel_path
-                if not tgt_file.is_file():
-                    # File missing in target
-                    logger.log(f"{__name__}.is_installed: File missing in target: {tgt_file}", level="ERROR")
-                    return False
-
-        # All files exist in target
-        return True
+        return self._get_content_exist(str(source_folder), str(target_folder))
     
     def set_selected(self, selected: bool):
         self.is_selected = selected
 
     def update_install_path(self, new_game_install_path):
-        logger.log(f"{__name__}.update_install_path: Updating install path from {self.install_path} to: {new_game_install_path}")
+        self._log(f"Updating install path from {self.install_path} to: {new_game_install_path}")
         self.install_path = Path(new_game_install_path)
 
+    def _log(self, message: str, level: str = "INFO"):
+        logger.log(f"[{self.name}] {message}", level=level)
     
+    def _get_content_exist(self, sourceFolderPath: str, destinationFolderPath: str) -> bool:
+        """
+        Returns True if *all contents* of `sourceFolderPath` exist under
+        `destinationFolderPath` with matching types and (for files) matching sizes.
+
+        Notes:
+        - Shallow check: existence + type + size (no hashing).
+        - Allows extra files/dirs in the destination.
+        - Does not follow directory symlinks (os.walk default). Symlinked files are treated as files.
+        - Fails safe (returns False) on permission/stat errors.
+        """
+        src_root = Path(sourceFolderPath)
+        dst_root = Path(destinationFolderPath)
+
+        # Both must exist and be directories
+        if not src_root.is_dir() or not dst_root.is_dir():
+            return False
+
+        # Walk the source tree and ensure each entry exists correspondingly in destination
+        for root, dirnames, filenames in os.walk(src_root, topdown=True, followlinks=False):
+            root_path = Path(root)
+            rel_dir = root_path.relative_to(src_root)
+            dst_here = dst_root / rel_dir  # map source subtree directly under destination root
+
+            # 1) Ensure directories exist as directories
+            for d in dirnames:
+                dst_dir = dst_here / d
+                if not dst_dir.exists() or not dst_dir.is_dir():
+                    return False
+
+            # 2) Ensure files exist as files with matching size
+            for f in filenames:
+                src_file = root_path / f
+                dst_file = dst_here / f
+
+                if not dst_file.exists() or not dst_file.is_file():
+                    return False
+
+                try:
+                    if src_file.stat().st_size != dst_file.stat().st_size:
+                        return False
+                except OSError:
+                    return False
+
+        return True
+

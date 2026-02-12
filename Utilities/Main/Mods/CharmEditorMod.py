@@ -12,4 +12,4 @@ class CharmEditorMod(ModModel):
         self.update_install_path(game_install_path)
 
     def update_install_path(self, new_game_install_path):
-        self.install_path = Path(new_game_install_path) / "reframework" / "plugins"
+        super().update_install_path(Path(new_game_install_path) / "reframework" / "plugins")

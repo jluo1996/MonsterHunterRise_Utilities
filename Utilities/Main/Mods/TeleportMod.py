@@ -10,4 +10,4 @@ class TeleportMod(ModModel):
         self.update_install_path(game_install_path)
 
     def update_install_path(self, new_game_install_path):
-        self.install_path = Path(new_game_install_path) / "reframework" / "autorun"
+        super().update_install_path(Path(new_game_install_path) / "reframework" / "autorun")
