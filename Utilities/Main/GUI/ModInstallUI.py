@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget, QMessageBox
 from Main.MainViewModel import MainViewModel
 from Main.GUI.ModListWidget import ModListWidget
 from Main.GUI.FolderSelector import FolderSelector
@@ -34,8 +34,16 @@ class ModInstallUI(QWidget):
         return mod_list_widget
     
     def _install_selected_mods(self):
-        self.main_vm.install_selected_mods()
+        if not self.main_vm.install_selected_mods():
+            self._show_dialog("Installation Error", "One or more mods failed to install. Please check the logs for details.")
         self._refresh_mod_statuses()
+
+    def _show_dialog(self, title, message):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setWindowTitle(title)
+        msg.setText(message)
+        msg.exec()
 
     def _uninstall_selected_mods(self):
         self.main_vm.uninstall_selected_mods()

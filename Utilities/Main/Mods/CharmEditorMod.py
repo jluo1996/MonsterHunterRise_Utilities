@@ -1,9 +1,9 @@
 
 from pathlib import Path
-from Main.Mods.ModModel import ModModel
+from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 
 
-class CharmEditorMod(ModModel):
+class CharmEditorMod(REFrameWorkDependentMod):
     def __init__(self, resource_folder: str, game_install_path: str):
         super().__init__(resource_folder, game_install_path)
         self.name = "Charm Editor"

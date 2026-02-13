@@ -11,6 +11,7 @@ class ModModel:
         self.resource_folder = resource_folder
         self.mod_file_path = None
         self.install_path = Path(game_install_path)
+        self.game_install_path = Path(game_install_path)
         self.is_selected = False
         self.settings = []
         self.logger = Logger()
@@ -27,6 +28,9 @@ class ModModel:
         return
 
     def install(self):
+        if self.is_installed():
+            self._log("Mod is already installed. Skipping installation.")
+            return True  # Already installed
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
@@ -34,6 +38,7 @@ class ModModel:
             self._log(f"Source folder does not exist: {source_folder}", level="ERROR")
             return False
         if not target_folder.exists():
+            self._log(f"Target folder does not exist, creating: {target_folder}")
             target_folder.mkdir(parents=True)
 
         # Iterate all files and folders in source
@@ -49,8 +54,14 @@ class ModModel:
                 # Copy file (overwrites if exists)
                 shutil.copy2(item, target_item)
                 self._log(f"Copied file: {target_item}")
+
+        return self.is_installed()
     
     def uninstall(self):
+        if not self.is_installed():
+            self._log("Mod is not installed. Skipping uninstallation.")
+            return True  # Already uninstalled
+        
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
@@ -72,6 +83,7 @@ class ModModel:
                         self._log(f"Removed file: {tgt_file}")
                     except Exception as e:
                         self._log(f"Failed to remove {tgt_file}: {e}", level="ERROR")
+                        return False
 
         # Optionally, remove empty directories in target
         for tgt_dir in sorted(target_folder.rglob("*"), key=lambda p: -p.parts.__len__()):
@@ -81,6 +93,9 @@ class ModModel:
                     self._log(f"Removed empty folder: {tgt_dir}")
                 except Exception as e:
                     self._log(f"Failed to remove {tgt_dir}: {e}", level="ERROR")
+                    return False
+                
+        return not self.is_installed()
                     
     def is_installed(self) -> bool:
         source_folder = self.mod_file_path

@@ -21,7 +21,7 @@ class MainViewModel():
         self.resources_path = file_helper.get_resources_folder_path()
         _ = self.auto_detect_game_install_path(auto_detect=False, update_game_install_path=True)  
 
-    def get_mods(self):
+    def get_mods(self) -> list:
         return self.mods
     
     def init_mods(self):
@@ -39,14 +39,24 @@ class MainViewModel():
         # self.mods.sort(key=lambda mod: mod.name)
 
     def install_selected_mods(self):
+        all_success = True
+
         for mod in self.mods:
             if mod.is_selected:
-                mod.install()
+                if not mod.install():
+                    all_success = False
+
+        return all_success
 
     def uninstall_selected_mods(self):
+        all_success = True
+
         for mod in self.mods:
             if mod.is_selected:
-                mod.uninstall()
+                if not mod.uninstall():
+                    all_success = False
+
+        return all_success
 
     def update_game_install_path(self, new_path):
         self.game_install_path = new_path

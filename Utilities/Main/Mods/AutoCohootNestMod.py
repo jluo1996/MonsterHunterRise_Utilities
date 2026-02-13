@@ -1,7 +1,7 @@
 from pathlib import Path
-from Main.Mods.ModModel import ModModel
+from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 
-class AutoCohootNestMod(ModModel):
+class AutoCohootNestMod(REFrameWorkDependentMod):
     def __init__(self, resources_path, game_install_path):
         super().__init__(resources_path, game_install_path)
         self.name = "Auto Cohoot Nest"

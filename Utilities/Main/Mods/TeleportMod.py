@@ -1,11 +1,11 @@
 from pathlib import Path
 import re
-from Main.Mods.ModModel import ModModel
+from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 from Main.Mods.ModSetting import ModSetting 
 
 TELEPORT_GESTURE_SETTING = "Teleport Gesture"
 
-class TeleportMod(ModModel):
+class TeleportMod(REFrameWorkDependentMod):
     def __init__(self, resource_folder: str, game_install_path: str):
         super().__init__(resource_folder, game_install_path)
         self.name = "Teleport"
@@ -37,8 +37,9 @@ class TeleportMod(ModModel):
         return None
 
     def install(self):
-        super().install()
+        success = super().install()
         self.settings = self._get_settings()  # Load settings after installation
+        return success
 
     def uninstall(self):
         super().uninstall()
