@@ -4,7 +4,6 @@ import shutil
 
 from Main.Log.Logger import Logger
 
-logger = Logger()
 class ModModel:
     def __init__(self, resource_folder: str, game_install_path: str):
         self.name = ""
@@ -13,6 +12,19 @@ class ModModel:
         self.mod_file_path = None
         self.install_path = Path(game_install_path)
         self.is_selected = False
+        self.settings = []
+        self.logger = Logger()
+
+    def get_has_settings(self) -> bool:
+        return isinstance(self.settings, list) and len(self.settings) > 0
+    
+    def _get_settings(self):
+        """Initialize settings with default values. Override in subclass if needed."""
+        return []
+    
+    def save_settings(self):
+        """Override in subclass if you need to persist settings changes."""
+        return
 
     def install(self):
         source_folder = self.mod_file_path
@@ -69,6 +81,7 @@ class ModModel:
                     self._log(f"Removed empty folder: {tgt_dir}")
                 except Exception as e:
                     self._log(f"Failed to remove {tgt_dir}: {e}", level="ERROR")
+                    
     def is_installed(self) -> bool:
         source_folder = self.mod_file_path
         target_folder = self.install_path
@@ -83,7 +96,7 @@ class ModModel:
         self.install_path = Path(new_game_install_path)
 
     def _log(self, message: str, level: str = "INFO"):
-        logger.log(f"[{self.name}] {message}", level=level)
+        self.logger.log(f"[{self.name}] {message}", level=level)
     
     def _get_content_exist(self, sourceFolderPath: str, destinationFolderPath: str) -> bool:
         """
