@@ -1,4 +1,5 @@
 from datetime import datetime 
+import os
 from pathlib import Path
 import tempfile
 
@@ -38,6 +39,14 @@ class Logger:
         path.parent.mkdir(parents=True, exist_ok=True)  # make sure the folder exists
         path.touch(exist_ok=True)  # creates the file if it doesn't exist
 
+    def open_log_file(self):
+        try:
+            if self.log_file_path.exists():
+                os.startfile(str(self.log_file_path))  # Windows-specific way to open the file
+            else:
+                self.log("Log file does not exist.", level="ERROR")
+        except Exception as e:
+            self.log(f"Failed to open log file: {e}", level="ERROR")
 
     def log(self, message, level="INFO"):
         if level not in self.LEVELS:

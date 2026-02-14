@@ -54,6 +54,14 @@ class MainWindow(QMainWindow):
         # --- Help menu ---
         help_menu = menubar.addMenu("&Help")
 
+        log_icon = QIcon(str(file_helper.get_icons_folder_path() / "Log.png"))  
+        act_view_log = QAction(log_icon, "View &Log", self)
+        act_view_log.triggered.connect(self._view_log)
+        act_view_log.setShortcut("Ctrl+L")
+        help_menu.addAction(act_view_log)
+
+        help_menu.addSeparator()
+
         about_icon = QIcon(str(file_helper.get_icons_folder_path() / "About.png"))
         act_about = QAction(about_icon, "&About", self)
         act_about.triggered.connect(self._show_about)
@@ -74,6 +82,9 @@ class MainWindow(QMainWindow):
             self.logger.log("Backup completed successfully.")
         else:
             self.logger.log("Backup failed.", level="ERROR")
+
+    def _view_log(self):
+        self.logger.open_log_file()
 
     def _auto_detect_game_folder(self):
         self.main_vm.auto_detect_game_install_path(auto_detect=True, update_game_install_path=True)
