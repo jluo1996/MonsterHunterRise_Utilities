@@ -1,9 +1,9 @@
 from typing import Mapping
 from PyQt6.QtWidgets import (
-    QDialog, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QFormLayout, QCheckBox, QLineEdit, QComboBox
+    QDialog, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QCheckBox, QLineEdit, QComboBox
 )
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIntValidator, QDoubleValidator
+from PyQt6.QtGui import QIntValidator, QDoubleValidator, QIcon
 from Main.Mods.ModModel import ModModel
 
 
@@ -26,7 +26,7 @@ class SettingsDialog(QDialog):
         self.setLayout(root)
 
         # Settings form (inserted above buttons)
-        self._settings_layout = QFormLayout()
+        self._settings_layout = QHBoxLayout()
         root.addLayout(self._settings_layout)
 
         # Build the dynamic settings UI
@@ -55,18 +55,11 @@ class SettingsDialog(QDialog):
         - self.mod.settings as dict[name -> ModSetting] or list[ModSetting]
         - Uses ModSetting.description as tooltip on label/editor when available
         """
-        # Clear existing rows (if this is ever re-built)
-        while self._settings_layout.count():
-            item = self._settings_layout.takeAt(0)
-            w = item.widget()
-            if w is not None:
-                w.deleteLater()
-
         self._editors.clear()
 
         settings = getattr(self.mod, "settings", None)
         if not settings:
-            self._settings_layout.addRow(QLabel("No settings available"))
+            self._settings_layout.addWidget(QLabel("No settings available"))
             return
 
         for setting in settings:
@@ -75,6 +68,14 @@ class SettingsDialog(QDialog):
             setting_type = getattr(setting, "setting_type", type(getattr(setting, "value", None)))
             value = getattr(setting, "value", None)
             desc = getattr(setting, "description", "") or ""
+
+            # Info icon with tooltip
+            info_icon = QLabel()
+            icon = QIcon.fromTheme("help-about")
+            info_icon.setPixmap(icon.pixmap(16, 16))
+            info_icon.setToolTip(desc)
+            info_icon.setCursor(Qt.CursorShape.ArrowCursor)
+            self._settings_layout.addWidget(info_icon)
 
             label = QLabel(str(name))
             if desc:
@@ -158,11 +159,9 @@ class SettingsDialog(QDialog):
                 editor = le
 
             self._editors[str(name)] = editor
-            self._settings_layout.addRow(label, editor)
+            self._settings_layout.addWidget(label)
+            self._settings_layout.addWidget(editor)
 
-
-
-    
     def on_save(self):
         """
         Read back widget values and write them into self.mod.settings (list[ModSetting]).

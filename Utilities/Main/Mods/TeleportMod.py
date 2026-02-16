@@ -126,12 +126,15 @@ class TeleportMod(REFrameWorkDependentMod):
             if setting.name == TELEPORT_GESTURE_SETTING:
                 selected_gesture_name = setting.current_value
                 current_gesture_name = self._get_current_gesture()
-                if selected_gesture_name != current_gesture_name:
-                    if self._update_teleport_gesture_in_file(self.mod_file_path / self.INSTALL_FILE_NAME, selected_gesture_name):
-                        self._log(f"Updated teleport gesture to '{selected_gesture_name}' in file {self.mod_file_path / self.INSTALL_FILE_NAME}.")
-                    else:
-                        self._log(f"Failed to update teleport gesture in file {self.mod_file_path / self.INSTALL_FILE_NAME}.", level="ERROR")
+                if selected_gesture_name == current_gesture_name:
+                    self._log(f"No change in teleport gesture selection. Current gesture: '{current_gesture_name}'. Skipping update.")
+                    continue  # No change, skip
+                
+                if not self._update_teleport_gesture_in_file(self.mod_file_path / self.INSTALL_FILE_NAME, selected_gesture_name):
+                    self._log(f"Failed to update teleport gesture in file {self.mod_file_path / self.INSTALL_FILE_NAME}.", level="ERROR")
+                    continue
 
+                self._log(f"Updated teleport gesture to '{selected_gesture_name}' in file {self.mod_file_path / self.INSTALL_FILE_NAME}.") 
                 if self.is_installed():
                     if self._update_teleport_gesture_in_file(self.install_path / self.INSTALL_FILE_NAME, selected_gesture_name):
                         self._log(f"Updated teleport gesture to '{selected_gesture_name}' in installed file {self.install_path / self.INSTALL_FILE_NAME}.")
