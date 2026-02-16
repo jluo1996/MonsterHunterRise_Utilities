@@ -19,3 +19,6 @@ class FileHelper:
         log_folder = self._get_temp_folder_path() / "MHR_Utilities_Logs"
         log_folder.mkdir(parents=True, exist_ok=True)
         return log_folder
+    
+    def get_install_state_file_path(self):
+        return self._get_temp_folder_path() / "mhr_utilities_install_state.json"

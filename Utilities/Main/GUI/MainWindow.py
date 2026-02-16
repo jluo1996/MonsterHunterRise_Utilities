@@ -39,13 +39,13 @@ class MainWindow(QMainWindow):
         # --- Edit / Tools ---
         tools_menu = menubar.addMenu("&Tools")
 
-        backup_icon = QIcon(str(file_helper.get_icons_folder_path() / "App.ico"))  # TODO: add icon file
+        backup_icon = QIcon(str(file_helper.get_icons_folder_path() / "Backup.png"))
         act_backup = QAction(backup_icon, "&Backup User Data", self)
         act_backup.setShortcut("Ctrl+B")
         act_backup.triggered.connect(self._backup_user_data)
         tools_menu.addAction(act_backup)
 
-        auto_detect_icon = QIcon(str(file_helper.get_icons_folder_path() / "App.ico"))  # TODO: add icon file
+        auto_detect_icon = QIcon(str(file_helper.get_icons_folder_path() / "Search.png")) 
         act_auto_detect = QAction(auto_detect_icon, "&Auto Detect Game Folder", self)
         act_auto_detect.setShortcut("Ctrl+D")
         act_auto_detect.triggered.connect(self._auto_detect_game_folder)
@@ -54,7 +54,16 @@ class MainWindow(QMainWindow):
         # --- Help menu ---
         help_menu = menubar.addMenu("&Help")
 
-        act_about = QAction("&About", self)
+        log_icon = QIcon(str(file_helper.get_icons_folder_path() / "Log.png"))  
+        act_view_log = QAction(log_icon, "View &Log", self)
+        act_view_log.triggered.connect(self._view_log)
+        act_view_log.setShortcut("Ctrl+L")
+        help_menu.addAction(act_view_log)
+
+        help_menu.addSeparator()
+
+        about_icon = QIcon(str(file_helper.get_icons_folder_path() / "About.png"))
+        act_about = QAction(about_icon, "&About", self)
         act_about.triggered.connect(self._show_about)
         act_about.setShortcut("F1")
         help_menu.addAction(act_about)
@@ -73,6 +82,9 @@ class MainWindow(QMainWindow):
             self.logger.log("Backup completed successfully.")
         else:
             self.logger.log("Backup failed.", level="ERROR")
+
+    def _view_log(self):
+        self.logger.open_log_file()
 
     def _auto_detect_game_folder(self):
         self.main_vm.auto_detect_game_install_path(auto_detect=True, update_game_install_path=True)

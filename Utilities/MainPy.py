@@ -26,7 +26,7 @@ if __name__ == "__main__":
     icon_path = file_helper.get_icons_folder_path()
 
     # Set application icon
-    app_icon = QIcon(str(icon_path / "App.ico"))
+    app_icon = QIcon(str(icon_path / "App.png"))
     app.setWindowIcon(app_icon)
     
     # Create and show a splash screen with custom background
