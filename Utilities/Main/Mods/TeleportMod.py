@@ -6,8 +6,8 @@ from Main.Mods.ModSetting import ModSetting
 TELEPORT_GESTURE_SETTING = "Teleport Gesture"
 
 class TeleportMod(REFrameWorkDependentMod):
-    def __init__(self, resource_folder: str, game_install_path: str):
-        super().__init__(resource_folder, game_install_path)
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
+        super().__init__(resource_folder, game_install_path, state_file_helper)
         self.name = "Teleport"
         self.description = "A mod that allows teleporting to different monsters."
         self.mod_file_path = Path(self.resource_folder) / "Teleport"
@@ -27,7 +27,6 @@ class TeleportMod(REFrameWorkDependentMod):
             return self._get_gesture_name_by_id(current_gesture_id, self.gestures) if current_gesture_id is not None else None
         return self._get_default_gesture(self.gestures)
 
-    
     def _get_gesture_id_from_file(self, path: str) -> int | None:
         with open(path, "r", encoding="utf-8") as f:
             for line in f:

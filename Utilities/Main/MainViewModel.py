@@ -11,6 +11,7 @@ from Main.Helpers.GameInfoHelper import GameInfoHelper
 from Main.Helpers.FileHelper import FileHelper
 from Main.Mods.CharmEditorMod import CharmEditorMod
 from Main.Mods.MonsterWeaknessIconIndicatorMod import MonsterWeaknessIconIndicatorMod
+from Main.Helpers.StateFileHelper import StateFileHelper
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
@@ -18,23 +19,24 @@ class MainViewModel():
     def __init__(self):
         self.mods = []  # This will hold a list of ModModel instances
         file_helper = FileHelper()
+        self.state_file_helper = StateFileHelper(file_helper=file_helper)
         self.resources_path = file_helper.get_resources_folder_path()
         _ = self.auto_detect_game_install_path(auto_detect=False, update_game_install_path=True)  
 
     def get_mods(self) -> list:
         return self.mods
     
-    def init_mods(self):
-        self.mods.append(REFrameworkMod(self.resources_path, self.game_install_path))
-        self.mods.append(REFrameworkD2DMod(self.resources_path, self.game_install_path))
-        self.mods.append(TeleportMod(self.resources_path, self.game_install_path))
-        self.mods.append(SpiritBirdsMod(self.resources_path, self.game_install_path))
-        self.mods.append(AutoArgosyMod(self.resources_path, self.game_install_path)) 
-        self.mods.append(AutoCohootNestMod(self.resources_path, self.game_install_path))
-        self.mods.append(MHROverlayMod(self.resources_path, self.game_install_path))
-        self.mods.append(DropRatesEnhancedMod(self.resources_path, self.game_install_path))
-        self.mods.append(CharmEditorMod(self.resources_path, self.game_install_path))
-        self.mods.append(MonsterWeaknessIconIndicatorMod(self.resources_path, self.game_install_path))
+    def init_mods(self):    
+        self.mods.append(REFrameworkMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(REFrameworkD2DMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(TeleportMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(SpiritBirdsMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(AutoArgosyMod(self.resources_path, self.game_install_path, self.state_file_helper)) 
+        self.mods.append(AutoCohootNestMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(MHROverlayMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(DropRatesEnhancedMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(CharmEditorMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(MonsterWeaknessIconIndicatorMod(self.resources_path, self.game_install_path, self.state_file_helper))
 
         # self.mods.sort(key=lambda mod: mod.name)
 

@@ -7,12 +7,12 @@ from Main.Mods.REFrameworkD2DMod import REFrameworkD2DMod
 class REFrameWorkDependentMod(ModModel):
     def get_is_REFramework_installed(self) -> bool:
         """Check if REFramework is installed in the current install path."""
-        reframework_mod = REFrameworkMod(self.resource_folder, self.game_install_path)
+        reframework_mod = REFrameworkMod(self.resource_folder, self.game_install_path, self.state_file_helper)
         return reframework_mod.is_installed()
     
     def get_is_REFrameworkD2D_installed(self) -> bool:
         """Check if REFrameworkD2D is installed in the current install path."""
-        reframework_d2d_mod = REFrameworkD2DMod(self.resource_folder, self.game_install_path)
+        reframework_d2d_mod = REFrameworkD2DMod(self.resource_folder, self.game_install_path, self.state_file_helper)
         return reframework_d2d_mod.is_installed()
     
     def install(self):

@@ -1,11 +1,13 @@
+from datetime import datetime
 import os
 from pathlib import Path
 import shutil
 
 from Main.Log.Logger import Logger
+from Main.Helpers.StateFileHelper import StateFileHelper
 
 class ModModel:
-    def __init__(self, resource_folder: str, game_install_path: str):
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper: StateFileHelper):
         self.name = ""
         self.description = ""
         self.resource_folder = resource_folder
@@ -15,6 +17,7 @@ class ModModel:
         self.is_selected = False
         self.settings = []
         self.logger = Logger()
+        self.state_file_helper = state_file_helper
 
     def get_has_settings(self) -> bool:
         return isinstance(self.settings, list) and len(self.settings) > 0
@@ -31,6 +34,7 @@ class ModModel:
         if self.is_installed():
             self._log("Mod is already installed. Skipping installation.")
             return True  # Already installed
+        
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
@@ -55,7 +59,18 @@ class ModModel:
                 shutil.copy2(item, target_item)
                 self._log(f"Copied file: {target_item}")
 
-        return self.is_installed()
+        if not self._is_install_internal():
+            self._log("Failed to install mod. Some files may not have been copied.", level="ERROR")
+            return False
+            
+        self._log("Mod installed successfully.")
+        now = datetime.now()
+        self._update_state_after_install()
+        return True
+    
+    def _update_state_after_install(self):
+        now = datetime.now()
+        self.state_file_helper.set_state(self.name, "InstallTime", now.isoformat())
     
     def uninstall(self):
         if not self.is_installed():
@@ -95,13 +110,23 @@ class ModModel:
                     self._log(f"Failed to remove {tgt_dir}: {e}", level="ERROR")
                     return False
                 
-        return not self.is_installed()
-                    
-    def is_installed(self) -> bool:
+        if self._is_install_internal():
+            self._log("Failed to uninstall mod. Some files may not have been removed.", level="ERROR")
+            return False
+        
+        self._log("Mod uninstalled successfully.")
+        self.state_file_helper.remove_mod_state(self.name)
+        return True
+    
+    def _is_install_internal(self) -> bool:
+        """ This method checks if the mod is installed by verifying that all files in the mod's source folder exist in the target install folder with matching types and sizes. """
         source_folder = self.mod_file_path
         target_folder = self.install_path
 
         return self._get_content_exist(str(source_folder), str(target_folder))
+                    
+    def is_installed(self) -> bool:
+        return self.state_file_helper.get_state(self.name, "InstallTime") is not None
     
     def set_selected(self, selected: bool):
         self.is_selected = selected

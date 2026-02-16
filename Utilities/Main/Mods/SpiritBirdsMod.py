@@ -2,8 +2,8 @@ from pathlib import Path
 from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 
 class SpiritBirdsMod(REFrameWorkDependentMod):
-    def __init__(self, resource_folder: str, game_install_path: str):
-        super().__init__(resource_folder, game_install_path)
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
+        super().__init__(resource_folder, game_install_path, state_file_helper)
         self.name = "Spirit Birds"
         self.description = "Adds spirit birds to the game for a more immersive experience."
         self.mod_file_path = Path(self.resource_folder) / "Spirit Birds v1.8"

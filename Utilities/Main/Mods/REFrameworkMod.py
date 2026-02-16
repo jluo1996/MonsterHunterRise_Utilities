@@ -2,10 +2,11 @@ from pathlib import Path
 from Main.Mods.ModModel import ModModel
 
 class REFrameworkMod(ModModel):
-    def __init__(self, resource_folder: str, game_install_path: str):
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
         super().__init__(
             resource_folder=resource_folder,
-            game_install_path=game_install_path
+            game_install_path=game_install_path,
+            state_file_helper=state_file_helper
         )
         self.name = "REFramework"
         self.description = "REFramework is a modding framework for RE Engine games."
