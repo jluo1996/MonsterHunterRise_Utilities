@@ -12,6 +12,9 @@ from Main.Helpers.FileHelper import FileHelper
 from Main.Mods.CharmEditorMod import CharmEditorMod
 from Main.Mods.MonsterWeaknessIconIndicatorMod import MonsterWeaknessIconIndicatorMod
 from Main.Helpers.StateFileHelper import StateFileHelper
+from Main.Mods.FastReturnMod import FastReturnMod
+from Main.Mods.MatchmakingMod import MatchmakingMod
+from Main.Mods.CustomInGameMenuMod import CustomInGameMenuMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
@@ -37,6 +40,10 @@ class MainViewModel():
         self.mods.append(DropRatesEnhancedMod(self.resources_path, self.game_install_path, self.state_file_helper))
         self.mods.append(CharmEditorMod(self.resources_path, self.game_install_path, self.state_file_helper))
         self.mods.append(MonsterWeaknessIconIndicatorMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        # self.mods.append(KillCamMod(self.resources_path, self.game_install_path, self.state_file_helper)) # Use FastReturnMod instead since it is simpler.
+        self.mods.append(FastReturnMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(MatchmakingMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(CustomInGameMenuMod(self.resources_path, self.game_install_path, self.state_file_helper))
 
         # self.mods.sort(key=lambda mod: mod.name)
 

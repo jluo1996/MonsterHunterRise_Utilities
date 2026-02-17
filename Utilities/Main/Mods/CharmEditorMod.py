@@ -7,7 +7,7 @@ class CharmEditorMod(REFrameWorkDependentMod):
     def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
         super().__init__(resource_folder, game_install_path, state_file_helper)
         self.name = "Charm Editor"
-        self.description = "Charm Editor is a mod that allows you to edit your charms in Monster Hunter Rise."
+        self.description = "Charm Editor (Legal only), All Items Cheat, Zenny/Points Editor."
         self.mod_file_path = Path(self.resource_folder) / "Charm Editor"
         self.update_install_path(game_install_path)
 

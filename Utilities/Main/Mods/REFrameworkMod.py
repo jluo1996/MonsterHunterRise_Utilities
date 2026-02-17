@@ -9,5 +9,5 @@ class REFrameworkMod(ModModel):
             state_file_helper=state_file_helper
         )
         self.name = "REFramework"
-        self.description = "REFramework is a modding framework for RE Engine games."
+        self.description = "Modding tool/framework with a powerful scripting API using Lua. Comes with fixes for DLLs/ReShade crashing, FreeCam, Timescale, FOV, VR, and tools for script/mod developers"
         self.mod_file_path = Path(self.resource_folder) / "REFramework"

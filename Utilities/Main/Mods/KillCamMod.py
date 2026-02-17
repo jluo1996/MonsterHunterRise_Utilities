@@ -1,12 +1,12 @@
 from pathlib import Path
 from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 
-class SpiritBirdsMod(REFrameWorkDependentMod):
+class KillCamMod(REFrameWorkDependentMod):
     def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
         super().__init__(resource_folder, game_install_path, state_file_helper)
-        self.name = "Spirit Birds"
-        self.description = "Automatically spawn a prism bird at the start of the quest or manually spawn in SpiritBirds of any type."
-        self.mod_file_path = Path(self.resource_folder) / "Spirit Birds v1.8"
+        self.name = "Kill Cam"
+        self.description = "Adds slow mo on final hit, also removes the monster kill cam that does some cutscene from a few different views as the monster dies."
+        self.mod_file_path = Path(self.resource_folder) / "Kill Cam"
         self.update_install_path(game_install_path)
 
     def update_install_path(self, new_game_install_path):

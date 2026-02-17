@@ -11,7 +11,7 @@ class DropRatesEnhancedMod(ModModel):
     def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
         super().__init__(resource_folder, game_install_path, state_file_helper)
         self.name = "Drop Rates Enhanced"
-        self.description = "Enhances drop rates in Monster Hunter Rise."
+        self.description = "More rewards per monster in a balanced way."
         self.default_drop_rate_option = DROP_RATE_BALANCED
         self.current_drop_rate = self._read_current_drop_rate()
         self.mod_file_path = Path(self.resource_folder) / "Drop Rates Enhanced" / self.current_drop_rate
