@@ -6,15 +6,22 @@ A comprehensive GUI application for managing mods for Monster Hunter Rise, provi
 
 The application provides a user-friendly graphical interface with features such as:
 
+- Manage 15+ popular Monster Hunter Rise mods in one place
 - Select all functionality for easy mod selection
 - Custom loading splash screen
 - Application icon for better identification
 - Auto-detection of game installation path
 - Game running detection to prevent installation conflicts
 - Two executable options: single file or directory-based
+- Automatic mod installation and uninstallation
 
-This application manages several popular Monster Hunter Rise mods:
+This application manages a wide variety of Monster Hunter Rise mods:
 
+### Core Framework
+- **REFramework**: The core framework required for most mods
+- **REFramework Direct2D**: Alternative Direct2D rendering for REFramework
+
+### Gameplay Enhancement Mods
 - **MHR Overlay**: A detailed in-game UI overlay that provides:
   - Damage Meter: Track damage dealt by all players in real-time
   - Monster Health Bars: Display health, stamina, and rage for large monsters
@@ -24,13 +31,22 @@ This application manages several popular Monster Hunter Rise mods:
   - Time Display: Show quest time and other timing information
   - Small Monster Tracking: Information about small monsters in the area
 
-- **REFramework**: The core framework required for most mods
-- **REFramework Direct2D**: Alternative Direct2D rendering for REFramework
 - **Teleport Mod**: Teleportation functionality
 - **Spirit Birds Mod**: Spirit Bird enhancements
-- **Drop Rates Enhanced Mod**: Enhanced drop rates with different balance options
+- **Monster Weakness Icon Indicator**: Indicates the monster elemental weakness
+- **Kill Cam (Currently unavailable)**: Adds slow motion on final hit and removes the monster kill cam cutscene sequences
+- **Fast Return**: Skip carve timer and quest ending animation
+
+### Quality of Life Mods
+- **Drop Rates Enhanced Mod**: Enhanced drop rates with different balance options (Balanced, Not so Balanced, Unbalanced)
 - **Auto Argosy Mod**: Automates the Argosy trading system
 - **Auto Cohoot Nest Mod**: Automates gathering from Cohoot nests
+- **Better Matchmaking**: Disables timeout when searching for Join Requests, removes region lock, and fixes language filter for lobbies
+
+### Customization & Editor Mods
+- **Charm Editor**: Edit charms (legal cheat only), all items cheat, and Zenny/Points editor
+- **Custom In-Game Mod Menu**: User-friendly IMGUI-inspired API for drawing in-game settings menus for REFramework mods
+- **Skip Intro Logo**: Skip logos and press any button to continue
 
 ## Installation
 
@@ -111,10 +127,18 @@ This project is provided as-is for educational and entertainment purposes.
 
 ## Version
 
-Current version: 2.x.x.x (MHR Overlay v2.7.3)
+Current version: 2.x.x.x - A comprehensive mod manager supporting 15+ popular Monster Hunter Rise mods
+
+## Build & Distribution
+
+This project uses GitHub Actions for automated builds and releases:
+- **One-File Build**: Creates a single executable file for easy distribution
+- **One-Directory Build**: Creates an executable with extracted files for modular access
+- Automated version numbering based on build runs
 
 ## Credits
 
-- Built using REFramework
-- Special thanks to the Monster Hunter Rise modding community
-- PyQt6 for the GUI framework
+- Built with PyQt6 for the GUI framework
+- Built using REFramework for mod support
+- Special thanks to the Monster Hunter Rise modding community and all mod creators
+- GitHub Actions for automated building and releases
