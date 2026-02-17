@@ -9,7 +9,7 @@ class TeleportMod(REFrameWorkDependentMod):
     def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
         super().__init__(resource_folder, game_install_path, state_file_helper)
         self.name = "Teleport"
-        self.description = "A mod that allows teleporting to different monsters."
+        self.description = "Teleport to the selected monster in the upper right corner UI by using a gesture."
         self.mod_file_path = Path(self.resource_folder) / "Teleport"
         self.update_install_path(game_install_path)
         self.INSTALL_FILE_NAME = "Teleport_to_target.lua"
