@@ -2,8 +2,8 @@ from pathlib import Path
 from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 
 class CustomInGameMenuMod(REFrameWorkDependentMod):
-    def __init__(self, resource_folder, game_install_path, state_file_helper):
-        super().__init__(resource_folder, game_install_path, state_file_helper)
+    def __init__(self, resource_folder, game_install_path, state_file_helper, logger):
+        super().__init__(resource_folder, game_install_path, state_file_helper, logger)
         self.name = "Custom In-Game Mod Menu"
         self.description = "A user-friendly IMGUI inspired API for drawing in-game settings menus for REF mods in MHRise."
         self.mod_file_path = Path(self.resource_folder) / "Custom In Game Mod Menu"

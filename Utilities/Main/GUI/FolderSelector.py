@@ -6,8 +6,9 @@ from PyQt6.QtWidgets import QFileDialog, QHBoxLayout, QLineEdit, QPushButton, QW
 class FolderSelector(QWidget):
     folder_changed_signal = pyqtSignal(Path)
 
-    def __init__(self, default_path="", parent=None):
+    def __init__(self, logger, default_path="", parent=None):
         super().__init__(parent)
+        self.logger = logger
 
         self.layout = QHBoxLayout(self)
         self.layout.setContentsMargins(5, 5, 5, 5)
@@ -23,6 +24,7 @@ class FolderSelector(QWidget):
         self.layout.addWidget(self.browse_button)
 
     def _select_folder(self):
+        self.logger.log("Browse button clicked for folder selection.", level="UI")
         folder = QFileDialog.getExistingDirectory(
             self, "Select Folder", str(Path(self.path_edit.text()).expanduser())
         )

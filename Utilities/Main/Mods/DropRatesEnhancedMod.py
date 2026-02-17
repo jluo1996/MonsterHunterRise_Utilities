@@ -8,8 +8,8 @@ DROP_RATE_NOT_SO_BALANCED = "Not so Balanced"
 DROP_RATE_UNBALANCED = "Unbalanced"
 
 class DropRatesEnhancedMod(ModModel):
-    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
-        super().__init__(resource_folder, game_install_path, state_file_helper)
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper, logger):
+        super().__init__(resource_folder, game_install_path, state_file_helper, logger)
         self.name = "Drop Rates Enhanced"
         self.description = "More rewards per monster in a balanced way."
         self.default_drop_rate_option = DROP_RATE_BALANCED

@@ -8,8 +8,9 @@ from Main.Mods.ModModel import ModModel
 
 
 class SettingsDialog(QDialog):
-    def __init__(self, mod : ModModel, parent: QWidget | None = None, title: str = "Settings"):
+    def __init__(self, mod : ModModel, logger, parent: QWidget | None = None, title: str = "Settings"):
         super().__init__(parent)
+        self.logger = logger
         self.mod = mod
         self.setWindowTitle(title)
         self.setModal(True)
@@ -169,6 +170,7 @@ class SettingsDialog(QDialog):
         - int/float/str: lineedit.text() cast appropriately -> value
         - list/tuple: combo.currentText() -> value   (assumes 'value' holds the choices originally)
         """
+        self.logger.log(f"Save button clicked for mod '{self.mod.name}'", level="UI")
         settings = getattr(self.mod, "settings", None)
         if not settings:
             self.accept()
@@ -215,6 +217,6 @@ class SettingsDialog(QDialog):
         self.mod.save_settings()
         self.accept()
 
-
     def on_cancel(self):
+        self.logger.log(f"Cancel button clicked for mod '{self.mod.name}'", level="UI")
         self.reject() 

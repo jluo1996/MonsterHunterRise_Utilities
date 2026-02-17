@@ -5,8 +5,9 @@ from Main.Mods.ModModel import ModModel
 
 
 class ModListWidget(QWidget):
-    def __init__(self, mods: list[ModModel], parent=None):
+    def __init__(self, mods: list[ModModel], logger, parent=None):
         super().__init__(parent)
+        self.logger = logger
 
         main_layout = QVBoxLayout(self)
 
@@ -30,13 +31,14 @@ class ModListWidget(QWidget):
 
         self.mods_item_widgets = []
         for mod in mods:
-            item = ModItemWidget(mod)
+            item = ModItemWidget(mod, self.logger)
             layout.addWidget(item)
             self.mods_item_widgets.append(item)
 
         layout.addStretch()
 
     def on_select_all_changed(self, state):
+        self.logger.log(f"'Select All' checkbox state changed to {state}", level="UI")
         checked = state == Qt.CheckState.Checked.value
         for item_widget in self.mods_item_widgets:
             item_widget.check_box.setChecked(checked)

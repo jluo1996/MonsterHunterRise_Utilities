@@ -15,13 +15,15 @@ from Main.Helpers.StateFileHelper import StateFileHelper
 from Main.Mods.FastReturnMod import FastReturnMod
 from Main.Mods.MatchmakingMod import MatchmakingMod
 from Main.Mods.CustomInGameMenuMod import CustomInGameMenuMod
+from Main.Mods.SkipIntroLogoMod import SkipIntroLogoMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
 class MainViewModel():
-    def __init__(self):
+    def __init__(self, logger):
         self.mods = []  # This will hold a list of ModModel instances
         file_helper = FileHelper()
+        self.logger = logger
         self.state_file_helper = StateFileHelper(file_helper=file_helper)
         self.resources_path = file_helper.get_resources_folder_path()
         _ = self.auto_detect_game_install_path(auto_detect=False, update_game_install_path=True)  
@@ -30,20 +32,21 @@ class MainViewModel():
         return self.mods
     
     def init_mods(self):    
-        self.mods.append(REFrameworkMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(REFrameworkD2DMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(TeleportMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(SpiritBirdsMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(AutoArgosyMod(self.resources_path, self.game_install_path, self.state_file_helper)) 
-        self.mods.append(AutoCohootNestMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(MHROverlayMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(DropRatesEnhancedMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(CharmEditorMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(MonsterWeaknessIconIndicatorMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(REFrameworkMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(REFrameworkD2DMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(TeleportMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(SpiritBirdsMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(AutoArgosyMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger)) 
+        self.mods.append(AutoCohootNestMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(MHROverlayMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(DropRatesEnhancedMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(CharmEditorMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(MonsterWeaknessIconIndicatorMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
         # self.mods.append(KillCamMod(self.resources_path, self.game_install_path, self.state_file_helper)) # Use FastReturnMod instead since it is simpler.
-        self.mods.append(FastReturnMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(MatchmakingMod(self.resources_path, self.game_install_path, self.state_file_helper))
-        self.mods.append(CustomInGameMenuMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(FastReturnMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(MatchmakingMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(CustomInGameMenuMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(SkipIntroLogoMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
 
         # self.mods.sort(key=lambda mod: mod.name)
 
@@ -73,8 +76,9 @@ class MainViewModel():
             mod.update_install_path(new_path)
 
     def auto_detect_game_install_path(self, auto_detect: bool = False, update_game_install_path: bool = False) -> list[Path]:
-        game_info_helper = GameInfoHelper()
+        game_info_helper = GameInfoHelper(self.logger)
         detected_path = game_info_helper.get_MRH_install_path(auto_detect)
         if update_game_install_path and detected_path:
             self.update_game_install_path(str(detected_path))
+                # TODO: if game install path is changed, need to apply the original config on the new game path
         return [detected_path] if detected_path else []
