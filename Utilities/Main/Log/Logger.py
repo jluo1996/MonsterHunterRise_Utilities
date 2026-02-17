@@ -7,7 +7,6 @@ from PyQt6.QtCore import QObject, pyqtSignal
 
 from Main.Helpers.FileHelper import FileHelper 
 
-# Singleton Logger class
 class Logger(QObject):
     # Signal emitted when a new log message is written
     log_message_signal = pyqtSignal(str, str)  # (formatted_message, level)

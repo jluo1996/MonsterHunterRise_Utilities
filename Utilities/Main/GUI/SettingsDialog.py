@@ -8,9 +8,9 @@ from Main.Mods.ModModel import ModModel
 
 
 class SettingsDialog(QDialog):
-    def __init__(self, mod : ModModel, parent: QWidget | None = None, title: str = "Settings"):
+    def __init__(self, mod : ModModel, logger, parent: QWidget | None = None, title: str = "Settings"):
         super().__init__(parent)
-        self.logger = Logger()
+        self.logger = logger
         self.mod = mod
         self.setWindowTitle(title)
         self.setModal(True)

@@ -83,9 +83,9 @@ class ModItemWidget(QWidget):
 
     def _settings_button_clicked(self, mod: ModModel):
         self.logger.log(f"Settings button clicked for mod '{mod.name}'", level="UI")
-        settings_dialog = SettingsDialog(mod, parent=self)
+        settings_dialog = SettingsDialog(mod, self.logger, parent=self)
         settings_dialog.exec()
 
     def _on_checkbox_state_changed(self, state):
         self.logger.log(f"Checkbox state changed for mod '{self.mod.name}' to {state}", level="UI")
-        self.mod.set_selected(state == Qt.CheckState.Checked)
+        self.mod.set_selected(state == Qt.CheckState.Checked.value)
