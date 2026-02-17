@@ -2,11 +2,13 @@ from PyQt6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QScrollArea, QChe
 from PyQt6.QtCore import Qt
 from Main.GUI.ModItemWidget import ModItemWidget
 from Main.Mods.ModModel import ModModel
+from Main.Log.Logger import Logger
 
 
 class ModListWidget(QWidget):
     def __init__(self, mods: list[ModModel], parent=None):
         super().__init__(parent)
+        self.logger = Logger()
 
         main_layout = QVBoxLayout(self)
 
@@ -37,6 +39,7 @@ class ModListWidget(QWidget):
         layout.addStretch()
 
     def on_select_all_changed(self, state):
+        self.logger.log(f"'Select All' checkbox state changed to {state}", level="UI")
         checked = state == Qt.CheckState.Checked.value
         for item_widget in self.mods_item_widgets:
             item_widget.check_box.setChecked(checked)

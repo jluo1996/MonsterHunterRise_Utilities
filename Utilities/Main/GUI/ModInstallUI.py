@@ -2,12 +2,14 @@ from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget, QMes
 from Main.MainViewModel import MainViewModel
 from Main.GUI.ModListWidget import ModListWidget
 from Main.GUI.FolderSelector import FolderSelector
+from Main.Log.Logger import Logger
 
 class ModInstallUI(QWidget):
     def __init__(self, main_vm: MainViewModel):
         super().__init__()
         
         self.main_vm = main_vm
+        self.logger = Logger()
         main_layout = QVBoxLayout()
 
         self.file_selector = FolderSelector(self.main_vm.game_install_path)
@@ -34,6 +36,7 @@ class ModInstallUI(QWidget):
         return mod_list_widget
     
     def _install_selected_mods(self):
+        self.logger.log("Install Selected Mods button clicked.", level="UI")
         if not self.main_vm.install_selected_mods():
             self._show_dialog("Installation Error", "One or more mods failed to install. Please check the logs for details.")
         self._refresh_mod_statuses()
@@ -46,6 +49,7 @@ class ModInstallUI(QWidget):
         msg.exec()
 
     def _uninstall_selected_mods(self):
+        self.logger.log("Uninstall Selected Mods button clicked.", level="UI")
         self.main_vm.uninstall_selected_mods()
         self._refresh_mod_statuses()
 

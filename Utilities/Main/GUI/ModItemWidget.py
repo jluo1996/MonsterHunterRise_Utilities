@@ -7,11 +7,13 @@ from PyQt6.QtCore import Qt, QSize
 from Main.Mods.ModModel import ModModel
 from Main.Helpers.FileHelper import FileHelper
 from Main.GUI.SettingsDialog import SettingsDialog
+from Main.Log.Logger import Logger
 
 class ModItemWidget(QWidget):
     def __init__(self, mod : ModModel, parent=None):
         super().__init__(parent)
         self.mod = mod
+        self.logger = Logger()
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(5, 2, 5, 2)
@@ -20,7 +22,7 @@ class ModItemWidget(QWidget):
         self.check_box = QCheckBox(self.mod.name)
         self.check_box.setCheckable(True)
         self.check_box.setChecked(self.mod.is_selected)
-        self.check_box.stateChanged.connect(self.mod.set_selected)
+        self.check_box.stateChanged.connect(lambda state: self._on_checkbox_state_changed(state))
         layout.addWidget(self.check_box, stretch=1)
 
         # Status label
@@ -81,5 +83,10 @@ class ModItemWidget(QWidget):
             self.status_label.setStyleSheet("color: red; font-weight: bold;")
 
     def _settings_button_clicked(self, mod: ModModel):
+        self.logger.log(f"Settings button clicked for mod '{mod.name}'", level="UI")
         settings_dialog = SettingsDialog(mod, parent=self)
         settings_dialog.exec()
+
+    def _on_checkbox_state_changed(self, state):
+        self.logger.log(f"Checkbox state changed for mod '{self.mod.name}' to {state}", level="UI")
+        self.mod.set_selected(state == Qt.CheckState.Checked)

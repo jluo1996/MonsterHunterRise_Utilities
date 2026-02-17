@@ -11,7 +11,8 @@ class Logger:
     LEVELS = {
         "INFO": "[INFO]",
         "WARNING": "[WARNING]",
-        "ERROR": "[ERROR]"
+        "ERROR": "[ERROR]",
+        "UI": "[UI]"
     }
 
     def __new__(cls, log_file_path=None):

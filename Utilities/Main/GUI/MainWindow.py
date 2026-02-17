@@ -22,7 +22,6 @@ class MainWindow(QMainWindow):
         file_helper = FileHelper()
         self._build_menubar(file_helper)
 
-
     def _build_menubar(self, file_helper: FileHelper = FileHelper()):
         menubar = self.menuBar()
 
@@ -72,10 +71,12 @@ class MainWindow(QMainWindow):
     # ---- Handlers for toolbar actions ----
 
     def _show_about(self):
+        self.logger.log("About menu item clicked.", level="UI")
         about_dialog = AboutDialog()
         about_dialog.exec() 
 
     def _backup_user_data(self):
+        self.logger.log("Backup User Data menu item clicked.", level="UI")
         game_info_helper = GameInfoHelper()
         success = game_info_helper.backup_MHR_user_data()
         if success:
@@ -84,8 +85,10 @@ class MainWindow(QMainWindow):
             self.logger.log("Backup failed.", level="ERROR")
 
     def _view_log(self):
+        self.logger.log("View Log menu item clicked.", level="UI")
         self.logger.open_log_file()
 
     def _auto_detect_game_folder(self):
+        self.logger.log("Auto Detect Game Folder menu item clicked.", level="UI")
         self.main_vm.auto_detect_game_install_path(auto_detect=True, update_game_install_path=True)
         self.main_gui.update_game_install_path(self.main_vm.game_install_path)

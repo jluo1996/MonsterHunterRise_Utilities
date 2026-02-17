@@ -21,6 +21,7 @@ if __name__ == "__main__":
     file_helper = FileHelper()
 
     logger = _init_logger(file_helper)
+    logger.log("Application initializing...", level="INFO")
     
     picture_path = file_helper.get_pictures_folder_path()
     icon_path = file_helper.get_icons_folder_path()
@@ -39,19 +40,24 @@ if __name__ == "__main__":
 
     game_info_helper = GameInfoHelper()
     if game_info_helper.is_game_running():
+        logger.log("Game is currently running. Exiting application.", level="ERROR")
         QMessageBox.critical(None, "Game Running", "Please close Monster Hunter Rise before using this utility.")
         sys.exit(0)
 
+    logger.log("Initializing MainViewModel and loading mods...", level="INFO")
     mod_vm = MainViewModel()
     mod_vm.init_mods()
+    logger.log("MainViewModel initialized and mods loaded.", level="INFO")
 
     splash.finish(None)  # Close the splash screen
 
 
+    logger.log("Launching MainWindow...", level="INFO")
     win = MainWindow(mod_vm)
     win.show()
     win.raise_()
     win.activateWindow()
+    logger.log("MainWindow launched successfully.", level="INFO")
 
 
     sys.exit(app.exec())
