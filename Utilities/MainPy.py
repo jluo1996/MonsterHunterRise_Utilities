@@ -1,26 +1,20 @@
-from datetime import datetime
 import sys
 from PyQt6.QtWidgets import QApplication, QSplashScreen, QMessageBox
 from PyQt6.QtGui import QIcon, QPixmap, QFont
 from PyQt6.QtCore import Qt
+from Main.Log.Logger import Logger
+
 from Main.MainViewModel import MainViewModel
 from Main.GUI.MainWindow import MainWindow
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
-from Main.Log.Logger import Logger
-
-def _init_logger(self, file_helper: FileHelper = FileHelper()):
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_folder = file_helper.get_log_folder_path()
-    log_file_path = log_folder / f"MHR_Utilities_{timestamp}.log"
-    return Logger(log_file_path)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     file_helper = FileHelper()
 
-    logger = _init_logger(file_helper)
+    logger = Logger()
     logger.log("Application initializing...", level="INFO")
     
     picture_path = file_helper.get_pictures_folder_path()
@@ -38,14 +32,14 @@ if __name__ == "__main__":
     splash.show()
     app.processEvents()
 
-    game_info_helper = GameInfoHelper()
+    game_info_helper = GameInfoHelper(logger)
     if game_info_helper.is_game_running():
         logger.log("Game is currently running. Exiting application.", level="ERROR")
         QMessageBox.critical(None, "Game Running", "Please close Monster Hunter Rise before using this utility.")
         sys.exit(0)
 
     logger.log("Initializing MainViewModel and loading mods...", level="INFO")
-    mod_vm = MainViewModel()
+    mod_vm = MainViewModel(logger)
     mod_vm.init_mods()
     logger.log("MainViewModel initialized and mods loaded.", level="INFO")
 
@@ -53,7 +47,7 @@ if __name__ == "__main__":
 
 
     logger.log("Launching MainWindow...", level="INFO")
-    win = MainWindow(mod_vm)
+    win = MainWindow(mod_vm, logger)
     win.show()
     win.raise_()
     win.activateWindow()

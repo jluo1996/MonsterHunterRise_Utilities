@@ -7,13 +7,12 @@ from PyQt6.QtCore import Qt, QSize
 from Main.Mods.ModModel import ModModel
 from Main.Helpers.FileHelper import FileHelper
 from Main.GUI.SettingsDialog import SettingsDialog
-from Main.Log.Logger import Logger
 
 class ModItemWidget(QWidget):
-    def __init__(self, mod : ModModel, parent=None):
+    def __init__(self, mod : ModModel, logger, parent=None):
         super().__init__(parent)
         self.mod = mod
-        self.logger = Logger()
+        self.logger = logger
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(5, 2, 5, 2)

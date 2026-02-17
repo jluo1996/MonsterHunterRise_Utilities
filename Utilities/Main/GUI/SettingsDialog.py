@@ -5,7 +5,6 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIntValidator, QDoubleValidator, QIcon
 from Main.Mods.ModModel import ModModel
-from Main.Log.Logger import Logger
 
 
 class SettingsDialog(QDialog):

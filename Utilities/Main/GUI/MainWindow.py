@@ -4,20 +4,21 @@ from Main.GUI.ModInstallUI import ModInstallUI
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
 from Main.GUI.AboutDialog import AboutDialog
-from Main.Log.Logger import Logger
 
 class MainWindow(QMainWindow):
-    def __init__(self, main_vm, parent=None):
+    def __init__(self, main_vm, logger, parent=None):
         super().__init__(parent)
         self.setWindowTitle("MHR Utilities")
         self.setMinimumWidth(330)
  
         self.main_vm = main_vm
-        self.logger = Logger()
-        self.main_gui = ModInstallUI(self.main_vm)
+        self.logger = logger
+        
+        self.main_gui = ModInstallUI(self.main_vm, self.logger)
         self.setCentralWidget(self.main_gui)
 
         # self.statusBar().showMessage("Ready")
+        self.logger.log_message_signal.connect(self._on_log_message_received)
 
         file_helper = FileHelper()
         self._build_menubar(file_helper)
@@ -92,3 +93,17 @@ class MainWindow(QMainWindow):
         self.logger.log("Auto Detect Game Folder menu item clicked.", level="UI")
         self.main_vm.auto_detect_game_install_path(auto_detect=True, update_game_install_path=True)
         self.main_gui.update_game_install_path(self.main_vm.game_install_path)
+
+    def _on_log_message_received(self, formatted_message, level):
+        match level:
+            case "ERROR":
+                self.statusBar().setStyleSheet("color: red;")
+            case "WARNING":
+                self.statusBar().setStyleSheet("color: orange;")
+            case "INFO":
+                self.statusBar().setStyleSheet("color: black;")
+            case "UI":
+                self.statusBar().setStyleSheet("color: blue;")
+            case _:
+                self.statusBar().setStyleSheet("color: black;")
+        self.statusBar().showMessage(formatted_message)

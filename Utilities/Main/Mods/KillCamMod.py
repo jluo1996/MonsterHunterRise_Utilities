@@ -2,8 +2,8 @@ from pathlib import Path
 from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 
 class KillCamMod(REFrameWorkDependentMod):
-    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
-        super().__init__(resource_folder, game_install_path, state_file_helper)
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper, logger):
+        super().__init__(resource_folder, game_install_path, state_file_helper, logger)
         self.name = "Kill Cam"
         self.description = "Adds slow mo on final hit, also removes the monster kill cam that does some cutscene from a few different views as the monster dies."
         self.mod_file_path = Path(self.resource_folder) / "Kill Cam"

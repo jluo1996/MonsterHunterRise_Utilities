@@ -1,15 +1,14 @@
 from pathlib import Path
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QFileDialog, QHBoxLayout, QLineEdit, QPushButton, QWidget
-from Main.Log.Logger import Logger
 
 
 class FolderSelector(QWidget):
     folder_changed_signal = pyqtSignal(Path)
-    logger = Logger()
 
-    def __init__(self, default_path="", parent=None):
+    def __init__(self, logger, default_path="", parent=None):
         super().__init__(parent)
+        self.logger = logger
 
         self.layout = QHBoxLayout(self)
         self.layout.setContentsMargins(5, 5, 5, 5)

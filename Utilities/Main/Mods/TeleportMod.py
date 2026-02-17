@@ -6,8 +6,8 @@ from Main.Mods.ModSetting import ModSetting
 TELEPORT_GESTURE_SETTING = "Teleport Gesture"
 
 class TeleportMod(REFrameWorkDependentMod):
-    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper):
-        super().__init__(resource_folder, game_install_path, state_file_helper)
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper, logger):
+        super().__init__(resource_folder, game_install_path, state_file_helper, logger)
         self.name = "Teleport"
         self.description = "Teleport to the selected monster in the upper right corner UI by using a gesture."
         self.mod_file_path = Path(self.resource_folder) / "Teleport"

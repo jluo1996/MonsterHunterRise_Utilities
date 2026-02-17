@@ -3,11 +3,10 @@ import os
 from pathlib import Path
 import shutil
 
-from Main.Log.Logger import Logger
 from Main.Helpers.StateFileHelper import StateFileHelper
 
 class ModModel:
-    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper: StateFileHelper):
+    def __init__(self, resource_folder: str, game_install_path: str, state_file_helper: StateFileHelper, logger):
         self.name = ""
         self.description = ""
         self.resource_folder = resource_folder
@@ -16,7 +15,7 @@ class ModModel:
         self.game_install_path = Path(game_install_path)
         self.is_selected = False
         self.settings = []
-        self.logger = Logger()
+        self.logger = logger
         self.state_file_helper = state_file_helper
 
     def get_has_settings(self) -> bool:

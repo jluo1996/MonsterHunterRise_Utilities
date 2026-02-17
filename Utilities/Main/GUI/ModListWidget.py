@@ -2,13 +2,12 @@ from PyQt6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QScrollArea, QChe
 from PyQt6.QtCore import Qt
 from Main.GUI.ModItemWidget import ModItemWidget
 from Main.Mods.ModModel import ModModel
-from Main.Log.Logger import Logger
 
 
 class ModListWidget(QWidget):
-    def __init__(self, mods: list[ModModel], parent=None):
+    def __init__(self, mods: list[ModModel], logger, parent=None):
         super().__init__(parent)
-        self.logger = Logger()
+        self.logger = logger
 
         main_layout = QVBoxLayout(self)
 
@@ -32,7 +31,7 @@ class ModListWidget(QWidget):
 
         self.mods_item_widgets = []
         for mod in mods:
-            item = ModItemWidget(mod)
+            item = ModItemWidget(mod, self.logger)
             layout.addWidget(item)
             self.mods_item_widgets.append(item)
 

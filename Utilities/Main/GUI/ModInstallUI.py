@@ -2,17 +2,16 @@ from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget, QMes
 from Main.MainViewModel import MainViewModel
 from Main.GUI.ModListWidget import ModListWidget
 from Main.GUI.FolderSelector import FolderSelector
-from Main.Log.Logger import Logger
 
 class ModInstallUI(QWidget):
-    def __init__(self, main_vm: MainViewModel):
+    def __init__(self, main_vm: MainViewModel, logger):
         super().__init__()
         
         self.main_vm = main_vm
-        self.logger = Logger()
+        self.logger = logger
         main_layout = QVBoxLayout()
 
-        self.file_selector = FolderSelector(self.main_vm.game_install_path)
+        self.file_selector = FolderSelector(self.logger, self.main_vm.game_install_path)
         self.file_selector.folder_changed_signal.connect(self._on_folder_changed)
         main_layout.addWidget(self.file_selector)
         
@@ -32,7 +31,7 @@ class ModInstallUI(QWidget):
         self.setLayout(main_layout)
 
     def _get_mod_list_widget(self, mods):
-        mod_list_widget = ModListWidget(mods)
+        mod_list_widget = ModListWidget(mods, self.logger)
         return mod_list_widget
     
     def _install_selected_mods(self):
