@@ -15,6 +15,7 @@ from Main.Helpers.StateFileHelper import StateFileHelper
 from Main.Mods.FastReturnMod import FastReturnMod
 from Main.Mods.MatchmakingMod import MatchmakingMod
 from Main.Mods.CustomInGameMenuMod import CustomInGameMenuMod
+from Main.Mods.SkipIntroLogoMod import SkipIntroLogoMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
@@ -44,6 +45,7 @@ class MainViewModel():
         self.mods.append(FastReturnMod(self.resources_path, self.game_install_path, self.state_file_helper))
         self.mods.append(MatchmakingMod(self.resources_path, self.game_install_path, self.state_file_helper))
         self.mods.append(CustomInGameMenuMod(self.resources_path, self.game_install_path, self.state_file_helper))
+        self.mods.append(SkipIntroLogoMod(self.resources_path, self.game_install_path, self.state_file_helper))
 
         # self.mods.sort(key=lambda mod: mod.name)
 
