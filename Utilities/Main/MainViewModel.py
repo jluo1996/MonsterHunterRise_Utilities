@@ -22,8 +22,8 @@ GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 class MainViewModel():
     def __init__(self, logger):
         self.mods = []  # This will hold a list of ModModel instances
-        file_helper = FileHelper()
         self.logger = logger
+        file_helper = FileHelper(self.logger)
         self.state_file_helper = StateFileHelper(file_helper=file_helper)
         self.resources_path = file_helper.get_resources_folder_path()
         _ = self.auto_detect_game_install_path(auto_detect=False, update_game_install_path=True)  

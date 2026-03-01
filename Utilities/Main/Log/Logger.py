@@ -22,7 +22,7 @@ class Logger(QObject):
         super().__init__()
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        file_helper = FileHelper()
+        file_helper = FileHelper() # Do not pass the logger here to avoid circular dependency since FileHelper is used in Logger and Logger is used in FileHelper.
         log_folder = file_helper.get_log_folder_path()
         log_file_path = log_folder / f"MHR_Utilities_{timestamp}.log"
 

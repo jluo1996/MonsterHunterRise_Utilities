@@ -12,11 +12,10 @@ from Main.Helpers.GameInfoHelper import GameInfoHelper
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    file_helper = FileHelper()
-
     logger = Logger()
     logger.log("Application initializing...", level="INFO")
     
+    file_helper = FileHelper(logger)
     picture_path = file_helper.get_pictures_folder_path()
     icon_path = file_helper.get_icons_folder_path()
 
