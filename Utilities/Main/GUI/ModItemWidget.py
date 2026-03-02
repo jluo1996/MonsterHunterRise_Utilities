@@ -53,7 +53,7 @@ class ModItemWidget(QWidget):
                     border-radius: 2px;
                 }
             """)
-        file_helper = FileHelper()
+        file_helper = FileHelper(self.logger)
         settings_icon = QIcon(str(file_helper.get_icons_folder_path() / "Setting.png"))
         if has_settings:
             self.settings_button.setIcon(settings_icon)

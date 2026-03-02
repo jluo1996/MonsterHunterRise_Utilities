@@ -20,10 +20,10 @@ class MainWindow(QMainWindow):
 
         self.logger.log_message_signal.connect(self._on_log_message_received)
 
-        file_helper = FileHelper()
+        file_helper = FileHelper(self.logger)
         self._build_menubar(file_helper)
 
-    def _build_menubar(self, file_helper: FileHelper = FileHelper()):
+    def _build_menubar(self, file_helper: FileHelper):
         menubar = self.menuBar()
 
         # --- Options menu ---
