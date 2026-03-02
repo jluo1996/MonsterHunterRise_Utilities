@@ -1,11 +1,14 @@
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtCore import Qt, QTimer
 from Main.GUI.ModInstallUI import ModInstallUI
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
 from Main.GUI.AboutDialog import AboutDialog
 from Main.MainViewModel import MainViewModel
 from Main.Updater.Updater import Updater
+from Main.GUI.UpdatingDialog import UpdatingDialog
+from Main.Thread.ThreadWorker import ThreadWorker
 
 class MainWindow(QMainWindow):
     def __init__(self, main_vm : MainViewModel, logger, parent=None):
@@ -88,20 +91,65 @@ class MainWindow(QMainWindow):
             return
 
         latest_version = updater.get_latest_version_number()
-        QMessageBox.information(self, "Update Available", f"A new version of MHR Utilities is available! Please visit the GitHub releases page to download version {latest_version}.")
+        result = QMessageBox.question(
+            self,
+            "Update Available",
+            f"New version {latest_version} is available. Do you want to update?",
+            QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel
+        )
+        if result != QMessageBox.StandardButton.Ok:
+            self.logger.log("Update cancelled by user.", level="INFO")
+            return
+        
         self.logger.log(f"Starting update to version {latest_version}...", level="INFO")
 
-        if not updater.prepare_to_update():
+        updating_dialog = UpdatingDialog(self)
+        prepare_thread = ThreadWorker()
+        prepare_thread.set_function(updater.prepare_to_update)
+        prepare_thread.finished.connect(updating_dialog.accept)  # Close the dialog when preparation is done
+        self.prepare_success = True
+        prepare_thread.finished.connect(lambda success: setattr(self, 'prepare_success', success))
+        prepare_thread.start()
+        updating_dialog.exec()  # Show the dialog and wait until preparation is done
+
+        if not self.prepare_success:
             QMessageBox.critical(self, "Update Failed", "An error occurred while preparing the update. Please check the log for details.")
             self.logger.log("Update preparation failed.", level="ERROR")
             return
         
-        QMessageBox.information(self, "Update Ready", "The update has been downloaded and prepared. Please follow the instructions in the log to complete the update process.")
-        # TODO: ask user to confirm for update and restart
-
+        countdown_dialog = self._get_restart_countdown_dialog(countdown_seconds=5)
+        result = countdown_dialog.exec()  # Show the countdown dialog and wait until it's done
+        if result == QMessageBox.StandardButton.Cancel:
+            self.logger.log("Update cancelled by user.", level="INFO")
+            return
+        
         updater.launch_update()
 
 
+
+    def _get_restart_countdown_dialog(self, countdown_seconds):
+        countdown = countdown_seconds
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle("Restarting Application")
+        msg_box.setIcon(QMessageBox.Icon.Information)
+        msg_box.setStandardButtons(QMessageBox.StandardButton.Cancel)
+        msg_box.setWindowModality(Qt.WindowModality.ApplicationModal)
+        msg_box.setText(f"The app will restart in {countdown_seconds} seconds...")
+
+        timer = QTimer()
+        def update_text():
+            nonlocal countdown
+            countdown -= 1
+            if countdown <= 0:
+                timer.stop()
+                msg_box.accept()  # Close the dialog
+            else:
+                msg_box.setText(f"The app will restart in {countdown} seconds...")
+
+        timer.timeout.connect(update_text)
+        timer.start(1000)
+
+        return msg_box
 
     def _show_about(self):
         self.logger.log("About menu item clicked.", level="UI")

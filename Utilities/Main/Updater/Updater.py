@@ -47,7 +47,6 @@ class Updater():
         return version
     
     def has_newer_version(self):
-        return True # TODO: remove debug code
         latest_version, _ = self._get_latest_release()
         latest_version = latest_version.lstrip('v')
         latest = version.parse(latest_version)
