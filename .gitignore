@@ -14,5 +14,5 @@ __pycache__/
 *.pyd
 
 # PyInstaller build files
-build/scripts/testBuild.bat
-build/MRH_Util/
+build/MHR_Util/
+debug_only/

@@ -1,5 +1,5 @@
-from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import Qt
+from PyQt6 import QtGui, QtWidgets
 
 GITHUB_URL = "https://github.com/jluo1996/MonsterHunterRise_Utilities"
 

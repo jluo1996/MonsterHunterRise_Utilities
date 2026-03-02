@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from Main.Mods.ModModel import ModModel 
 
 class MonsterWeaknessIconIndicatorMod(ModModel):

@@ -1,6 +1,7 @@
-import os
-from Main.Helpers.FileHelper import FileHelper
 import json
+import os
+
+from Main.Helpers.FileHelper import FileHelper
 
 class StateFileHelper:
     def __init__(self, file_helper: FileHelper):

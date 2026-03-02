@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from Main.Mods.ModModel import ModModel
 from Main.Mods.ModSetting import ModSetting
 

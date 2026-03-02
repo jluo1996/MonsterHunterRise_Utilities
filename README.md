@@ -14,6 +14,7 @@ The application provides a user-friendly graphical interface with features such 
 - Game running detection to prevent installation conflicts
 - Two executable options: single file or directory-based
 - Automatic mod installation and uninstallation
+- Built-in update checker with one-click download and install of new releases
 
 This application manages a wide variety of Monster Hunter Rise mods:
 
@@ -60,7 +61,18 @@ This application manages a wide variety of Monster Hunter Rise mods:
 6. Select the mods you want to install from the list
 7. Click "Install Selected Mods"
 
+## Updating the Application
+
+The Mod Manager now includes an update feature:
+
+1. The application allow users to check for newer releases on startup and when the user opens the **Help → Check for Updates** menu.
+4. Once the download completes, the application will prompt you to restart and apply the update.
+
+Updates are downloaded to a temporary folder and the updater replaces the current executable, preserving any configuration settings.
+
 ## Requirements
+
+- Internet connection for checking and downloading updates (optional but recommended)
 
 - Monster Hunter Rise (PC)
 - Windows 10 or later

@@ -1,21 +1,22 @@
 from pathlib import Path
-from Main.Mods.REFrameworkMod import REFrameworkMod
-from Main.Mods.REFrameworkD2DMod import REFrameworkD2DMod
-from Main.Mods.TeleportMod import TeleportMod
-from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
-from Main.Mods.DropRatesEnhancedMod import DropRatesEnhancedMod
-from Main.Mods.MHROverlayMod import MHROverlayMod
+
+from Main.Helpers.FileHelper import FileHelper
+from Main.Helpers.GameInfoHelper import GameInfoHelper
+from Main.Helpers.StateFileHelper import StateFileHelper
 from Main.Mods.AutoArgosyMod import AutoArgosyMod
 from Main.Mods.AutoCohootNestMod import AutoCohootNestMod
-from Main.Helpers.GameInfoHelper import GameInfoHelper
-from Main.Helpers.FileHelper import FileHelper
 from Main.Mods.CharmEditorMod import CharmEditorMod
-from Main.Mods.MonsterWeaknessIconIndicatorMod import MonsterWeaknessIconIndicatorMod
-from Main.Helpers.StateFileHelper import StateFileHelper
-from Main.Mods.FastReturnMod import FastReturnMod
-from Main.Mods.MatchmakingMod import MatchmakingMod
 from Main.Mods.CustomInGameMenuMod import CustomInGameMenuMod
+from Main.Mods.DropRatesEnhancedMod import DropRatesEnhancedMod
+from Main.Mods.FastReturnMod import FastReturnMod
+from Main.Mods.MHROverlayMod import MHROverlayMod
+from Main.Mods.MatchmakingMod import MatchmakingMod
+from Main.Mods.MonsterWeaknessIconIndicatorMod import MonsterWeaknessIconIndicatorMod
+from Main.Mods.REFrameworkD2DMod import REFrameworkD2DMod
+from Main.Mods.REFrameworkMod import REFrameworkMod
 from Main.Mods.SkipIntroLogoMod import SkipIntroLogoMod
+from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
+from Main.Mods.TeleportMod import TeleportMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
@@ -77,7 +78,7 @@ class MainViewModel():
 
     def auto_detect_game_install_path(self, auto_detect: bool = False, update_game_install_path: bool = False) -> list[Path]:
         game_info_helper = GameInfoHelper(self.logger)
-        detected_path = game_info_helper.get_MRH_install_path(auto_detect)
+        detected_path = game_info_helper.get_MHR_install_path(auto_detect)
         if update_game_install_path and detected_path:
             self.update_game_install_path(str(detected_path))
                 # TODO: if game install path is changed, need to apply the original config on the new game path

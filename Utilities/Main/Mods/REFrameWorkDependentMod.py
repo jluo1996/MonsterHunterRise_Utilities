@@ -1,6 +1,6 @@
 from Main.Mods.ModModel import ModModel
-from Main.Mods.REFrameworkMod import REFrameworkMod
 from Main.Mods.REFrameworkD2DMod import REFrameworkD2DMod
+from Main.Mods.REFrameworkMod import REFrameworkMod
 
 
 class REFrameWorkDependentMod(ModModel):

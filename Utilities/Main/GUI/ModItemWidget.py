@@ -1,12 +1,10 @@
-from PyQt6.QtWidgets import (
-    QCheckBox, QWidget, QHBoxLayout, QLabel, QPushButton, QStyle
-)
+from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtGui import QIcon, QPixmap
-from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtWidgets import QCheckBox, QHBoxLayout, QLabel, QPushButton, QStyle, QWidget
 
-from Main.Mods.ModModel import ModModel
-from Main.Helpers.FileHelper import FileHelper
 from Main.GUI.SettingsDialog import SettingsDialog
+from Main.Helpers.FileHelper import FileHelper
+from Main.Mods.ModModel import ModModel
 
 class ModItemWidget(QWidget):
     def __init__(self, mod : ModModel, logger, parent=None):

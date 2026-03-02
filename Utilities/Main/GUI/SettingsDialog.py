@@ -1,9 +1,11 @@
 from typing import Mapping
-from PyQt6.QtWidgets import (
-    QDialog, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QCheckBox, QLineEdit, QComboBox
-)
+
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIntValidator, QDoubleValidator, QIcon
+from PyQt6.QtGui import QDoubleValidator, QIcon, QIntValidator
+from PyQt6.QtWidgets import (
+    QCheckBox, QComboBox, QDialog, QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget,
+)
+
 from Main.Mods.ModModel import ModModel
 
 

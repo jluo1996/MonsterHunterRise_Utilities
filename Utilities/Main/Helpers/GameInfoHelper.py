@@ -1,11 +1,11 @@
+import os
+import shutil
+import winreg
 from collections.abc import Iterable
 from datetime import datetime
-import os
 from pathlib import Path
-import shutil
 from string import ascii_uppercase
 from typing import List
-import winreg
 
 import psutil
 
@@ -74,7 +74,7 @@ class GameInfoHelper:
             
         return None
     
-    def get_MRH_install_path(self, auto_detect: bool = False) -> Path | None:
+    def get_MHR_install_path(self, auto_detect: bool = False) -> Path | None:
         if not auto_detect:
             steam_install_path = self._get_steam_install_path()
             if steam_install_path is None or not steam_install_path.exists():

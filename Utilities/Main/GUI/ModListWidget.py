@@ -1,5 +1,6 @@
-from PyQt6.QtWidgets import QHBoxLayout, QWidget, QVBoxLayout, QScrollArea, QCheckBox
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QCheckBox, QHBoxLayout, QScrollArea, QVBoxLayout, QWidget
+
 from Main.GUI.ModItemWidget import ModItemWidget
 from Main.Mods.ModModel import ModModel
 
