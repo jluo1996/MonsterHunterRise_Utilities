@@ -77,7 +77,7 @@ class MainViewModel():
 
     def auto_detect_game_install_path(self, auto_detect: bool = False, update_game_install_path: bool = False) -> list[Path]:
         game_info_helper = GameInfoHelper(self.logger)
-        detected_path = game_info_helper.get_MRH_install_path(auto_detect)
+        detected_path = game_info_helper.get_MHR_install_path(auto_detect)
         if update_game_install_path and detected_path:
             self.update_game_install_path(str(detected_path))
                 # TODO: if game install path is changed, need to apply the original config on the new game path

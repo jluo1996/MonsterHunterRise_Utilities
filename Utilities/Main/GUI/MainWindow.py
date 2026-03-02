@@ -1,10 +1,11 @@
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QAction, QIcon
 from Main.GUI.ModInstallUI import ModInstallUI
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
 from Main.GUI.AboutDialog import AboutDialog
 from Main.MainViewModel import MainViewModel
+from Main.Updater.Updater import Updater
 
 class MainWindow(QMainWindow):
     def __init__(self, main_vm : MainViewModel, logger, parent=None):
@@ -60,6 +61,12 @@ class MainWindow(QMainWindow):
         act_view_log.setShortcut("Ctrl+L")
         help_menu.addAction(act_view_log)
 
+        check_updates_icon = QIcon(str(file_helper.get_icons_folder_path() / "update.png"))
+        act_check_updates = QAction(check_updates_icon, "Check for &Updates (beta)", self)
+        act_check_updates.triggered.connect(self._check_for_updates) 
+        act_check_updates.setShortcut("Ctrl+U")
+        help_menu.addAction(act_check_updates)
+
         help_menu.addSeparator()
 
         about_icon = QIcon(str(file_helper.get_icons_folder_path() / "About.png"))
@@ -70,6 +77,31 @@ class MainWindow(QMainWindow):
 
 
     # ---- Handlers for toolbar actions ----
+
+    def _check_for_updates(self):
+        self.logger.log("Check for updates menu item clicked.", level="UI") 
+
+        updater = Updater()
+        if not updater.has_newer_version():
+            QMessageBox.information(self, "No Update Available", "You are already using the latest version of MHR Utilities.")
+            self.logger.log("Checked for updates: already on the latest version.", level="INFO")
+            return
+
+        latest_version = updater.get_latest_version_number()
+        QMessageBox.information(self, "Update Available", f"A new version of MHR Utilities is available! Please visit the GitHub releases page to download version {latest_version}.")
+        self.logger.log(f"Starting update to version {latest_version}...", level="INFO")
+
+        if not updater.prepare_to_update():
+            QMessageBox.critical(self, "Update Failed", "An error occurred while preparing the update. Please check the log for details.")
+            self.logger.log("Update preparation failed.", level="ERROR")
+            return
+        
+        QMessageBox.information(self, "Update Ready", "The update has been downloaded and prepared. Please follow the instructions in the log to complete the update process.")
+        # TODO: ask user to confirm for update and restart
+
+        updater.launch_update()
+
+
 
     def _show_about(self):
         self.logger.log("About menu item clicked.", level="UI")

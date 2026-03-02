@@ -74,7 +74,7 @@ class GameInfoHelper:
             
         return None
     
-    def get_MRH_install_path(self, auto_detect: bool = False) -> Path | None:
+    def get_MHR_install_path(self, auto_detect: bool = False) -> Path | None:
         if not auto_detect:
             steam_install_path = self._get_steam_install_path()
             if steam_install_path is None or not steam_install_path.exists():
