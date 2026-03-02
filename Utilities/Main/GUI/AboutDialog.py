@@ -1,3 +1,5 @@
+import sys
+import win32api
 from PyQt6.QtCore import Qt
 from PyQt6 import QtGui, QtWidgets
 
@@ -42,8 +44,24 @@ class AboutDialog(QtWidgets.QDialog):
         )
         btns.accepted.connect(self.accept)
 
+        version_text = self._get_current_exe_version()
+        version = QtWidgets.QLabel(f"Version: {version_text}")
+        version_font = QtGui.QFont()
+        version_font.setPointSize(9)
+        version.setFont(version_font)
+        version.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
         layout.addWidget(title)
         layout.addWidget(desc)
         layout.addWidget(link)
         layout.addStretch(1)
+        layout.addWidget(version)
         layout.addWidget(btns)
+
+    def _get_current_exe_version(self):
+        exe_path = sys.executable 
+        info = win32api.GetFileVersionInfo(exe_path, '\\')
+        ms = info['FileVersionMS']
+        ls = info['FileVersionLS']
+        version = f"{ms >> 16}.{ms & 0xFFFF}.{ls >> 16}.{ls & 0xFFFF}"
+        return version
