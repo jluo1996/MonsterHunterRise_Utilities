@@ -1,21 +1,22 @@
 from pathlib import Path
-from Main.Mods.REFrameworkMod import REFrameworkMod
-from Main.Mods.REFrameworkD2DMod import REFrameworkD2DMod
-from Main.Mods.TeleportMod import TeleportMod
-from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
-from Main.Mods.DropRatesEnhancedMod import DropRatesEnhancedMod
-from Main.Mods.MHROverlayMod import MHROverlayMod
+
+from Main.Helpers.FileHelper import FileHelper
+from Main.Helpers.GameInfoHelper import GameInfoHelper
+from Main.Helpers.StateFileHelper import StateFileHelper
 from Main.Mods.AutoArgosyMod import AutoArgosyMod
 from Main.Mods.AutoCohootNestMod import AutoCohootNestMod
-from Main.Helpers.GameInfoHelper import GameInfoHelper
-from Main.Helpers.FileHelper import FileHelper
 from Main.Mods.CharmEditorMod import CharmEditorMod
-from Main.Mods.MonsterWeaknessIconIndicatorMod import MonsterWeaknessIconIndicatorMod
-from Main.Helpers.StateFileHelper import StateFileHelper
-from Main.Mods.FastReturnMod import FastReturnMod
-from Main.Mods.MatchmakingMod import MatchmakingMod
 from Main.Mods.CustomInGameMenuMod import CustomInGameMenuMod
+from Main.Mods.DropRatesEnhancedMod import DropRatesEnhancedMod
+from Main.Mods.FastReturnMod import FastReturnMod
+from Main.Mods.MHROverlayMod import MHROverlayMod
+from Main.Mods.MatchmakingMod import MatchmakingMod
+from Main.Mods.MonsterWeaknessIconIndicatorMod import MonsterWeaknessIconIndicatorMod
+from Main.Mods.REFrameworkD2DMod import REFrameworkD2DMod
+from Main.Mods.REFrameworkMod import REFrameworkMod
 from Main.Mods.SkipIntroLogoMod import SkipIntroLogoMod
+from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
+from Main.Mods.TeleportMod import TeleportMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 

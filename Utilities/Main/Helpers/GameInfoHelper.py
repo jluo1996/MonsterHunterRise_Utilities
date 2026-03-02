@@ -1,11 +1,11 @@
+import os
+import shutil
+import winreg
 from collections.abc import Iterable
 from datetime import datetime
-import os
 from pathlib import Path
-import shutil
 from string import ascii_uppercase
 from typing import List
-import winreg
 
 import psutil
 

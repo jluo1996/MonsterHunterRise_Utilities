@@ -1,14 +1,15 @@
-from PyQt6.QtWidgets import QMainWindow, QMessageBox
+from PyQt6.QtCore import QTimer, Qt
 from PyQt6.QtGui import QAction, QIcon
-from PyQt6.QtCore import Qt, QTimer
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
+
+from Main.GUI.AboutDialog import AboutDialog
 from Main.GUI.ModInstallUI import ModInstallUI
+from Main.GUI.UpdatingDialog import UpdatingDialog
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
-from Main.GUI.AboutDialog import AboutDialog
 from Main.MainViewModel import MainViewModel
-from Main.Updater.Updater import Updater
-from Main.GUI.UpdatingDialog import UpdatingDialog
 from Main.Thread.ThreadWorker import ThreadWorker
+from Main.Updater.Updater import Updater
 
 class MainWindow(QMainWindow):
     def __init__(self, main_vm : MainViewModel, logger, parent=None):

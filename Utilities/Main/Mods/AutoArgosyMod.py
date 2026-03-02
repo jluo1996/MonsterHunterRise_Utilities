@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
 
 class AutoArgosyMod(REFrameWorkDependentMod):

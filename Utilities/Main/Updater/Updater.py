@@ -1,10 +1,11 @@
-from pathlib import Path
 import subprocess
 import sys
 import zipfile
-import win32api
+
 import requests
+import win32api
 from packaging import version
+from pathlib import Path
 
 from Main.Helpers.FileHelper import FileHelper
 

@@ -1,7 +1,8 @@
-from pathlib import Path
 import re
-from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod
-from Main.Mods.ModSetting import ModSetting 
+from pathlib import Path
+
+from Main.Mods.ModSetting import ModSetting
+from Main.Mods.REFrameWorkDependentMod import REFrameWorkDependentMod 
 
 TELEPORT_GESTURE_SETTING = "Teleport Gesture"
 

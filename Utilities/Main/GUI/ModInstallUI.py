@@ -1,7 +1,8 @@
-from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget, QMessageBox
-from Main.MainViewModel import MainViewModel
-from Main.GUI.ModListWidget import ModListWidget
+from PyQt6.QtWidgets import QHBoxLayout, QMessageBox, QPushButton, QVBoxLayout, QWidget
+
 from Main.GUI.FolderSelector import FolderSelector
+from Main.GUI.ModListWidget import ModListWidget
+from Main.MainViewModel import MainViewModel
 
 class ModInstallUI(QWidget):
     def __init__(self, main_vm: MainViewModel, logger):
