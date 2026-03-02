@@ -12,7 +12,7 @@ The application provides a user-friendly graphical interface with features such 
 - Application icon for better identification
 - Auto-detection of game installation path
 - Game running detection to prevent installation conflicts
-~~- Two executable options: single file or directory-based~~
+- ~~Two executable options: single file or directory-based~~
 - Automatic mod installation and uninstallation
 - Built-in update checker with one-click download and install of new releases
 
@@ -53,7 +53,7 @@ This application manages a wide variety of Monster Hunter Rise mods:
 
 1. Download the latest release from the [Releases](https://github.com/jluo1996/MonsterHunterRise_Utilities/releases) page
 2. Choose the appropriate executable for your needs:
-   ~~- **One-file executable** (.exe): A single executable file that runs directly (recommended for most users)~~
+   - ~~**One-file executable** (.exe): A single executable file that runs directly (recommended for most users)~~
    - **One-directory executable** (.exe): An executable that extracts to a directory (useful if you need access to individual files)
 3. Run the executable as administrator
 4. The application will check if Monster Hunter Rise is currently running and prompt you to close it if necessary
