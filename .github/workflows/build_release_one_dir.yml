@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - main_dev
+      - '*'
 
 env:
   VersionMarjor: 2
