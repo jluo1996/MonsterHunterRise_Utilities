@@ -20,7 +20,7 @@ env:
   PythonRequirements: build\python_requirements.txt
 
 jobs:
-  build_release:
+  ${{ github.ref == 'refs/heads/main' && 'build_release' || 'build_dev' }}:
     runs-on: windows-latest
 
     steps:
