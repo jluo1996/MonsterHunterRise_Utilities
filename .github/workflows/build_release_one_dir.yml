@@ -20,7 +20,7 @@ env:
   PythonRequirements: build\python_requirements.txt
 
 jobs:
-  build_release:
+  'build-MHR_Utilities':
     runs-on: windows-latest
 
     steps:
