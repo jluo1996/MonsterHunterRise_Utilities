@@ -18,6 +18,7 @@ from Main.Mods.SkipIntroLogoMod import SkipIntroLogoMod
 from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
 from Main.Mods.TeleportMod import TeleportMod
 from Main.Mods.SkipDangoSongMod import SkipDangoSongMod
+from Main.Mods.AutoLikeMod import AutoLikeMod
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
@@ -50,6 +51,7 @@ class MainViewModel():
         self.mods.append(CustomInGameMenuMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
         self.mods.append(SkipIntroLogoMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
         self.mods.append(SkipDangoSongMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
+        self.mods.append(AutoLikeMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
 
         # self.mods.sort(key=lambda mod: mod.name)
 
