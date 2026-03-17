@@ -90,7 +90,7 @@ class Updater():
     def prepare_to_update(self):
         if not self.has_newer_version():
             self._log("Already on the latest version.", level="INFO")
-            return
+            return False
         
         latest_version, download_url = self._get_latest_release()
         self._set_temp_update_folder(self.file_helper.get_app_data_temp_folder_path() / f"update_{latest_version}")

@@ -37,16 +37,10 @@ if __name__ == "__main__":
         QMessageBox.critical(None, "Game Running", "Please close Monster Hunter Rise before using this utility.")
         sys.exit(0)
 
-    logger.log("Initializing MainViewModel and loading mods...", level="INFO")
     mod_vm = MainViewModel(logger)
-    mod_vm.init_mods()
-    logger.log("MainViewModel initialized and mods loaded.", level="INFO")
-
-    splash.finish(None)  # Close the splash screen
-
-
     logger.log("Launching MainWindow...", level="INFO")
     win = MainWindow(mod_vm, logger)
+    splash.finish(None)  # Close the splash screen
     win.show()
     win.raise_()
     win.activateWindow()

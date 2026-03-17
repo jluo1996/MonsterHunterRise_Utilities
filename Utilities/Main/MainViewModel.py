@@ -19,22 +19,47 @@ from Main.Mods.SpiritBirdsMod import SpiritBirdsMod
 from Main.Mods.TeleportMod import TeleportMod
 from Main.Mods.SkipDangoSongMod import SkipDangoSongMod
 from Main.Mods.AutoLikeMod import AutoLikeMod
+from Main.Updater.Updater import Updater
+from Main.Log.Logger import Logger
+from Main.Thread.ThreadWorker import ThreadWorker
 
 GAME_INSTALL_PATH = Path(__file__).resolve().parent.name
 
 class MainViewModel():
-    def __init__(self, logger):
+    def __init__(self, logger : Logger):
         self.mods = []  # This will hold a list of ModModel instances
         self.logger = logger
-        file_helper = FileHelper(self.logger)
-        self.state_file_helper = StateFileHelper(file_helper=file_helper)
-        self.resources_path = file_helper.get_resources_folder_path()
+        self.file_helper = FileHelper(self.logger)
+        self.state_file_helper = StateFileHelper(file_helper=self.file_helper)
+        self.updater = Updater(file_helper=self.file_helper, logger=self.logger)
+        self.resources_path = self.file_helper.get_resources_folder_path()
+        
+
+    def on_startup(self):
         _ = self.auto_detect_game_install_path(auto_detect=False, update_game_install_path=True)  
+        self._init_mods()
+
+    def has_newer_version(self):
+        return self.updater.has_newer_version()
+    
+    def get_latest_version_number(self, only_number=False):
+        return self.updater.get_latest_version_number(only_number)
+    
+    def start_update_preparation_process(self, finish_callback=None):
+        self.prepare_thread = ThreadWorker()
+        self.prepare_thread.set_function(self.updater.prepare_to_update)
+        for callback in finish_callback if isinstance(finish_callback, list) else [finish_callback]:
+            if callback:
+                self.prepare_thread.finished.connect(callback)
+        self.prepare_thread.start()
+
+    def start_update_process(self):
+        self.updater.launch_update()
 
     def get_mods(self) -> list:
         return self.mods
     
-    def init_mods(self):    
+    def _init_mods(self):    
         self.mods.append(REFrameworkMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
         self.mods.append(REFrameworkD2DMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
         self.mods.append(TeleportMod(self.resources_path, self.game_install_path, self.state_file_helper, self.logger))
