@@ -172,7 +172,7 @@ class Updater():
         echo.
         echo Update completed!
         echo restarting application...
-        start "" "{current_exe_folder}\{current_exe_name}"
+        start "" "{current_exe_folder}\\{current_exe_name}"
 
         REM Delete the updater script itself
         del "%~f0"
