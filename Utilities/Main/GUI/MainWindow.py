@@ -182,12 +182,11 @@ class MainWindow(QMainWindow):
         self.main_vm.auto_detect_game_install_path(auto_detect=True, update_game_install_path=True)
         self.main_gui.update_game_install_path(self.main_vm.game_install_path)
 
-    def _on_log_message_received(self, formatted_message, level):
+    def _on_log_message_received(self, msg, level):
         if self.status_bar is None:
             return
         
-        stripped_message = self._strip_timestamp(formatted_message)
-        self.status_bar.showMessage(stripped_message)
+        self.status_bar.showMessage(msg)
         self.status_bar.setVisible(True)  # Ensure status bar is visible for relevant messages
 
         match level:
@@ -199,6 +198,3 @@ class MainWindow(QMainWindow):
                 self.status_bar.set_message_color("grey")
             case "UI":
                 self.status_bar.set_message_color("blue")
-
-    def _strip_timestamp(self, log_message):
-        return log_message[20:] if len(log_message) > 20 else log_message

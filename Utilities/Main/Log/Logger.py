@@ -56,10 +56,10 @@ class Logger(QObject):
         # Append to log file
         with open(self.log_file_path, "a", encoding="utf-8") as file:
             file.write(formatted_message + "\n")
-        self.last_log = formatted_message
+        self.last_log = message
         
         # Emit signal to notify clients of new log message
-        self.log_message_signal.emit(formatted_message, level)
+        self.log_message_signal.emit(message, level)
 
     def get_last_log(self):
-        return self.last_log
+        return self.last_log 
