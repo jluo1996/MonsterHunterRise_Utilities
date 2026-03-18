@@ -27,7 +27,7 @@ class FileHelper:
                 f.write("{}")  # write default content
             self._log("Install state file created.", level="INFO")
         except FileExistsError:
-            self._log("Install state file already exists.", level="ERROR")
+            self._log("Install state file already exists.", level="WARNING")
         return install_state_file_path
     
     def get_app_data_folder_path(self):
