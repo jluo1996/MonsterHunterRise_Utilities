@@ -1,7 +1,7 @@
 from PyQt6.QtCore import QThread, pyqtSignal
 
 class ThreadWorker(QThread):
-    finished = pyqtSignal(bool)  # emit True if successful, False if failed
+    finished = pyqtSignal(object) 
     
     def set_function(self, func):
         self.func = func

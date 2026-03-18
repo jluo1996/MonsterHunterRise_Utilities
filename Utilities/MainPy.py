@@ -1,13 +1,14 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QSplashScreen, QMessageBox
-from PyQt6.QtGui import QIcon, QPixmap, QFont
-from PyQt6.QtCore import Qt
+from time import sleep
+from PyQt6.QtWidgets import QApplication, QMessageBox
+from PyQt6.QtGui import QIcon
 from Main.Log.Logger import Logger
 
 from Main.MainViewModel import MainViewModel
 from Main.GUI.MainWindow import MainWindow
 from Main.Helpers.FileHelper import FileHelper
 from Main.Helpers.GameInfoHelper import GameInfoHelper
+from Main.GUI.LoadingSplashScreen import LoadingSplashScreen
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -24,10 +25,8 @@ if __name__ == "__main__":
     app.setWindowIcon(app_icon)
     
     # Create and show a splash screen with custom background
-    splash_pixmap = QPixmap(str(picture_path / "splash_background.jpg"))  # Load custom image
-    splash = QSplashScreen(splash_pixmap)
-    splash.setFont(QFont("Arial", 16)) 
-    splash.showMessage("Loading MHR Utilities...", alignment=Qt.AlignmentFlag.AlignCenter, color=Qt.GlobalColor.white)
+    splash = LoadingSplashScreen(str(picture_path / "splash_background.jpg"))
+    splash.showMessage("Loading MHR Utilities...")
     splash.show()
     app.processEvents()
 
@@ -37,14 +36,18 @@ if __name__ == "__main__":
         QMessageBox.critical(None, "Game Running", "Please close Monster Hunter Rise before using this utility.")
         sys.exit(0)
 
+    logger.log("Initializing MainViewModel...")
     mod_vm = MainViewModel(logger)
-    logger.log("Launching MainWindow...", level="INFO")
+    logger.log("MainWindowModel initialized successfully.")
+
+    logger.log("Initializing MainWindow...")
     win = MainWindow(mod_vm, logger)
+    logger.log("MainWindow initialized successfully.")
+
     splash.finish(None)  # Close the splash screen
     win.show()
     win.raise_()
     win.activateWindow()
     logger.log("MainWindow launched successfully.", level="INFO")
-
 
     sys.exit(app.exec())

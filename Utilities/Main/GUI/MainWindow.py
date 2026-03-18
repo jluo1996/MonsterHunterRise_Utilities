@@ -124,7 +124,7 @@ class MainWindow(QMainWindow):
             self.logger.log("Update preparation failed.", level="ERROR")
             return
         
-        countdown_dialog = self._get_restart_countdown_dialog(countdown_seconds=8)
+        countdown_dialog = self._get_restart_countdown_dialog(countdown_seconds=5)
         result = countdown_dialog.exec()  # Show the countdown dialog and wait until it's done
         if result == QMessageBox.StandardButton.Cancel:
             self.logger.log("Update cancelled by user.", level="INFO")
