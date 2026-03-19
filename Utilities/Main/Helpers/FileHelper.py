@@ -72,9 +72,9 @@ class FileHelper:
 
         for log_file in log_folder.glob('*.log'):
             if active_log_file_path and log_file == active_log_file_path:
-                log_file.write_text('', encoding='utf-8')
-            else:
-                log_file.unlink()
+                # log_file.write_text('', encoding='utf-8')
+                continue
+            log_file.unlink()
             removed_count += 1
 
         return removed_count
