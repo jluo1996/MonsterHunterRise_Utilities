@@ -65,6 +65,13 @@ class MainWindow(QMainWindow):
         act_auto_detect.triggered.connect(self._auto_detect_game_folder)
         tools_menu.addAction(act_auto_detect)
 
+        tools_menu.addSeparator()
+
+        clear_cache_icon = QIcon(str(file_helper.get_icons_folder_path() / "clear_cache.png"))
+        act_clear_cache = QAction(clear_cache_icon, "&Clear Cache", self)
+        act_clear_cache.triggered.connect(self._clear_cache)
+        tools_menu.addAction(act_clear_cache)
+
         # --- Help menu ---
         help_menu = menubar.addMenu("&Help")
 
@@ -181,6 +188,29 @@ class MainWindow(QMainWindow):
         self.logger.log("Auto Detect Game Folder menu item clicked.", level="UI")
         self.main_vm.auto_detect_game_install_path(auto_detect=True, update_game_install_path=True)
         self.main_gui.update_game_install_path(self.main_vm.game_install_path)
+
+    def _clear_cache(self):
+        self.logger.log("Clear Cache menu item clicked.", level="UI")
+        result = QMessageBox.question(
+            self,
+            "Clear Cache",
+            "This will delete temporary update files and all saved log files. Continue?",
+            QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel
+        )
+
+        if result != QMessageBox.StandardButton.Ok:
+            self.logger.log("Clear cache cancelled by user.", level="INFO")
+            return
+
+        file_helper = FileHelper(self.logger)
+        try:
+            message = file_helper.clear_cache(active_log_file_path=self.logger.log_file_path)
+            self.logger.log(message, level="INFO")
+            QMessageBox.information(self, "Clear Cache", message)
+        except Exception as exc:
+            error_message = f"Failed to clear cache: {exc}"
+            self.logger.log(error_message, level="ERROR")
+            QMessageBox.critical(self, "Clear Cache Failed", error_message)
 
     def _on_log_message_received(self, msg, level):
         if self.status_bar is None:
