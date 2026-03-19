@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
 
         tools_menu.addSeparator()
 
-        clear_cache_icon = QIcon(str(file_helper.get_icons_folder_path() / "update.png"))
+        clear_cache_icon = QIcon(str(file_helper.get_icons_folder_path() / "clear_cache.png"))
         act_clear_cache = QAction(clear_cache_icon, "&Clear Cache", self)
         act_clear_cache.triggered.connect(self._clear_cache)
         tools_menu.addAction(act_clear_cache)
