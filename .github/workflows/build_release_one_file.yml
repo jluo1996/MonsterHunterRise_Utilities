@@ -110,6 +110,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.FullVersion }}
+          generate_release_notes: true
           name: ${{ env.ArtifactName }} (Compressed)
           files: |
             ${{ env.ArtifactFullPath }}
