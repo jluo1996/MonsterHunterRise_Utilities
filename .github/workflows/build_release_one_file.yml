@@ -70,52 +70,35 @@ jobs:
           path: |
             ${{ env.ArtifactFullPath }}
 
-      # ============== Below are steps for only release branch (main) ================
-
-      - name: Delete all (one file) releases and tags
-        if: github.ref == 'refs/heads/main'
-        shell: pwsh
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VersionBuild: ${{ env.VersionBuild }}
+      - name: Build preprelease
+        if: ${{ !startsWith(github.ref, 'refs/heads/release/') }}
         run: |
-          # Build regex dynamically based on VersionBuild
-          $patch = [regex]::Escape($env:VersionBuild)
-          $versionPattern = "^v\d+\.\d+\.$patch\.\d+$"
-    
-             Write-Host "Deleting releases with patch version $env:VersionBuild..."
-    
-             $releases = gh release list --limit 1000 --json tagName | ConvertFrom-Json
-          foreach ($release in $releases) {
-            if ($release.tagName -match $versionPattern) {
-              Write-Host "Deleting release $($release.tagName)"
-              gh release delete $release.tagName -y
-            }
-          }
-    
-             Write-Host "Deleting tags with patch version $env:VersionBuild..."
-    
-             git fetch --tags
-          $tags = git tag
-          foreach ($tag in $tags) {
-            if ($tag -match $versionPattern) {
-              Write-Host "Deleting tag $tag"
-              git tag -d $tag
-              git push origin :refs/tags/$tag
-            }
-          }
+          echo ("PRERELEASE=true") >> $env:GITHUB_ENV
+
+      - name: Build tag name
+        if: ${{ env.PRERELEASE == 'true' }}
+        run: |
+          echo FullVersion=${FullVersion}-prerelease >> $GITHUB_ENV
 
       - name: Create Release
-        if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ env.FullVersion }}
           generate_release_notes: true
           name: ${{ env.ArtifactName }} (Compressed)
+          prerelease: ${{ env.PRERELEASE == 'true' }}
+          # make_latest: ${{ env.PRERELEASE != 'true' }}
           files: |
             ${{ env.ArtifactFullPath }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
 
-
-
+      - name: Delete pre-release
+        if: ${{ env.PRERELEASE != 'true' }}
+        uses: jluo1996/delete-releases-action@v1
+        with:
+            tag-pattern: "*-prerelease*"
+            keep-latest: 0
+            remove-tags: true
+            repository: ${{ github.repository }}
+            token: ${{ secrets.GITHUB_TOKEN }}
