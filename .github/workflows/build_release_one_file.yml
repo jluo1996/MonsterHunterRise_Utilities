@@ -15,6 +15,7 @@ env:
   VersionFile: build\version_info.txt
   ArtifactFolder: dist\
   PythonRequirements: build\python_requirements.txt
+  PRERELEASE: ${{ !startsWith(github.ref_name, 'release/') }}
 
 jobs:
   build_release:
@@ -69,11 +70,6 @@ jobs:
           name: ${{ env.ArtifactName }} 
           path: |
             ${{ env.ArtifactFullPath }}
-
-      - name: Build preprelease
-        if: ${{ !startsWith(github.ref, 'refs/heads/release/') }}
-        run: |
-          echo ("PRERELEASE=true") >> $env:GITHUB_ENV
 
       - name: Build tag name
         if: ${{ env.PRERELEASE == 'true' }}

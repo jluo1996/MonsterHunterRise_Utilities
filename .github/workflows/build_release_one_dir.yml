@@ -18,6 +18,7 @@ env:
   VersionFile: build\version_info.txt
   ArtifactFolder: dist\
   PythonRequirements: build\python_requirements.txt
+  PRERELEASE: ${{ !startsWith(github.ref_name, 'release/') }}
 
 jobs:
   'build-MHR_Utilities':
@@ -73,15 +74,10 @@ jobs:
           path: |
             ${{ env.ArtifactFullPath }}
 
-      - name: Build preprelease
-        if: ${{ !startsWith(github.ref, 'refs/heads/release/') }}
-        run: |
-          echo ("PRERELEASE=true") >> $env:GITHUB_ENV
-
       - name: Build tag name
         if: ${{ env.PRERELEASE == 'true' }}
         run: |
-          echo FullVersion=${FullVersion}-prerelease >> $GITHUB_ENV
+          echo "FullVersion=${{ env.FullVersion }}-prerelease" >> $env:GITHUB_ENV
     
       - name: Zip artifact
         run: |
