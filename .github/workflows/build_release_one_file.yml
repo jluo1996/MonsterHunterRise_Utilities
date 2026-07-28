@@ -74,8 +74,8 @@ jobs:
       - name: Build tag name
         if: ${{ env.PRERELEASE == 'true' }}
         run: |
-          echo FullVersion="${FullVersion}-prerelease" >> $GITHUB_ENV
-
+          echo "FullVersion=${{ env.FullVersion }}-prerelease" >> $env:GITHUB_ENV
+          
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
